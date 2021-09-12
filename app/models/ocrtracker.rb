@@ -1,0 +1,2 @@
+class Ocrtracker < ApplicationRecord
+end
