@@ -21,4 +21,10 @@ ActiveRecord::Schema.define(version: 2021_09_12_193745) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "ocrtrackers", force: :cascade do |t|
+    t.string "WIP"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
 end
