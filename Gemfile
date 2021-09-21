@@ -5,8 +5,8 @@ ruby '3.0.2'
 
 # Bundles for Google OAUTH2
 gem 'devise'
-gem 'omniauth'
-gem 'omniauth-google-oauth2'
+gem 'omniauth', '~>1.9.1'
+gem 'omniauth-google-oauth2', '0.8.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.4', '>= 6.1.4.1'
