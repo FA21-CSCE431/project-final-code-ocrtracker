@@ -1,2 +1,2 @@
-class Ocrtracker < ApplicationRecords
+class Ocrtracker < ApplicationRecord
 end

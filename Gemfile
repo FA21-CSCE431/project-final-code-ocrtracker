@@ -6,10 +6,11 @@ ruby '3.0.2'
 # Bundles for Google OAUTH2
 gem 'devise'
 gem 'omniauth', '~>1.9.1'
-gem 'omniauth-google-oauth2', '0.8.2'
+gem 'omniauth-google-oauth2'
+# gem 'lock.min.js', '~>10.9.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
-gem 'rails', '~> 6.1.4', '>= 6.1.4.1'
+gem 'rails', '~> 6.1.2'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 1.1'
 # Use Puma as the app server

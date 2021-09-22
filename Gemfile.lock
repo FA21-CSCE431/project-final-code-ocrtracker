@@ -281,11 +281,11 @@ DEPENDENCIES
   jbuilder (~> 2.7)
   listen (~> 3.3)
   omniauth (~> 1.9.1)
-  omniauth-google-oauth2 (= 0.8.2)
+  omniauth-google-oauth2
   pg (~> 1.1)
   puma (~> 5.0)
   rack-mini-profiler (~> 2.0)
-  rails (~> 6.1.4, >= 6.1.4.1)
+  rails (~> 6.1.2)
   rexml
   rspec-rails
   sass-rails (>= 6)
