@@ -10,7 +10,7 @@
   <div class="logoutheader">
     <h2>You're Logged out! Log in to the Admin Dashboard</h2>
   </div>
-  <div class="signinbutton">
+  <div class="g-signin2" data-onsuccess="onSignIn">
     <%= link_to "Sign in with Google", admin_google_oauth2_omniauth_authorize_path %>
   </div>
 </body>
