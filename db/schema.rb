@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_24_210036) do
+ActiveRecord::Schema.define(version: 2021_09_24_210731) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,4 +31,33 @@ ActiveRecord::Schema.define(version: 2021_09_24_210036) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "exercise_posts", force: :cascade do |t|
+    t.bigint "exercise_id"
+    t.bigint "workout_post_id"
+    t.text "specific_instructions"
+    t.boolean "is_ranked"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["exercise_id"], name: "index_exercise_posts_on_exercise_id"
+    t.index ["workout_post_id"], name: "index_exercise_posts_on_workout_post_id"
+  end
+
+  create_table "exercises", force: :cascade do |t|
+    t.text "title"
+    t.text "description"
+    t.text "picture"
+    t.text "unit_name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "workout_posts", force: :cascade do |t|
+    t.text "title"
+    t.date "date_created"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  add_foreign_key "exercise_posts", "exercises"
+  add_foreign_key "exercise_posts", "workout_posts"
 end
