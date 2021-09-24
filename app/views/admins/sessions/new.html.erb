@@ -1,17 +1,9 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Welcome page</title>
-  </head>
+<h1>You're logged in! Welcome to the Admin Dashboard!</h1>
+<head>
+  <p>
+    <strong>W.I.P.</strong>
+  </p>
+</head>
 <body>
-  <div class="welcometitle">
-    <h1>Welcome to TAMU OCR Tracker!</h1>
-  </div>
-  <div class="logoutheader">
-    <h2>You're Logged out! Log in to the Admin Dashboard</h2>
-  </div>
-  <div class="signinbutton">
-    <%= link_to "Sign in with Google", admin_google_oauth2_omniauth_authorize_path %>
-  </div>
+  <%= link_to "Sign Out", destroy_admin_session_path %>
 </body>
-</html>
