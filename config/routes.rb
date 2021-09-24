@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  devise_for :users
   # resources :books
   # resources :ocrtrackers
   root to: 'ocrtrackers#show'
