@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   # resources :books
   # resources :ocrtrackers
-  root to: 'dashboards#show'
+  root to: 'ocrtrackers#show'
   devise_for :admins, controllers: { omniauth_callbacks: 'admins/omniauth_callbacks' }
   devise_scope :admin do
     get 'admins/sign_in', to: 'admins/sessions#new', as: :new_admin_session

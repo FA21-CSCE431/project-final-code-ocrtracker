@@ -3,8 +3,9 @@
 <p>
   <strong>W.i.p:</strong>
   <%= @ocrtracker.W.I.P %>
-  <%= link_to "Sign Out", destroy_admin_session_path %>
 </p>
+
+<%= link_to "Sign Out", destroy_admin_session_path %>
 
 <%= link_to 'Edit', edit_ocrtracker_path(@ocrtracker) %> |
 <%= link_to 'Back', ocrtrackers_path %>
