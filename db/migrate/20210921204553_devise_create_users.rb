@@ -7,6 +7,8 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.1]
       t.string :full_name
       t.string :uid
       t.string :avatar_url
+      t.boolean :is_admin
+      t.string :description
 
       t.timestamps null: false
     end
