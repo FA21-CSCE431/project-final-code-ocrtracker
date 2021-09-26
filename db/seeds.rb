@@ -5,3 +5,42 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+############ Exercises #############
+
+e1 = Exercise.create({
+    title: 'Pushups',
+    description: 'A push-up is a common calisthenics exercise beginning from the prone position. By raising and lowering the body using the arms, push-ups exercise the pectoral muscles, triceps, and anterior deltoids, with ancillary benefits to the rest of the deltoids, serratus anterior, coracobrachialis and the midsection as a whole.',
+    picture: 'https://www.thehindu.com/sci-tech/health/vsuju8/article34301845.ece/ALTERNATES/LANDSCAPE_1200/10MPHowto1',
+    unit_name: 'time'
+})
+
+e2 = Exercise.create({
+    title: 'Situps',
+    description: 'The sit-up is an abdominal endurance training exercise to strengthen, tighten and tone the abdominal muscles. It is similar to a crunch, but sit-ups have a fuller range of motion and condition additional muscles.',
+    picture: 'https://image.shutterstock.com/image-vector/woman-who-fat-doing-sit-260nw-715195228.jpg',
+    unit_name: 'time'
+})
+
+############ Workout Posts #############
+
+wp1 = WorkoutPost.create({
+    title: 'Workout Post 1',
+    date_created: Date.today
+})
+    
+############ Exercise Posts #############
+
+ep1 = ExercisePost.create({
+    exercise: e1,
+    workout_post: wp1,
+    specific_instructions: '50 pushups',
+    is_ranked: true
+})
+
+ep2 = ExercisePost.create({
+    exercise: e2,
+    workout_post: wp1,
+    specific_instructions: '20 situps',
+    is_ranked: false
+})
