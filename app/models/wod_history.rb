@@ -1,3 +1,3 @@
 class WodHistory < ApplicationRecord
-    has_one :workout_post
+    belongs_to :workout_post
 end
