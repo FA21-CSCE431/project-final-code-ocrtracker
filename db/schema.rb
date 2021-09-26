@@ -15,6 +15,12 @@ ActiveRecord::Schema.define(version: 2021_09_25_215052) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "books", force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "exercise_posts", force: :cascade do |t|
     t.bigint "exercise_id"
     t.bigint "workout_post_id"
@@ -62,16 +68,14 @@ ActiveRecord::Schema.define(version: 2021_09_25_215052) do
     t.index ["workout_submission_id"], name: "index_leaderboard_spots_on_workout_submission_id"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", id: :bigint, default: -> { "nextval('admins_id_seq'::regclass)" }, force: :cascade do |t|
     t.string "email", null: false
     t.string "full_name"
     t.string "uid"
     t.string "avatar_url"
-    t.boolean "is_admin"
-    t.string "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["email"], name: "index_admins_on_email", unique: true
   end
 
   create_table "wod_histories", force: :cascade do |t|
@@ -97,6 +101,14 @@ ActiveRecord::Schema.define(version: 2021_09_25_215052) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_workout_submissions_on_user_id"
     t.index ["workout_post_id"], name: "index_workout_submissions_on_workout_post_id"
+  end
+
+  create_table "workouts", force: :cascade do |t|
+    t.string "workout_title"
+    t.string "workout_desc"
+    t.string "workout_picture"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   add_foreign_key "exercise_posts", "exercises"
