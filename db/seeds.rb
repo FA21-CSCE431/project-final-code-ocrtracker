@@ -8,14 +8,14 @@
 
 ############ Exercises #############
 
-e1 = Exercise.create!({
+e1 = Exercise.find_or_create_by({
     title: 'Pushups',
     description: 'A push-up is a common calisthenics exercise beginning from the prone position. By raising and lowering the body using the arms, push-ups exercise the pectoral muscles, triceps, and anterior deltoids, with ancillary benefits to the rest of the deltoids, serratus anterior, coracobrachialis and the midsection as a whole.',
     picture: 'https://www.thehindu.com/sci-tech/health/vsuju8/article34301845.ece/ALTERNATES/LANDSCAPE_1200/10MPHowto1',
     unit_name: 'time'
 })
 
-e2 = Exercise.create!({
+e2 = Exercise.find_or_create_by({
     title: 'Situps',
     description: 'The sit-up is an abdominal endurance training exercise to strengthen, tighten and tone the abdominal muscles. It is similar to a crunch, but sit-ups have a fuller range of motion and condition additional muscles.',
     picture: 'https://image.shutterstock.com/image-vector/woman-who-fat-doing-sit-260nw-715195228.jpg',
@@ -24,21 +24,21 @@ e2 = Exercise.create!({
 
 ############ Workout Posts #############
 
-wp1 = WorkoutPost.create!({
+wp1 = WorkoutPost.find_or_create_by({
     title: 'Workout Post 1',
     date_created: Date.today
 })
     
 ############ Exercise Posts #############
 
-ep1 = ExercisePost.create!({
+ep1 = ExercisePost.find_or_create_by({
     exercise: e1,
     workout_post: wp1,
     specific_instructions: '50 pushups',
     is_ranked: true
 })
 
-ep2 = ExercisePost.create!({
+ep2 = ExercisePost.find_or_create_by({
     exercise: e2,
     workout_post: wp1,
     specific_instructions: '20 situps',
