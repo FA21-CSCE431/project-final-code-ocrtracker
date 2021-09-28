@@ -1,6 +1,8 @@
 class ExercisesController < ApplicationController
-  before_action :set_exercise, only: %i[ show edit update destroy ]
 
+  #before_action :require_admin   #, only: %i[ edit update destroy ]
+  before_action :set_exercise, only: %i[ show edit update destroy ]
+  
   # GET /exercises
   def index
     @exercises = Exercise.all
@@ -50,7 +52,7 @@ class ExercisesController < ApplicationController
   def destroy
     @exercise.destroy
     respond_to do |format|
-      format.html {redirect_to exercise_url, notice: "Exercise was successfully destroyed"}
+      format.html {redirect_to exercises_path, notice: "Exercise was successfully destroyed"}
       format.json {head :no_content}
     end
   end
