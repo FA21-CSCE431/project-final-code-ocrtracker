@@ -44,3 +44,26 @@ ep2 = ExercisePost.find_or_create_by({
     specific_instructions: '20 situps',
     is_ranked: false
 })
+
+############ Workout Submissions #############
+
+ws1 = WorkoutSubmission.find_or_create_by({
+    user: User.find(1),
+    workout_post: wp1,
+    submitted_datetime: DateTime.now
+});
+    
+############ Exercise Submissions #############
+
+es1 = ExerciseSubmission.find_or_create_by({
+    exercise_post: ep1,
+    workout_submission: ws1,
+    unit_value: "180"
+});
+
+es2 = ExerciseSubmission.find_or_create_by({
+    exercise_post: ep2,
+    workout_submission: ws1,
+    unit_value: "120"
+});
+
