@@ -15,9 +15,9 @@ RSpec.describe WorkoutSubmission, type: :model do
     end
     
     # Ensure that the subject is not valid without a submitted datetime
-    # it 'is not valid without a submitted datetime' do
-    #     subject.submitted_datetime = nil
-    #     expect(subject).not_to be_valid
-    # end
+    it 'is not valid without a submitted datetime' do
+        subject.submitted_datetime = nil
+        expect(subject).not_to be_valid
+    end
 
 end

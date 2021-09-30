@@ -1,7 +1,7 @@
 #location spec/unit/exercise_submission_spec.rb
 require 'rails_helper'
 
-RSpec.describe WorkoutSubmission, type: :model do
+RSpec.describe ExerciseSubmission, type: :model do
 
     # Create a subject to test model validity with
     subject do
