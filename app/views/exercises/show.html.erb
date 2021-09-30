@@ -1,0 +1,21 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @exercise.title %>
+</p>
+<p>
+  <strong>Description:</strong>
+  <%= @exercise.description %>
+</p>
+<p>
+  <strong>Picture:</strong>
+  <%= image_tag(@exercise.picture, height: '100') %>
+</p>
+<p>
+  <strong>Unit name:</strong>
+  <%= @exercise.unit_name %>
+</p>
+
+<%= link_to 'Edit', edit_exercise_path(@exercise) %> |
+<%= link_to 'Back', exercises_path %>
