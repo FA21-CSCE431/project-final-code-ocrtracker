@@ -1,15 +1,15 @@
 class SubmissionsController < ApplicationController
-    before_action :set_workout_post #, only: %i[ show edit update destroy ]
-    before_action :set_exercise_posts #, only: %i[ show edit update destroy ]
+    before_action :set_workout_post , only: %i[ new ]
+    before_action :set_exercise_posts, only: %i[ new ]
   
     
 
-    # GET /ocrtrackers or /ocrtrackers.json
+    # GET 
     def index
       
     end
   
-    # GET /ocrtrackers/1 or /ocrtrackers/1.json
+    # GET
     def show
     end
   
@@ -18,63 +18,71 @@ class SubmissionsController < ApplicationController
         @workout_submission = WorkoutSubmission.new
         @exercise_submission = ExerciseSubmission.new
 
-
     end
   
-    # GET /ocrtrackers/1/edit
+    # GET 
     def edit
     end
   
     # POST 
     def create
-        @workout_submission = WorkoutSubmission.new(workout_submission_params)
-        @exercise_submissions = 
+        
+        submissions = params[:exercise_submission]
+        exercise_submissions = []
+
+        workout_submission = WorkoutSubmission.new({
+          user: current_user,
+          submitted_datetime: DateTime.now
+        })
+
+        submissions.each do |ep_id, uv|
+          exercise_post = ExercisePost.find(ep_id)
+          @workout_post = exercise_post.workout_post
+          exercise_submissions << ExerciseSubmission.new({
+            exercise_post: exercise_post,
+            workout_submission: workout_submission,
+            unit_value: uv
+          })
+        end
+
+        workout_submission.workout_post = @workout_post
+        # @workout_submission = WorkoutSubmission.new(workout_submission_params)
+        # @exercise_submissions = 
     
         respond_to do |format|
-            if @workout_submission.save
-            format.html { redirect_to @workout_submission, notice: "Ocrtracker was successfully created." }
-            format.json { render :show, status: :created, location: @workout_submission }
+            if workout_submission.save 
+              exercise_submissions.each(&:save!)
+              format.html { redirect_to '/', notice: "Workout was successfully submitted" }
+              # format.json { render :show, status: :created, location: workout_submission }
             else
-            format.html { render :new, status: :unprocessable_entity }
-            format.json { render json: @workout_submission.errors, status: :unprocessable_entity }
+              format.html { render :new, status: :unprocessable_entity }
+              format.json { render json: workout_submission.errors, status: :unprocessable_entity }
             end
         end
     end
   
-    # PATCH/PUT /ocrtrackers/1 or /ocrtrackers/1.json
+    # PATCH/PUT
     def update
-      respond_to do |format|
-        if @ocrtracker.update(ocrtracker_params)
-          format.html { redirect_to @ocrtracker, notice: "Ocrtracker was successfully updated." }
-          format.json { render :show, status: :ok, location: @ocrtracker }
-        else
-          format.html { render :edit, status: :unprocessable_entity }
-          format.json { render json: @ocrtracker.errors, status: :unprocessable_entity }
-        end
-      end
+      
     end
   
-    # DELETE /ocrtrackers/1 or /ocrtrackers/1.json
+    # DELETE 
     def destroy
-      @ocrtracker.destroy
-      respond_to do |format|
-        format.html { redirect_to ocrtrackers_url, notice: "Ocrtracker was successfully destroyed." }
-        format.json { head :no_content }
-      end
+      
     end
   
     private
     # Use callbacks to share common setup or constraints between actions.
     def set_workout_post
-    @workout_post = WorkoutPost.find(params[:workout_post_id])
+      @workout_post = WorkoutPost.find(params[:workout_post_id])
     end
 
     def set_exercise_posts
-    @exercise_posts = @workout_post.exercise_posts
+      @exercise_posts = @workout_post.exercise_posts
     end
 
     def workout_submission_params
-    params.require(:workout_submission).permit(:submitted_datetime, :workout_post_id, :user_id)
+      params.require(:workout_submission).permit(:submitted_datetime, :workout_post_id, :user_id)
     end
     
     def exercise_submission_params
