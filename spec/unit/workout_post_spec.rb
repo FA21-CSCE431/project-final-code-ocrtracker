@@ -1,12 +1,13 @@
-#location spec/unit/exercise_spec.rb
+#location spec/unit/workout_post_spec.rb
 require 'rails_helper'
 
-RSpec.describe Exercise, type: :model do
+RSpec.describe WorkoutPost, type: :model do
 
     # Create a subject to test model validity with
     subject do
-        FactoryBot.build(:exercise)
+        FactoryBot.build(:workout_post)
     end
+
 
     # Ensure that the subject is valid with all fields
     it 'is valid with valid attributes' do
@@ -19,16 +20,10 @@ RSpec.describe Exercise, type: :model do
         expect(subject).not_to be_valid
     end
     
-    # Ensure that the subject is not valid without a description
-    it 'is not valid without a description' do
-        subject.description = nil
+    # Ensure that the subject is not valid without a date created
+    it 'is not valid without a date created' do
+        subject.date_created = nil
         expect(subject).not_to be_valid
     end
-    
-    # Ensure that the subject is not valid without a unit name
-    it 'is not valid without a unit name' do
-        subject.unit_name = nil
-        expect(subject).not_to be_valid
-    end
-    
+
 end
