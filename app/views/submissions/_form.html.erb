@@ -1,0 +1,9 @@
+<%= form_with model: @workout_post do |wp_form| %>
+  <%= wp_form.text_field :title %>
+  <% @workout_post.exercise_posts.each do |ep| %>
+    <%= wp_form.fields_for ep, index: ep.id do |ep_form| %>
+     
+     <%= ep.exercise.title %>
+    <% end %>
+  <% end %>
+<% end %>

@@ -8,6 +8,8 @@ Rails.application.routes.draw do
     get 'users/sign_out', to: 'users/sessions#destroy', as: :destroy_user_session
   end
 
+  get 'submissions/new/:workout_post_id', to: 'submissions#new'
+
   resources :exercises, :workout_posts, :exercise_posts
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
