@@ -11,10 +11,11 @@ Rails.application.routes.draw do
   get 'submissions/new/:workout_post_id', to: 'submissions#new'
   post 'submissions/create', to: 'submissions#create'
 
-  get 'submissions/history/:work_post_id', to: 'submissions#history'
+  get 'submissions/history/:workout_post_id', to: 'submissions#history'
 
 
   get 'posts/new/', to: 'posts#new'
+  post 'posts/create/', to: 'posts#create'
 
   resources :exercises, :workout_posts, :exercise_posts
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
