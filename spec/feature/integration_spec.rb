@@ -3,6 +3,7 @@ require 'rails_helper'
 
 
 feature 'testing oauth' do
+    fixtures :users
     scenario 'should create a new user' do
         visit user_google_oauth2_omniauth_authorize_path
         expect(page).to have_content('Successfully authenticated from Google account')
@@ -11,6 +12,9 @@ end
 
 
 RSpec.describe 'Creating an exercise', type: :feature do
+
+    fixtures :users
+
     scenario 'valid title' do
         login_as_admin
         visit exercises_path

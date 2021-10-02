@@ -1,0 +1,17 @@
+user_account:
+  id: 1
+  email: user_email@tamu.edu
+  full_name:  user account
+  uid: USERUID
+  avatar_url: https://fake_url.com
+  description: user description
+  is_admin: false
+
+admin_account:
+  id: 2
+  email: admin_email@tamu.edu
+  full_name:  admin account
+  uid: ADMINUID
+  avatar_url: https://fake_url.com
+  description: admin description
+  is_admin: true

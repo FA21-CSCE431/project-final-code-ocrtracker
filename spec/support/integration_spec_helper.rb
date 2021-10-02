@@ -1,13 +1,11 @@
 module IntegrationSpecHelper
 
     def login_as_user
-        user = FactoryBot.create(:user)
-        sign_in user
+        sign_in users(:user_account)
     end
-
+    
     def login_as_admin
-        user = FactoryBot.create(:user, :admin)
-        sign_in user
+        sign_in users(:admin_account)
     end
 
 end
