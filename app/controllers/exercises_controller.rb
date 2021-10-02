@@ -1,6 +1,6 @@
 class ExercisesController < ApplicationController
 
-  #before_action :require_admin   #, only: %i[ edit update destroy ]
+  before_action :require_admin   #, only: %i[ edit update destroy ]
   before_action :set_exercise, only: %i[ show edit update destroy ]
   
   # GET /exercises
