@@ -6,11 +6,10 @@
 </head>
 
 <body>
-  Howdy <%= current_user.full_name %> as
   <% if current_user.is_admin? %>
-    <p>admin</p>
+    <p>Howdy <%= current_user.full_name %> as admin</p>
   <% else %>
-    <p>user</p>
+    <p>Howdy <%= current_user.full_name %> as user</p>
   <% end %>
   <div>
     <%= link_to "Sign Out", destroy_user_session_path %>
