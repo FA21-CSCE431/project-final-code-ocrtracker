@@ -1,0 +1,8 @@
+<% @workout_submissions.each do |ws| %>
+
+    <%=ws.user.full_name%>
+
+
+    <%= ws.exercise_submissions.detect{|es| es.exercise_post.is_ranked == true}.unit_value %>
+
+<% end %>

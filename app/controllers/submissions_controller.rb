@@ -1,6 +1,13 @@
 class SubmissionsController < ApplicationController
-    before_action :set_workout_post , only: %i[ new ]
+    before_action :set_workout_post , only: %i[ new history ]
     before_action :set_exercise_posts, only: %i[ new ]
+
+    before_action :set_workout_submissions, only: %i[ history ]
+
+
+    def history
+      
+    end
   
     
 
@@ -41,7 +48,7 @@ class SubmissionsController < ApplicationController
           exercise_submissions << ExerciseSubmission.new({
             exercise_post: exercise_post,
             workout_submission: workout_submission,
-            unit_value: uv
+            unit_value: uv[:unit_value]
           })
         end
 
@@ -80,6 +87,11 @@ class SubmissionsController < ApplicationController
     def set_exercise_posts
       @exercise_posts = @workout_post.exercise_posts
     end
+
+    def set_workout_submissions
+      @workout_submissions = @workout_post.workout_submissions
+    end
+
 
     def workout_submission_params
       params.require(:workout_submission).permit(:submitted_datetime, :workout_post_id, :user_id)
