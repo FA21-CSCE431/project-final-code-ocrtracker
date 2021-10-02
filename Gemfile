@@ -9,6 +9,8 @@ gem 'omniauth', '~>1.9.1'
 gem 'omniauth-google-oauth2'
 # gem 'lock.min.js', '~>10.9.1'
 
+gem 'figaro'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.2'
 # Use postgresql as the database for Active Record
