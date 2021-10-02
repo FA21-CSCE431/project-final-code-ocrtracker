@@ -28,9 +28,9 @@ FactoryBot.define do
         avatar_url {'https://fake_url.com'}
         description {'fake description'}
         
-      #  trait :admin do
+        trait :admin do
             is_admin {true}
-      #  end
+        end
     end
 
     factory :workout_submission do
