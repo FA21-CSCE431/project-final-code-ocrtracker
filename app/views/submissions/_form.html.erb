@@ -1,9 +1,21 @@
-<%= form_with model: @workout_post do |wp_form| %>
-  <%= wp_form.text_field :title %>
-  <% @workout_post.exercise_posts.each do |ep| %>
-    <%= wp_form.fields_for ep, index: ep.id do |ep_form| %>
+<h1><%= @workout_post.title %></h1>
+<%= form_with url:"/submissions/create", method: :post do |ws_form| %>
+
+    <% @workout_post.exercise_posts.each do |ep| %>
+        <%= ep.exercise.title %>
+        <%= ep.exercise.unit_name %>
+        <%= ep.specific_instructions %>
+        <% es = ExerciseSubmission.new(exercise_post: ep) %>
+        <%= ws_form.fields_for es, index: ep.id do |es_form| %>
      
-     <%= ep.exercise.title %>
+            <%= es_form.text_field :unit_value %>
+        <% end %>
     <% end %>
-  <% end %>
+
+    <div class="actions">
+        <%= ws_form.submit %>
+    </div>
+
 <% end %>
+
+

@@ -26,7 +26,7 @@ e2 = Exercise.find_or_create_by({
 
 wp1 = WorkoutPost.find_or_create_by({
     title: 'Workout Post 1',
-    date_created: Date.today
+    date_created: Date.new(2021,10,1)
 })
     
 ############ Exercise Posts #############
@@ -50,7 +50,7 @@ ep2 = ExercisePost.find_or_create_by({
 ws1 = WorkoutSubmission.find_or_create_by({
     user: User.find(1),
     workout_post: wp1,
-    submitted_datetime: DateTime.now
+    submitted_datetime: DateTime.new(2021,10,1,2,3,4)
 });
     
 ############ Exercise Submissions #############
