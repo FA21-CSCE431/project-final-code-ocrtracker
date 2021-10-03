@@ -2,3 +2,8 @@ es1:
   exercise_post: ep1
   workout_submission: ws1
   unit_value: 180
+
+es2: 
+  exercise_post: ep2
+  workout_submission: ws1
+  unit_value: 120
