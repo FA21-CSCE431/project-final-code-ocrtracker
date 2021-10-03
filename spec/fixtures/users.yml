@@ -1,5 +1,4 @@
 user_account:
-  id: 1
   email: user_email@tamu.edu
   full_name:  user account
   uid: USERUID
@@ -8,7 +7,6 @@ user_account:
   is_admin: false
 
 admin_account:
-  id: 2
   email: admin_email@tamu.edu
   full_name:  admin account
   uid: ADMINUID
