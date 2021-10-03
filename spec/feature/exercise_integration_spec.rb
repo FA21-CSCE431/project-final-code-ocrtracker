@@ -91,3 +91,39 @@ RSpec.describe 'Editing an exercise', type: :feature do
     end
 
 end
+
+RSpec.describe 'Viewing an exercise', type: :feature do
+
+    fixtures :users, :exercises, :workout_posts, :exercise_posts
+
+    scenario 'through /exercises' do
+        login_as_admin
+        visit exercises_path
+        expect(page).to have_content exercises(:pushups).title
+    end
+
+    scenario 'non-admin through /exercises' do
+        login_as_user
+        visit exercises_path
+        expect(page).to have_content "You must be an admin to access this section"
+    end
+
+    scenario 'through /exercises/:id' do
+        login_as_admin
+        visit exercise_path(exercises(:pushups))
+        expect(page).to have_content exercises(:pushups).title
+    end
+
+    scenario 'non-admin through /exercises/:id' do
+        login_as_user
+        visit exercise_path(exercises(:pushups))
+        expect(page).to have_content "You must be an admin to access this section"
+    end
+
+    scenario 'non-admin through /submissions/new/:workout_post_id' do
+        login_as_user
+        visit "/submissions/new/#{workout_posts(:wp1).id}"
+        expect(page).to have_content exercises(:pushups).title
+    end
+
+end
