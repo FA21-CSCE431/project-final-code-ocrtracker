@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Submissions Controller
 class SubmissionsController < ApplicationController
   before_action :set_workout_post, only: %i[new history]
   before_action :set_exercise_posts, only: %i[new]

@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# CreateLeaderboardSpot
 class CreateLeaderboardSpot < ActiveRecord::Migration[6.1]
   def change
     create_table :leaderboard_spots do |t|

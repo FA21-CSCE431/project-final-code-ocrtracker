@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Users
+  # Omniauth Callbacks Controller
   class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     def google_oauth2
       user = User.from_google(**from_google_params)

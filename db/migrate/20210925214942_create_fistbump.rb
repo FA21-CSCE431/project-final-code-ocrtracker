@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# CreateFistbump
 class CreateFistbump < ActiveRecord::Migration[6.1]
   def change
     create_table :fistbumps do |t|

@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# User
 class User < ApplicationRecord
   devise :omniauthable, omniauth_providers: [:google_oauth2]
 

@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# CreateWorkoutPost
 class CreateWorkoutPost < ActiveRecord::Migration[6.1]
   def change
     create_table :workout_posts do |t|

@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Ocrtrackers Controller
 class OcrtrackersController < ApplicationController
   before_action :set_ocrtracker, only: %i[show edit update destroy]
 

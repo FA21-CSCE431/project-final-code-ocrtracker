@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Posts Controller
 class PostsController < ApplicationController
   before_action :set_exercises, only: %i[new]
   before_action :initialize_ep, only: %i[new]

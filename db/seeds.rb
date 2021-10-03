@@ -12,14 +12,20 @@
 
 e1 = Exercise.find_or_create_by({
                                   title: 'Pushups',
-                                  description: 'A push-up is a common calisthenics exercise beginning from the prone position. By raising and lowering the body using the arms, push-ups exercise the pectoral muscles, triceps, and anterior deltoids, with ancillary benefits to the rest of the deltoids, serratus anterior, coracobrachialis and the midsection as a whole.',
+                                  description: 'A push-up is a common calisthenics exercise beginning from the prone'\
+                                  ' position. By raising and lowering thebody using the arms, push-ups exercise'\
+                                  ' the pectoral muscles, triceps, and anterior deltoids, with ancillary benefits'\
+                                  ' to the rest of the deltoids, serratus anterior, coracobrachialis and the'\
+                                  ' midsection as a whole.',
                                   picture: 'https://www.thehindu.com/sci-tech/health/vsuju8/article34301845.ece/ALTERNATES/LANDSCAPE_1200/10MPHowto1',
                                   unit_name: 'time'
                                 })
 
 e2 = Exercise.find_or_create_by({
                                   title: 'Situps',
-                                  description: 'The sit-up is an abdominal endurance training exercise to strengthen, tighten and tone the abdominal muscles. It is similar to a crunch, but sit-ups have a fuller range of motion and condition additional muscles.',
+                                  description: 'The sit-up is an abdominal endurance training exercise to strengthen,'\
+                                  ' tighten and tone the abdominal muscles. It is similar to a crunch, but sit-ups'\
+                                  ' have a fuller range of motion and condition additional muscles.',
                                   picture: 'https://image.shutterstock.com/image-vector/woman-who-fat-doing-sit-260nw-715195228.jpg',
                                   unit_name: 'time'
                                 })
@@ -57,14 +63,14 @@ ws1 = WorkoutSubmission.find_or_create_by({
 
 ############ Exercise Submissions #############
 
-es1 = ExerciseSubmission.find_or_create_by({
-                                             exercise_post: ep1,
-                                             workout_submission: ws1,
-                                             unit_value: '180'
-                                           })
+ExerciseSubmission.find_or_create_by({
+                                       exercise_post: ep1,
+                                       workout_submission: ws1,
+                                       unit_value: '180'
+                                     })
 
-es2 = ExerciseSubmission.find_or_create_by({
-                                             exercise_post: ep2,
-                                             workout_submission: ws1,
-                                             unit_value: '120'
-                                           })
+ExerciseSubmission.find_or_create_by({
+                                       exercise_post: ep2,
+                                       workout_submission: ws1,
+                                       unit_value: '120'
+                                     })
