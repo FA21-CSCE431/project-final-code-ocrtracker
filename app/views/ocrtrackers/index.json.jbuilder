@@ -1,1 +1,1 @@
-json.array! @ocrtrackers, partial: "ocrtrackers/ocrtracker", as: :ocrtracker
+json.array! @ocrtrackers, partial: 'ocrtrackers/ocrtracker', as: :ocrtracker

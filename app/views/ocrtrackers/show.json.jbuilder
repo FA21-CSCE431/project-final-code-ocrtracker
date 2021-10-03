@@ -1,1 +1,1 @@
-json.partial! "ocrtrackers/ocrtracker", ocrtracker: @ocrtracker
+json.partial! 'ocrtrackers/ocrtracker', ocrtracker: @ocrtracker

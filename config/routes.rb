@@ -13,7 +13,6 @@ Rails.application.routes.draw do
 
   get 'submissions/history/:workout_post_id', to: 'submissions#history'
 
-
   get 'posts/new/', to: 'posts#new'
   post 'posts/create/', to: 'posts#create'
 
