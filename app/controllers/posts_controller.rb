@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PostsController < ApplicationController
   before_action :set_exercises, only: %i[new]
   before_action :initialize_ep, only: %i[new]
@@ -42,7 +44,7 @@ class PostsController < ApplicationController
     end
 
     respond_to do |format|
-      if workout_post.valid? && exercise_posts.all? { |ep| ep.valid? }
+      if workout_post.valid? && exercise_posts.all?(&:valid?)
         workout_post.save
         exercise_posts.each(&:save!)
         format.html { redirect_to '/', notice: 'Workout was successfully posted' }

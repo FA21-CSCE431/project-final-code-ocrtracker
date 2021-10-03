@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ExerciseSubmission < ApplicationRecord
   belongs_to :exercise_post
   belongs_to :workout_submission

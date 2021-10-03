@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # location spec/unit/workout_submission_spec.rb
 require 'rails_helper'
 

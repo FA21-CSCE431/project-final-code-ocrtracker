@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class WorkoutSubmission < ApplicationRecord
   belongs_to :workout_post
   belongs_to :user
