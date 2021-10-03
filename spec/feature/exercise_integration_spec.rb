@@ -60,3 +60,34 @@ RSpec.describe 'Creating an exercise', type: :feature do
     end
 
 end
+
+RSpec.describe 'Editing an exercise', type: :feature do
+
+    fixtures :users, :exercises
+
+    scenario 'valid inputs' do
+        login_as_admin
+        visit edit_exercise_path(exercises(:pushups))
+        fill_in 'Title', with: 'new_test_title'
+        fill_in 'Description', with: 'new_test_desc'
+        # fill_in 'Picture', with: 'test_pic'
+        fill_in 'Unit name', with: 'new_test_un'
+        click_on 'Update Exercise'
+        expect(page).to have_content "Exercise was successfully updated"
+    end
+
+    scenario 'invalid inputs' do
+        login_as_admin
+        visit edit_exercise_path(exercises(:pushups))
+        fill_in 'Title', with: ''
+        click_on 'Update Exercise'
+        expect(page).to have_content "error"
+    end
+
+    scenario 'non-admin user' do
+        login_as_user
+        visit edit_exercise_path(exercises(:pushups))
+        expect(page).to have_content "You must be an admin to access this section"
+    end
+
+end
