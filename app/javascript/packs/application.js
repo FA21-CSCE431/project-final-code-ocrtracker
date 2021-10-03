@@ -16,7 +16,7 @@ import "../stylesheets/application";
 
 //= require jquery3
 //= require popper
-//= require bootstrap
+//= require bootstrap-sprockets
 
 Rails.start()
 Turbolinks.start()
