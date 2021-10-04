@@ -5,7 +5,7 @@ require 'rails_helper'
 
 RSpec.describe 'View submission history for a workout post', type: :feature do
   fixtures :users, :exercises, :workout_posts, :exercise_posts, :workout_submissions, :exercise_submissions
-  
+
   scenario 'admin views submission history for a workout post' do
     login_as_admin
 
@@ -14,7 +14,6 @@ RSpec.describe 'View submission history for a workout post', type: :feature do
 
     visit "/submissions/history/#{wp.id}"
     expect(page).to have_content(wp.ranked_exercise_post.exercise_submissions.first.unit_value)
-    
   end
 
   scenario 'user visits history path' do
@@ -23,7 +22,5 @@ RSpec.describe 'View submission history for a workout post', type: :feature do
     wp = workout_posts(:wp1)
     visit "/submissions/history/#{wp.id}"
     expect(page).to have_content('You must be an admin to access this section')
-
   end
-
 end
