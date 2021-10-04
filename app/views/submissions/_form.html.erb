@@ -6,8 +6,7 @@
         <p>Exercise description: <%= ep.exercise.description %></p>
         <p>Specific instructions: <%= ep.specific_instructions %></p>
         <p>Unit for submission: <%= ep.exercise.unit_name %></p>
-        <% es = ExerciseSubmission.new(exercise_post: ep) %>
-        <%= ws_form.fields_for es, index: ep.id do |es_form| %>
+        <%= ws_form.fields_for :exercise_submission, index: ep.id do |es_form| %>
             <%= es_form.label :unit_value, "Value for submission (#{ep.exercise.title})"%>
             <%= es_form.text_field :unit_value %>
         <% end %>
