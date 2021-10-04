@@ -45,11 +45,11 @@ class SubmissionsController < ApplicationController
     end
 
     workout_submission.workout_post = @workout_post
-    # @workout_submission = WorkoutSubmission.new(workout_submission_params)
-    # @exercise_submissions =
 
     respond_to do |format|
-      if workout_submission.save
+      # If the workout submission and all exercise submissions are valid
+      if workout_submission.valid? && exercise_submissions.all?(&:valid?)
+        workout_submission.save
         exercise_submissions.each(&:save!)
         format.html { redirect_to '/', notice: 'Workout was successfully submitted' }
         # format.json { render :show, status: :created, location: workout_submission }
@@ -88,9 +88,4 @@ class SubmissionsController < ApplicationController
   def exercise_submission_params
     params.require(:exercise_submission).permit(:exercise_post_id, :workout_submission_id, :unit_value)
   end
-
-  #   # Only allow a list of trusted parameters through.
-  #   def ocrtracker_params
-  #     params.require(:ocrtracker).permit(:W.I.P)
-  #   end
 end
