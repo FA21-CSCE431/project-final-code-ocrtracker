@@ -7,6 +7,8 @@ class SubmissionsController < ApplicationController
 
   before_action :set_workout_submissions, only: %i[history]
 
+  before_action :require_admin, only: %i[history]
+
   def history; end
 
   # GET
