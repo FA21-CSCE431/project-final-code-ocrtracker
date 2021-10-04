@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# location: spec/feature/oauth_integration_spec.rb
+# location: spec/feature/history_integration_spec.rb
 require 'rails_helper'
 
 RSpec.describe 'View submission history for a workout post', type: :feature do
