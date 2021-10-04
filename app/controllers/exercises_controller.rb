@@ -18,10 +18,10 @@ class ExercisesController < ApplicationController
     @exercise = Exercise.new
   end
 
-  # GET /books/1/edit
+  # GET /exercises/1/edit
   def edit; end
 
-  # POST /books
+  # POST /exercises
   def create
     @exercise = Exercise.new(exercise_params)
 
@@ -50,11 +50,11 @@ class ExercisesController < ApplicationController
   end
 
   def destroy
-    @exercise.destroy
-    respond_to do |format|
-      format.html { redirect_to exercises_path, notice: 'Exercise was successfully destroyed' }
-      format.json { head :no_content }
-    end
+    # @exercise.destroy
+    # respond_to do |format|
+    #   format.html { redirect_to exercises_path, notice: 'Exercise was successfully destroyed' }
+    #   format.json { head :no_content }
+    # end
   end
 
   private
