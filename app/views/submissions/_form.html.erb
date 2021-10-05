@@ -1,0 +1,21 @@
+<h1><%= @workout_post.title %></h1>
+<%= form_with url:"/submissions/create", method: :post do |ws_form| %>
+
+    <% @workout_post.exercise_posts.each do |ep| %>
+        <p>Exercise title: <%= ep.exercise.title %></p>
+        <p>Exercise description: <%= ep.exercise.description %></p>
+        <p>Specific instructions: <%= ep.specific_instructions %></p>
+        <p>Unit for submission: <%= ep.exercise.unit_name %></p>
+        <%= ws_form.fields_for :exercise_submission, index: ep.id do |es_form| %>
+            <%= es_form.label :unit_value, "Value for submission (#{ep.exercise.title})"%>
+            <%= es_form.text_field :unit_value %>
+        <% end %>
+    <% end %>
+
+    <div class="actions">
+        <%= ws_form.submit "Submit"%>
+    </div>
+
+<% end %>
+
+

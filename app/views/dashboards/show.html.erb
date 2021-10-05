@@ -1,13 +1,17 @@
-<!DOCTYPE html>
-<html>
-  <h1>You're logged in! Welcome to the User Dashboard!</h1>
-  <head>
-    <p>
-      <strong>W.I.P.</strong>
-    </p>
-  </head>
+<h1>You're logged in! Welcome to the User Dashboard!</h1>
+<head>
+  <p>
+    <strong>W.I.P.</strong>
+  </p>
+</head>
 
-  <body>
+<body>
+  <% if current_user.is_admin? %>
+    Howdy <%= current_user.full_name %> as admin
+  <% else %>
+    Howdy <%= current_user.full_name %> as user
+  <% end %>
+  <div>
     <%= link_to "Sign Out", destroy_user_session_path %>
-  </body>
-</html>
+  </div>
+</body>

@@ -1,0 +1,11 @@
+ep1:
+  exercise: pushups
+  workout_post: wp1
+  specific_instructions: 50 pushups
+  is_ranked: true
+
+ep2:
+  exercise: situps
+  workout_post: wp1
+  specific_instructions: 20 situps
+  is_ranked: false

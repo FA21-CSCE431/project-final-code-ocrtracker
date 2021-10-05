@@ -1,0 +1,57 @@
+
+<%= form_with model: WorkoutPost.new, url:"/posts/create", method: :post do |wp_form| %>
+
+    <p>Title: <%= wp_form.text_field :title%></p>
+
+    <div class='new_exercise_posts'>
+        <%= wp_form.fields_for ExercisePost.new, index:1 do |ep_form| %>
+
+            <%= ep_form.select(:exercise_id, Exercise.all.collect {|e| [e.title, e.id]},  {prompt: "Select"}, {class: 'form-control'}) %>
+
+            
+            <%= ep_form.text_field :specific_instructions%>
+            <%= ep_form.check_box :is_ranked%>
+
+            
+        <% end %>
+        <%= wp_form.fields_for ExercisePost.new, index:2 do |ep_form| %>
+
+            <%= ep_form.select(:exercise_id, Exercise.all.collect {|e| [e.title, e.id]},  {prompt: "Select"}, {class: 'form-control'}) %>
+
+            
+            <%= ep_form.text_field :specific_instructions%>
+            <%= ep_form.check_box :is_ranked%>
+
+            
+        <% end %>
+
+
+    </div>
+
+    <input type="button" id = "new_exercise" value="new">
+
+
+    <div class="actions">
+        <%= wp_form.submit %>
+    </div>
+
+<% end %>
+
+<script>
+
+    document.getElementById("new_exercise").onclick = function() {
+
+        original = document.getElementsByClassName("new_exercise_posts")[0].cloneNode(true)
+        original.childNodes.forEach(element => {
+            element.setAttribute("name", element.getAttribute("name").replace("1", "2"))
+            element.id.replace("1", "2")
+        });
+
+        document.getElementsByTagName("form")[0].append(
+            original
+
+        );
+    };
+
+
+</script>
