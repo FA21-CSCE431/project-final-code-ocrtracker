@@ -3,10 +3,11 @@
 # Posts Controller
 class PostsController < ApplicationController
   before_action :set_exercises, only: %i[new]
-  before_action :initialize_ep, only: %i[new]
 
   before_action :set_workout_posts, only: %i[index]
   before_action :set_exercise_posts, only: %i[index]
+
+  before_action :require_admin, only: %i[new create]
 
   # GET
   def index; end
@@ -29,31 +30,17 @@ class PostsController < ApplicationController
 
     submitted_exercise_posts = params[:workout_post][:exercise_post]
 
-    exercise_posts = []
-
-    unless workout_post.valid?
-      # stop
-    end
-
-    submitted_exercise_posts.each do |_index, ep|
-      exercise_posts << ExercisePost.new(
-        workout_post: workout_post,
-        exercise_id: ep[:exercise_id],
-        specific_instructions: ep[:specific_instructions],
-        is_ranked: ep[:is_ranked] == '1'
-      )
-    end
+    workout_post.exercise_posts.build(submitted_exercise_posts.values)
 
     respond_to do |format|
-      if workout_post.valid? && exercise_posts.all?(&:valid?)
+      if workout_post.valid? && workout_post.exercise_posts.all?(&:valid?)
         workout_post.save
-        exercise_posts.each(&:save!)
+        workout_post.exercise_posts.each(&:save!)
         format.html { redirect_to '/', notice: 'Workout was successfully posted' }
         # format.json { render :show, status: :created, location: workout_submission }
       else
-        puts 'nope'
-        format.html { render :new, status: :unprocessable_entity }
-        #   format.json { render json: workout_submission.errors, status: :unprocessable_entity }
+        format.html { redirect_to '/', notice: 'Error: Could not post workout' }
+        # format.html { render :new, status: :unprocessable_entity }
       end
     end
   end
@@ -71,20 +58,7 @@ class PostsController < ApplicationController
     @exercises = Exercise.all
   end
 
-  def initialize_ep
-    @exercise_post = ExercisePost.new
-  end
-
-  def workout_post_params
-    params.require(:workout_post).permit(:title, :date_created)
-  end
-
   def exercise_post_params
     params.require(:exercise_post).permit(:exercise_id, :workout_post_id, :specific_instructions, :is_ranked)
   end
-
-  #   # Only allow a list of trusted parameters through.
-  #   def ocrtracker_params
-  #     params.require(:ocrtracker).permit(:W.I.P)
-  #   end
 end
