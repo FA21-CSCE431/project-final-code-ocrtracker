@@ -82,12 +82,4 @@ class SubmissionsController < ApplicationController
   def set_workout_submissions
     @workout_submissions = @workout_post.workout_submissions
   end
-
-  def workout_submission_params
-    params.require(:workout_submission).permit(:submitted_datetime, :workout_post_id, :user_id)
-  end
-
-  def exercise_submission_params
-    params.require(:exercise_submission).permit(:exercise_post_id, :workout_submission_id, :unit_value)
-  end
 end
