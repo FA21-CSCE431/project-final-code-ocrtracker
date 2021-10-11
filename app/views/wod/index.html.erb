@@ -1,0 +1,17 @@
+<h1>Set WOD</h1>
+
+<%= javascript_pack_tag 'ajax_response' %>
+
+<div id='flash_message'></div>
+
+<% @workout_posts.each do |wp| %>
+
+    <%= form_with model: wp.wod_history, url: '/wod', method: :post, local: false, class: 'wp_h_form' do |wp_h_form|%>
+        <%= wp.title %>
+        <%= wp_h_form.datetime_local_field :wod_date %> 
+        <%= wp_h_form.hidden_field :workout_post_id, :value => wp.id %>
+        <%= wp_h_form.submit %> 
+
+    <% end %> 
+
+<%end%>
