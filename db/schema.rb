@@ -12,7 +12,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_210_925_215_052) do
+ActiveRecord::Schema.define(version: 20_211_011_142_232) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'plpgsql'
 
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 20_210_925_215_052) do
     t.string 'unit_value'
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
+    t.boolean 'opt_out'
     t.index ['exercise_post_id'], name: 'index_exercise_submissions_on_exercise_post_id'
     t.index ['workout_submission_id'], name: 'index_exercise_submissions_on_workout_submission_id'
   end
@@ -48,19 +49,11 @@ ActiveRecord::Schema.define(version: 20_210_925_215_052) do
 
   create_table 'fistbumps', force: :cascade do |t|
     t.bigint 'user_id'
-    t.bigint 'workout_submission_id'
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
+    t.bigint 'exercise_submission_id'
+    t.index ['exercise_submission_id'], name: 'index_fistbumps_on_exercise_submission_id'
     t.index ['user_id'], name: 'index_fistbumps_on_user_id'
-    t.index ['workout_submission_id'], name: 'index_fistbumps_on_workout_submission_id'
-  end
-
-  create_table 'leaderboard_spots', force: :cascade do |t|
-    t.bigint 'workout_submission_id'
-    t.integer 'spot_no'
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
-    t.index ['workout_submission_id'], name: 'index_leaderboard_spots_on_workout_submission_id'
   end
 
   create_table 'users', force: :cascade do |t|
@@ -104,9 +97,8 @@ ActiveRecord::Schema.define(version: 20_210_925_215_052) do
   add_foreign_key 'exercise_posts', 'workout_posts'
   add_foreign_key 'exercise_submissions', 'exercise_posts'
   add_foreign_key 'exercise_submissions', 'workout_submissions'
+  add_foreign_key 'fistbumps', 'exercise_submissions'
   add_foreign_key 'fistbumps', 'users'
-  add_foreign_key 'fistbumps', 'workout_submissions'
-  add_foreign_key 'leaderboard_spots', 'workout_submissions'
   add_foreign_key 'wod_histories', 'workout_posts'
   add_foreign_key 'workout_submissions', 'users'
   add_foreign_key 'workout_submissions', 'workout_posts'
