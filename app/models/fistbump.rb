@@ -2,5 +2,5 @@
 
 class Fistbump < ApplicationRecord
   belongs_to :user
-  belongs_to :workout_submission
+  belongs_to :exercise_submission
 end
