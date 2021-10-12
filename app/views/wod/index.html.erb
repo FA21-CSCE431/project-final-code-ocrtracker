@@ -11,6 +11,7 @@
         <%= wp_h_form.datetime_local_field :wod_date %> 
         <%= wp_h_form.hidden_field :workout_post_id, :value => wp.id %>
         <%= wp_h_form.submit %> 
+        <%= link_to "Delete", remove_wod_path(wp), method: :post, remote: true %> 
 
     <% end %> 
 

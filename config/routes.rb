@@ -20,6 +20,7 @@ Rails.application.routes.draw do
 
   get '/wod/set', to: 'wod#index'
   post '/wod/set', to: 'wod#update_wod'
+  post '/wod/remove/:workout_post_id', to: 'wod#remove', as: "remove_wod"
 
   resources :exercises, :workout_posts, :exercise_posts
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

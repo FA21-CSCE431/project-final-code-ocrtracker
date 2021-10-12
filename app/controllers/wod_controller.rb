@@ -4,7 +4,7 @@
 class WodController < ApplicationController
   
     before_action :set_workout_posts, only: %i[index]
-    before_action :require_admin, only: %i[index update_wod]
+    before_action :require_admin, only: %i[index update_wod remove]
   
     # GET
     def index
@@ -26,23 +26,37 @@ class WodController < ApplicationController
     def update_wod
       workout_post = WorkoutPost.find(params[:wod_history][:workout_post_id])
 
-      workout_post.wod_history.update(wod_date: params[:wod_history][:wod_date])
 
-      workout_post.save!
+      if params[:wod_history][:wod_date].empty?
+        respond_to do |format|
+          msg = { :status => 'failure', :message => "Failed to update #{workout_post.title}"}
+          format.json{render :json => msg}
+        end
 
-      # flash.now[:notice] = 'a'
+      else
+        workout_post.wod_history.update(wod_date: params[:wod_history][:wod_date])
+  
+        workout_post.save
+        respond_to do |format|
+          msg = { :status => 'success', :message => "Successfully updated #{workout_post.title}"}
+          format.json{render :json => msg}
+        end
+        
+      end
+
+    end
+
+    def remove
+      workout_post = WorkoutPost.find(params[:workout_post_id])
+
+      # Destroy the wod_history entity associated with the workout post (if one exists)
+      workout_post.wod_history.destroy unless workout_post.wod_history.new_record?
 
       respond_to do |format|
-        msg = { :status => 'success', :message => "Successfully updated #{workout_post.title}"}
+        msg = { :status => 'success', :message => "Successfully deleted WOD history date for #{workout_post.title}"}
         format.json{render :json => msg}
       end
-      # render json: {status: 'success', message: 'Successfully updated'}
 
-      # wodh = WodHistory.find_or_create_by(workout_post: workout_post)
-      # wodh.wod_date = params[:wod_history][:wod_date]
-  
-      # workout_post.wod_history = wodh
-      # workout_post.save!
     end
   
     # PATCH/PUT
@@ -59,10 +73,6 @@ class WodController < ApplicationController
       # TODO change this to show the last 10? Made within the last week?
       @workout_posts = WorkoutPost.all
     end
-
-    # def wod_history_params
-    #   params.require(:wod_history).permit(:wod_date)
-    # end
   
   end
   
