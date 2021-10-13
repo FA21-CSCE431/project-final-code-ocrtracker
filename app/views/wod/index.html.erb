@@ -6,12 +6,13 @@
 
 <% @workout_posts.each do |wp| %>
 
-    <%= form_with model: wp.wod_history, url: '/wod/set', method: :post, local: false, class: 'wp_h_form' do |wp_h_form|%>
+    <%= form_with model: wp.wod_history, url: '/wod/set', method: :post, local: false, class: 'wp_h_form', format: :json do |wp_h_form|%>
         <%= wp.title %>
         <%= wp_h_form.datetime_local_field :wod_date %> 
         <%= wp_h_form.hidden_field :workout_post_id, :value => wp.id %>
-        <%= wp_h_form.submit %> 
+        <%= wp_h_form.submit 'Set WOD date' %> 
         <%= link_to "Delete", remove_wod_path(wp), method: :post, remote: true %> 
+         
 
     <% end %> 
 

@@ -18,10 +18,17 @@ Rails.application.routes.draw do
   get 'posts/new/', to: 'posts#new'
   post 'posts/create/', to: 'posts#create'
 
-  get '/wod/set', to: 'wod#index'
+  # Admin-only routes for setting WOD dates
+  get '/wod/set', to: 'wod#index', as: 'set_wod'
   post '/wod/set', to: 'wod#update_wod'
-  post '/wod/remove/:workout_post_id', to: 'wod#remove', as: "remove_wod"
+  post '/wod/remove/:workout_post_id', to: 'wod#remove', as: 'remove_wod'
 
-  resources :exercises, :workout_posts, :exercise_posts
+  # User route for viewing the current WOD
+  get '/wod/current', to: 'wod#show_current_wod'
+  get '/wod/history', to: 'wod#show_wod_history', as: 'wod_history'
+
+
+
+  resources :exercises#, :workout_posts, :exercise_posts
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
