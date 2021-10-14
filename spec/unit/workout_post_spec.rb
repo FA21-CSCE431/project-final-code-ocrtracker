@@ -20,9 +20,4 @@ RSpec.describe WorkoutPost, type: :model do
     expect(subject).not_to be_valid
   end
 
-  # Ensure that the subject is not valid without a date created
-  it 'is not valid without a date created' do
-    subject.date_created = nil
-    expect(subject).not_to be_valid
-  end
 end

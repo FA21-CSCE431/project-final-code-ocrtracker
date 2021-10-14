@@ -10,7 +10,6 @@ FactoryBot.define do
 
   factory :workout_post do
     title { 'Workout Post Title' }
-    date_created { Date.today }
   end
 
   factory :exercise_post do
