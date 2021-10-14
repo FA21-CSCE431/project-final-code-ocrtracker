@@ -4,3 +4,8 @@ wp1:
 
 wp2:
   title: Workout Post 2
+  wod_date: <%=5.minutes.ago%>
+
+wp_with_wod_in_future:
+  title: Workout Post 3 (WOD in future)
+  wod_date: <%= 5.days.from_now %>

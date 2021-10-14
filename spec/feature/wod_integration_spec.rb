@@ -3,7 +3,7 @@
 # location: spec/feature/wod_integration_spec.rb
 require 'rails_helper'
 
-RSpec.describe '', type: :feature do
+RSpec.describe 'Admin wod view', type: :feature do
   fixtures :users, :exercises, :workout_posts
 
   scenario 'Admin views the current WOD date for a workout post' do
@@ -67,4 +67,30 @@ RSpec.describe '', type: :feature do
     visit set_wod_path
     expect(page).to have_content 'You must be an admin to access this section'
   end
+end
+
+RSpec.describe 'User wod view', type: :feature do
+
+  fixtures :users, :exercises, :workout_posts, :exercise_posts, :workout_submissions, :exercise_submissions
+
+  scenario 'User sees link to the current WOD' do
+    login_as_user
+    visit user_wod_path
+    expect(page).to have_link(nil, href: new_submission_path(workout_posts(:wp2)))
+  end
+  
+  scenario 'User cannot see future WOD' do
+    login_as_user
+    visit user_wod_path
+    expect(page).not_to have_content workout_posts(:wp_with_wod_in_future).title
+
+  end
+
+  scenario 'User sees submission info for past WODs' do
+    login_as_user
+    visit user_wod_path
+    expect(page).to have_content users(:user_account).workout_submissions.first.exercise_submissions.first.unit_value
+  end
+
+
 end
