@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   post 'posts/create/', to: 'posts#create'
 
   # Admin-only routes for setting WOD dates
-  get '/wod/set', to: 'wod#index', as: 'set_wod'
+  get '/wod/set', to: 'wod#admin_view', as: 'set_wod'
   post '/wod/set', to: 'wod#update_wod'
 
   # User route for viewing the current WOD

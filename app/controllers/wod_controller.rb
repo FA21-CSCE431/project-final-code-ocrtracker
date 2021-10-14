@@ -2,11 +2,11 @@
 
 # Posts Controller
 class WodController < ApplicationController
-  before_action :set_recent_workout_posts, only: %i[index]
-  before_action :require_admin # , only: %i[index update_wod remove]
+  before_action :set_recent_workout_posts, only: %i[admin_view]
+  before_action :require_admin, only: %i[admin_view update_wod]
 
   # GET /wod/set
-  def index; end
+  def admin_view; end
 
   # POST /wod/set
   def update_wod
