@@ -1,2 +1,6 @@
 wp1:
   title: Workout Post 1
+  wod_date: 2020-5-5
+
+wp2:
+  title: Workout Post 2
