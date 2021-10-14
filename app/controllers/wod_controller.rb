@@ -2,70 +2,31 @@
 
 # Posts Controller
 class WodController < ApplicationController
-  before_action :set_workout_posts, only: %i[index]
-  before_action :require_admin, only: %i[index update_wod remove]
+  before_action :set_recent_workout_posts, only: %i[index]
+  before_action :require_admin # , only: %i[index update_wod remove]
 
-  # GET
+  # GET /wod/set
   def index; end
 
-  # GET
-  def show; end
-
-  # GET
-  def new; end
-
-  # GET
-  def edit; end
-
-  # POST
-  def create; end
-
+  # POST /wod/set
   def update_wod
-    workout_post = WorkoutPost.find(params[:wod_history][:workout_post_id])
-
-    if params[:wod_history][:wod_date].empty?
-      respond_to do |format|
-        msg = { status: 'failure', message: "Failed to update #{workout_post.title}" }
-        format.json { render json: msg }
-      end
-
-    else
-      workout_post.wod_history.update(wod_date: params[:wod_history][:wod_date])
-
-      workout_post.save
-      respond_to do |format|
-        # puts *format
-        msg = { status: 'success', message: "Successfully updated #{workout_post.title}" }
-        format.json { render json: msg }
-      end
-
-    end
-  end
-
-  def remove
-    workout_post = WorkoutPost.find(params[:workout_post_id])
-
-    # Destroy the wod_history entity associated with the workout post (if one exists)
-    workout_post.wod_history.destroy unless workout_post.wod_history.new_record?
+    submitted_hash = params[:workout_post]
 
     respond_to do |format|
-      msg = { status: 'success', message: "Successfully deleted WOD history date for #{workout_post.title}" }
-      format.json { render json: msg }
+      if WorkoutPost.update(submitted_hash.keys, submitted_hash.values.map { |x| { wod_date: x[:wod_date] } })
+        format.html { redirect_to set_wod_path, notice: 'WOD dates successfully updated' }
+      else
+        format.html { redirect_to set_wod_path, notice: 'Failure' }
+      end
     end
   end
-
-  # PATCH/PUT
-  def update; end
-
-  # DELETE
-  def destroy; end
 
   private
 
   # Use callbacks to share common setup or constraints between actions.
 
-  def set_workout_posts
+  def set_recent_workout_posts
     # TODO: change this to show the last 10? Made within the last week?
-    @workout_posts = WorkoutPost.all
+    @workout_posts = WorkoutPost.limit(10).order('created_at DESC')
   end
 end
