@@ -14,9 +14,4 @@ class WorkoutPost < ApplicationRecord
   def ranked_exercise
     ranked_exercise_post.exercise
   end
-
-  def wod_history
-    super || build_wod_history
-  end
-
 end
