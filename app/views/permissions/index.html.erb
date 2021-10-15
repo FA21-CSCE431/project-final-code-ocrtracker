@@ -1,6 +1,6 @@
 <%= form_with url:"/permissions", method: :post do |perm_form| %>
 <h1>Permissions</h1>
-<input type="text" id="inputName" onkeyup="searchName()" placeholder="Search for names.." title="Type in a name">
+<input type="text" id="inputName" onkeyup="searchName()" placeholder="Search by TAMU email" title="Type in a name">
 <table id="userTable">
   <tr>
    <th>Email</th>
@@ -23,7 +23,7 @@
 <% end %>
 <%= link_to 'Back', '/'  %>
 
-<%#https://www.w3schools.com/howto/howto_js_filter_table.asp %> 
+<%#https://www.w3schools.com/howto/howto_js_filter_table.asp %>
 <script>
 function searchName() {
   var input, filter, table, tr, td, i, txtValue;
