@@ -8,6 +8,7 @@
 <body>
   <% if current_user.is_admin? %>
     Howdy <%= current_user.full_name %> as admin
+    <p><%= link_to "permissions", "/permissions" %></p>
   <% else %>
     Howdy <%= current_user.full_name %> as user
   <% end %>

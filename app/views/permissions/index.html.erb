@@ -1,0 +1,23 @@
+<%= form_with url:"/permissions", method: :post do |perm_form| %>
+<h1>Permissions</h1>
+<table>
+  <tr>
+   <th>Email</th>
+   <th>Name</th>
+   <th>Is Admin?</th>
+ </tr>
+  <% @users.each do |user| %>
+    <%= perm_form.fields_for user, index: user.id, method: :post do |p_fields|%>
+    <tr>
+      <td><%= user.email %></td>
+      <td><%= user.full_name %></td>
+      <td><%= p_fields.check_box :is_admin %></td>
+    </tr>
+    <% end %>
+  <% end %>
+</table>
+  <div class="actions">
+      <%= perm_form.submit "Save Changes"%>
+  </div>
+<% end %>
+<%= link_to 'Back', '/'  %>
