@@ -10,13 +10,13 @@
 
 ############ Exercises #############
 
-User.find_or_create_by({
-                         email: 'test-user@tamu.edu',
-                         full_name: 'test user',
-                         uid: '12376y1245098162308412',
-                         is_admin: true,
-                         description: 'test-description'
-                       })
+User.find_or_create_by(email: 'test-user@tamu.edu').update({
+
+                                                             full_name: 'test user',
+                                                             uid: '12376y1245098162308412',
+                                                             is_admin: true,
+                                                             description: 'test-description'
+                                                           })
 
 e1 = Exercise.find_or_create_by({
                                   title: 'Pushups',
