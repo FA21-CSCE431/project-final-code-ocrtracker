@@ -1,14 +1,7 @@
 <%= form_with url:"/permissions", method: :post do |perm_form| %>
 <h1>Permissions</h1>
 <%#https://stackoverflow.com/questions/34751453/sort-html-table-alphabetically-on-page-load%>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">
-  var mylist = $('#userTable');
-  var listitems = mylist.find('tr');
-  listitems.sort(function(a, b) {
-     return $(a).text().toUpperCase().localeCompare($(b).text().toUpperCase());
-  })
-  $.each(listitems, function(idx, itm) { mylist.append(itm); });
-</script>
+<%#<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>%>
 <input type="text" id="inputName" onkeyup="searchName()" placeholder="Search by TAMU email" title="Type in a name">
 <table id="userTable">
   <tr>
