@@ -41,8 +41,7 @@ e2 = Exercise.find_or_create_by({
 ############ Workout Posts #############
 
 wp1 = WorkoutPost.find_or_create_by({
-                                      title: 'Workout Post 1',
-                                      date_created: Date.new(2021, 10, 1)
+                                      title: 'Workout Post 1'
                                     })
 
 ############ Exercise Posts #############
@@ -74,11 +73,13 @@ ws1 = WorkoutSubmission.find_or_create_by({
 ExerciseSubmission.find_or_create_by({
                                        exercise_post: ep1,
                                        workout_submission: ws1,
-                                       unit_value: '180'
+                                       unit_value: '180',
+                                       user: ws1.user
                                      })
 
 ExerciseSubmission.find_or_create_by({
                                        exercise_post: ep2,
                                        workout_submission: ws1,
-                                       unit_value: '120'
+                                       unit_value: '120',
+                                       user: ws1.user
                                      })
