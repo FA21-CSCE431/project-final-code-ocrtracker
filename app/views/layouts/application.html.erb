@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>GoogleOauthDevise</title>
+    <title>OCR Tracker</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
     <%= stylesheet_link_tag  'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <style>
@@ -14,11 +15,6 @@
   </head>
 
   <body>
-    <% if flash.any? %>
-      <% flash.each do |key, value| -%>
-        <section class="flash flash__<%= key %>"><%= value.html_safe %></section>
-      <% end -%>
-    <% end %>
     <%= yield %>
   </body>
 </html>
