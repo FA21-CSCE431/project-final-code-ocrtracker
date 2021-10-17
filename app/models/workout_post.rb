@@ -2,8 +2,8 @@
 
 # Workout Post
 class WorkoutPost < ApplicationRecord
-  has_many :exercise_posts
-  has_many :workout_submissions
+  has_many :exercise_posts, dependent: :destroy
+  has_many :workout_submissions, dependent: :destroy
 
   validates :title, presence: true
 
