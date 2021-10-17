@@ -9,3 +9,15 @@ ep2:
   workout_post: wp1
   specific_instructions: 20 situps
   is_ranked: false
+
+ep3:
+  exercise: situps
+  workout_post: wp2
+  specific_instructions: 35 situps
+  is_ranked: false
+
+ep4:
+  exercise: pushups
+  workout_post: wp2
+  specific_instructions: 15 pushups
+  is_ranked: true

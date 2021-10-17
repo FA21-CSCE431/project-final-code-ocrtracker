@@ -6,5 +6,7 @@ class ExerciseSubmission < ApplicationRecord
   belongs_to :user
   has_many :fistbumps, dependent: :destroy
 
+  delegate :exercise, to: :exercise_post
+
   validates :unit_value, presence: true
 end
