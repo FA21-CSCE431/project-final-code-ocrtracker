@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_14_144043) do
+ActiveRecord::Schema.define(version: 2021_10_15_182218) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,7 +33,9 @@ ActiveRecord::Schema.define(version: 2021_10_14_144043) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "opt_out"
+    t.bigint "user_id"
     t.index ["exercise_post_id"], name: "index_exercise_submissions_on_exercise_post_id"
+    t.index ["user_id"], name: "index_exercise_submissions_on_user_id"
     t.index ["workout_submission_id"], name: "index_exercise_submissions_on_workout_submission_id"
   end
 
@@ -87,6 +89,7 @@ ActiveRecord::Schema.define(version: 2021_10_14_144043) do
   add_foreign_key "exercise_posts", "exercises"
   add_foreign_key "exercise_posts", "workout_posts"
   add_foreign_key "exercise_submissions", "exercise_posts"
+  add_foreign_key "exercise_submissions", "users"
   add_foreign_key "exercise_submissions", "workout_submissions"
   add_foreign_key "fistbumps", "exercise_submissions"
   add_foreign_key "fistbumps", "users"

@@ -12,4 +12,5 @@ class User < ApplicationRecord
   # enum role: [:normal, :admin]
   has_many :workout_submissions
   has_many :fistbumps
+  has_many :exercise_submissions
 end
