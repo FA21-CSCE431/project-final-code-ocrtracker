@@ -18,6 +18,7 @@ import "../stylesheets/application";
 //= require popper
 //= require bootstrap-sprockets
 
+require('turbolinks').start()
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()

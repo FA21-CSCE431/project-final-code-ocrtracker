@@ -32,6 +32,7 @@ gem 'jbuilder', '~> 2.7'
 # gem 'bcrypt', '~> 3.1.7'
 # Use for user/admin roles
 # gem 'pundit'
+gem 'coffee-script-source', '1.8.0'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
