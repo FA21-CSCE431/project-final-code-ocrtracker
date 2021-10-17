@@ -42,7 +42,8 @@ class SubmissionsController < ApplicationController
       exercise_submissions << ExerciseSubmission.new({
                                                        exercise_post: exercise_post,
                                                        workout_submission: workout_submission,
-                                                       unit_value: uv[:unit_value]
+                                                       unit_value: uv[:unit_value],
+                                                       user: current_user
                                                      })
     end
 

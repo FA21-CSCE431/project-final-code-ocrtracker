@@ -5,18 +5,18 @@ require 'rails_helper'
 
 RSpec.describe WorkoutSubmission, type: :model do
   # Create a subject to test model validity with
-  subject do
+  subject(:workout_submission) do
     FactoryBot.create(:workout_submission)
   end
 
   # Ensure that the subject is valid with all fields
   it 'is valid with valid attributes' do
-    expect(subject).to be_valid
+    expect(workout_submission).to be_valid
   end
 
   # Ensure that the subject is not valid without a submitted datetime
   it 'is not valid without a submitted datetime' do
-    subject.submitted_datetime = nil
-    expect(subject).not_to be_valid
+    workout_submission.submitted_datetime = nil
+    expect(workout_submission).not_to be_valid
   end
 end
