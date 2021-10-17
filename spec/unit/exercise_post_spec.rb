@@ -20,7 +20,7 @@ RSpec.describe ExercisePost, type: :model do
   #  @subject = FactoryBot.create(:exercise_post, exercise: e, workout_post: wp)
   # end
 
-  subject do
+  subject(:exercise_post) do
     FactoryBot.create(:exercise_post)
   end
 
@@ -28,12 +28,12 @@ RSpec.describe ExercisePost, type: :model do
 
   # Ensure that the subject is valid with all fields
   it 'is valid with valid attributes' do
-    expect(subject).to be_valid
+    expect(exercise_post).to be_valid
   end
 
   # Ensure that the subject is not valid without specific instructions
   it 'is not valid without specific instructions' do
-    subject.specific_instructions = nil
-    expect(subject).not_to be_valid
+    exercise_post.specific_instructions = nil
+    expect(exercise_post).not_to be_valid
   end
 end

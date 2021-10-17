@@ -4,7 +4,7 @@
 class WorkoutSubmission < ApplicationRecord
   belongs_to :workout_post
   belongs_to :user
-  has_many :exercise_submissions
+  has_many :exercise_submissions, dependent: :destroy
 
   validates :submitted_datetime, presence: true
 

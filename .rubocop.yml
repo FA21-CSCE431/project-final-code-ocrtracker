@@ -1,9 +1,12 @@
+inherit_from: .rubocop_todo.yml
+
 require:
   - rubocop-performance
   - rubocop-rails
   - rubocop-rspec
 
 AllCops:
+  NewCops: enable
   Exclude:
     - 'db/**/*'
     - 'script/**/*'
@@ -16,9 +19,10 @@ AllCops:
     - 'tmp/**/*'
     - 'vendor/**/*'
     - '.git/**/*'
+    - 'test/**/*'
 
-Metrics/LineLength:
-  Max: 100
+Layout/LineLength:
+  Max: 200
 
 Metrics/BlockLength:
   Exclude:
@@ -37,3 +41,13 @@ Naming/ClassAndModuleCamelCase:
 Naming/MethodName:
   Enabled: true
   EnforcedStyle: snake_case #default
+
+RSpec/Capybara/FeatureMethods:
+  EnabledMethods:
+    - scenario
+
+RSpec/ExampleLength:
+  Max: 20
+
+RSpec/MultipleDescribes:
+  Enabled: false
