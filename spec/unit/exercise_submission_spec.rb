@@ -6,7 +6,7 @@ require 'rails_helper'
 RSpec.describe ExerciseSubmission, type: :model do
   # Create a subject to test model validity with
   subject do
-    FactoryBot.create(:exercise_submission)
+    FactoryBot.build(:exercise_submission)
   end
 
   # Ensure that the subject is valid with all fields

@@ -43,6 +43,7 @@ FactoryBot.define do
   factory :exercise_submission do
     association :exercise_post
     association :workout_submission
+    association :user
     unit_value { '150' }
   end
 end
