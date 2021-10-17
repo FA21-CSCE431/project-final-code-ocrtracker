@@ -12,9 +12,9 @@ class WorkoutPost < ApplicationRecord
                               }
 
   # Give the last 10 workout posts that have been created
-  scope :recent_workout_posts, lambda { 
-                                limit(10).order('created_at DESC')
-                              }
+  scope :recent_workout_posts, lambda {
+                                 limit(10).order('created_at DESC')
+                               }
 
   def workout_submission_to_this_post_for_current_user(user)
     workout_submissions.detect { |ws| ws.user.id == user.id }

@@ -70,7 +70,6 @@ RSpec.describe 'Admin wod view', type: :feature do
 end
 
 RSpec.describe 'User wod view', type: :feature do
-
   fixtures :users, :exercises, :workout_posts, :exercise_posts, :workout_submissions, :exercise_submissions
 
   scenario 'User sees link to the current WOD' do
@@ -78,12 +77,11 @@ RSpec.describe 'User wod view', type: :feature do
     visit user_wod_path
     expect(page).to have_link(nil, href: new_submission_path(workout_posts(:wp2)))
   end
-  
+
   scenario 'User cannot see future WOD' do
     login_as_user
     visit user_wod_path
     expect(page).not_to have_content workout_posts(:wp_with_wod_in_future).title
-
   end
 
   scenario 'User sees submission info for past WODs' do
@@ -91,6 +89,4 @@ RSpec.describe 'User wod view', type: :feature do
     visit user_wod_path
     expect(page).to have_content users(:user_account).workout_submissions.first.exercise_submissions.first.unit_value
   end
-
-
 end
