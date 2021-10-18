@@ -98,6 +98,10 @@ And now your application is setup and in production mode!
 
 TBD
 
+## References ##
+
+- https://stackoverflow.com/questions/34751453/sort-html-table-alphabetically-on-page-load
+
 ## Support ##
 
 Admins looking for support should first look at the application help page.
