@@ -101,6 +101,7 @@ TBD
 ## References ##
 
 - https://stackoverflow.com/questions/34751453/sort-html-table-alphabetically-on-page-load
+- https://www.w3schools.com/howto/howto_js_filter_table.asp
 
 ## Support ##
 
