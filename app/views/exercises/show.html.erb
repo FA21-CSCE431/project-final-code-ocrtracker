@@ -1,4 +1,3 @@
-<p id="notice"><%= notice %></p>
 
 <p>
   <strong>Title:</strong>
@@ -14,7 +13,7 @@
 </p>
 <p>
   <strong>Unit name:</strong>
-  <%= @exercise.unit_name %>
+  <%= @exercise.humanized_unit_name %>
 </p>
 
 <%= link_to 'Edit', edit_exercise_path(@exercise) %> |
