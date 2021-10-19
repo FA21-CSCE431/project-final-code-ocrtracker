@@ -13,9 +13,9 @@
     </style>
   </head>
 
+<% unless current_page?(new_user_session_path) %>
 <%#Admin Navbar%>
-<% unless !current_user.is_admin? %>
-  <% unless current_page?(new_user_session_path) %>
+  <% unless !current_user.is_admin? %>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container-fluid">
       <%= link_to "OCRTracker", root_path, class: 'navbar-brand' %>
@@ -25,21 +25,44 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <%= link_to "Post", posts_new_path, class: 'nav-link' %>
+              <%= link_to "Submit Scores", submissions_create_path, class: 'nav-link' %>
             </li>
-            <li class="nav-item" style="margin-left: 0">
-              <%= link_to "#{current_user.full_name}", root_path, class: 'nav-link' %>
+            <li class="nav-item">
+              <%= link_to "Leaderboard", root_path, class: 'nav-link' %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "WOD", root_path, class: 'nav-link' %>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Management
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                <li><%= link_to "Exercises", exercises_path, class: 'nav-link' , style: "color: black"%></li>
+                <li><%= link_to "New Post", posts_new_path, class: 'nav-link' , style: "color: black"%></li>
+                <li><%= link_to "Set WOD", root_path, class: 'nav-link' , style: "color: black"%></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><%= link_to "Permissions", root_path, class: 'nav-link' , style: "color: black"%></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <%= "#{current_user.full_name}"%>
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                <li><%= link_to "View Profile", root_path, class: 'nav-link' , style: "color: black"%></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><%= link_to "Sign Out", destroy_user_session_path, class: 'nav-link' , style: "color: black"%></li>
+              </ul>
             </li>
           </ul>
         </div>
       </div>
     </nav>
   <% end %>
-<% end %>
 
 <%#User Navbar%>
-<% unless current_user.is_admin? %>
-  <% unless current_page?(new_user_session_path) %>
+  <% unless current_user.is_admin? %>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container-fluid">
         <%= link_to "OCRTracker", root_path, class: 'navbar-brand' %>
@@ -49,10 +72,23 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <%= link_to "Post", posts_new_path, class: 'nav-link' %>
+              <%= link_to "Submit Scores", root_path, class: 'nav-link' %>
             </li>
-            <li class="nav-item" style="margin-left: 0">
-              <%= link_to "#{current_user.full_name}", root_path, class: 'nav-link' %>
+            <li class="nav-item">
+              <%= link_to "Leaderboard", root_path, class: 'nav-link' %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "WOD", root_path, class: 'nav-link' %>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <%= "#{current_user.full_name}"%>
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                <li><%= link_to "View Profile", root_path, class: 'nav-link' , style: "color: black"%></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><%= link_to "Sign Out", destroy_user_session_path, class: 'nav-link' , style: "color: black"%></li>
+              </ul>
             </li>
           </ul>
         </div>
@@ -60,7 +96,6 @@
     </nav>
   <% end %>
 <% end %>
-
   <body>
     <%= yield %>
   </body>
