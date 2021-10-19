@@ -1,7 +1,7 @@
 <h1><%= @workout_post.title %></h1>
 <%= form_with url:"/submissions/create", method: :post do |ws_form| %>
 
-    <%= ws_form.hidden_field :wp_id, value: @workout_post.id %>
+    <%= ws_form.hidden_field :workout_post_id, value: @workout_post.id %>
 
     <% @workout_post.exercise_posts.each do |ep| %>
         <p>Exercise title: <%= ep.exercise.title %></p>

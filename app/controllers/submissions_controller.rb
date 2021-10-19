@@ -2,12 +2,14 @@
 
 # Submissions Controller
 class SubmissionsController < ApplicationController
-  before_action :set_workout_post, only: %i[new history]
+  before_action :set_workout_post, only: %i[new history create]
   before_action :set_exercise_posts, only: %i[new]
 
   before_action :set_workout_submissions, only: %i[history]
 
   before_action :require_admin, only: %i[history]
+
+  before_action :build_workout_submission, only: %i[create]
 
   def history; end
 
@@ -28,31 +30,17 @@ class SubmissionsController < ApplicationController
 
   # POST
   def create
-    submissions = params[:exercise_submission]
-
-    workout_submission = WorkoutSubmission.new({
-                                                 user: current_user,
-                                                 submitted_datetime: DateTime.now,
-                                                 workout_post_id: params[:wp_id]
-                                               })
-
-    submissions.each do |ep_id, fields|
-      uv = get_uv(fields)
-      workout_submission.exercise_submissions.build({
-                                                      exercise_post_id: ep_id,
-                                                      unit_value: uv,
-                                                      user: current_user
-                                                    })
-    end
+    exercise_submissions = params[:exercise_submission].to_unsafe_h.map { |ep_id, fields| { exercise_post_id: ep_id, unit_value: get_uv(fields), user: current_user } }
+    @workout_submission.exercise_submissions.build(exercise_submissions)
 
     respond_to do |format|
       # If the workout submission and all exercise submissions are valid
-      if workout_submission.save
+      if @workout_submission.save
         format.html { redirect_to '/', notice: 'Workout was successfully submitted' }
         # format.json { render :show, status: :created, location: workout_submission }
       else
-        format.html { redirect_to new_submission_url(params[:wp_id]), status: :unprocessable_entity }
-        format.json { render json: workout_submission.errors, status: :unprocessable_entity }
+        format.html { redirect_to new_submission_url(params[:workout_post_id]), status: :unprocessable_entity }
+        # format.json { render json: workout_submission.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -76,6 +64,10 @@ class SubmissionsController < ApplicationController
 
   def set_workout_submissions
     @workout_submissions = @workout_post.workout_submissions
+  end
+
+  def build_workout_submission
+    @workout_submission = @workout_post.workout_submissions.build({ user: current_user, submitted_datetime: DateTime.now })
   end
 
   # Check if a string represents a valid number
