@@ -29,35 +29,29 @@ class SubmissionsController < ApplicationController
   # POST
   def create
     submissions = params[:exercise_submission]
-    exercise_submissions = []
 
     workout_submission = WorkoutSubmission.new({
                                                  user: current_user,
-                                                 submitted_datetime: DateTime.now
+                                                 submitted_datetime: DateTime.now,
+                                                 workout_post_id: params[:wp_id]
                                                })
 
-    submissions.each do |ep_id, uv|
-      exercise_post = ExercisePost.find(ep_id)
-      @workout_post = exercise_post.workout_post
-      exercise_submissions << ExerciseSubmission.new({
-                                                       exercise_post: exercise_post,
-                                                       workout_submission: workout_submission,
-                                                       unit_value: uv[:unit_value],
-                                                       user: current_user
-                                                     })
+    submissions.each do |ep_id, fields|
+      uv = get_uv(fields)
+      workout_submission.exercise_submissions.build({
+                                                      exercise_post_id: ep_id,
+                                                      unit_value: uv,
+                                                      user: current_user
+                                                    })
     end
-
-    workout_submission.workout_post = @workout_post
 
     respond_to do |format|
       # If the workout submission and all exercise submissions are valid
-      if workout_submission.valid? && exercise_submissions.all?(&:valid?)
-        workout_submission.save
-        exercise_submissions.each(&:save!)
+      if workout_submission.save
         format.html { redirect_to '/', notice: 'Workout was successfully submitted' }
         # format.json { render :show, status: :created, location: workout_submission }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { redirect_to new_submission_url(params[:wp_id]), status: :unprocessable_entity }
         format.json { render json: workout_submission.errors, status: :unprocessable_entity }
       end
     end
@@ -82,5 +76,21 @@ class SubmissionsController < ApplicationController
 
   def set_workout_submissions
     @workout_submissions = @workout_post.workout_submissions
+  end
+
+  # Check if a string represents a valid number
+  def numeric?(field)
+    !Float(field).nil?
+  rescue StandardError
+    false
+  end
+
+  # Get the unit value from the params, either as a single value or a combination of minutes and seconds
+  def get_uv(fields)
+    if numeric?(fields[:unit_value])
+      fields[:unit_value]
+    elsif numeric?(fields[:minutes]) && numeric?(fields[:seconds])
+      (fields[:minutes].to_f * 60) + fields[:seconds].to_f
+    end
   end
 end
