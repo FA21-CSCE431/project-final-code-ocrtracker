@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ep1:
   exercise: pushups
   workout_post: wp1
@@ -5,3 +6,28 @@ ep1:
   is_ranked: true
 
 
+=======
+ep1:
+  exercise: pushups
+  workout_post: wp1
+  specific_instructions: 50 pushups
+  is_ranked: true
+
+ep2:
+  exercise: situps
+  workout_post: wp1
+  specific_instructions: 20 situps
+  is_ranked: false
+
+ep3:
+  exercise: situps
+  workout_post: wp2
+  specific_instructions: 35 situps
+  is_ranked: false
+
+ep4:
+  exercise: pushups
+  workout_post: wp2
+  specific_instructions: 15 pushups
+  is_ranked: true
+>>>>>>> 9645f30515eed86ee65f4943cf8cf17dbfec771b

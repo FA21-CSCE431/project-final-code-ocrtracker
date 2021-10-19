@@ -1,40 +1,49 @@
 
 <%= form_with model: WorkoutPost.new, url:"/posts/create", method: :post do |wp_form| %>
 
-    <p>Title: <%= wp_form.text_field :title%></p>
+
+    <%= wp_form.label :title, "Title"%>
+    <%= wp_form.text_field :title%>
 
     <div class='new_exercise_posts'>
-        <%= wp_form.fields_for ExercisePost.new, index:1 do |ep_form| %>
+   <!-- <input type="button" id = "new_exercise" value="new"> -->
+        <div id="1">
+        <%= wp_form.fields_for ExercisePost.new, index:1 do |ep_form|%>
 
+            <%= ep_form.label :exercise_id, "Exercise"%>
             <%= ep_form.select(:exercise_id, Exercise.all.collect {|e| [e.title, e.id]},  {prompt: "Select"}, {class: 'form-control'}) %>
-
-            
+            <br>
+            <%= ep_form.label :specific_instructions, "Specific instructions"%>
             <%= ep_form.text_field :specific_instructions%>
+            <br>
+            <%= ep_form.label :is_ranked, "Ranked?"%>
             <%= ep_form.check_box :is_ranked%>
+            <br>
 
-            
         <% end %>
-        <%= wp_form.fields_for ExercisePost.new, index:2 do |ep_form| %>
+        <%= wp_form.fields_for ExercisePost.new, index:2 do |ep_form|%>
 
+            <%= ep_form.label :exercise_id, "Exercise"%>
             <%= ep_form.select(:exercise_id, Exercise.all.collect {|e| [e.title, e.id]},  {prompt: "Select"}, {class: 'form-control'}) %>
-
-            
+            <br>
+            <%= ep_form.label :specific_instructions, "Specific instructions"%>
             <%= ep_form.text_field :specific_instructions%>
+            <br>
+            <%= ep_form.label :is_ranked, "Ranked?"%>
             <%= ep_form.check_box :is_ranked%>
+            <br>
 
-            
         <% end %>
-
+        </div>
 
     </div>
-
-    <input type="button" id = "new_exercise" value="new">
 
 
     <div class="actions">
         <%= wp_form.submit %>
     </div>
 
+<<<<<<< HEAD
 <% end %>
 
 <script>
@@ -55,3 +64,6 @@
 
 
 </script>
+=======
+<% end %>
+>>>>>>> 9645f30515eed86ee65f4943cf8cf17dbfec771b

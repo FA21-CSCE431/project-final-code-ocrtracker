@@ -1,0 +1,19 @@
+<h1>Set WOD dates</h1>
+
+<%= form_with url: set_wod_path, method: :post do |wp_h_form|%>
+
+    <% @workout_posts.each do |wp| %>
+
+        <%= wp_h_form.fields_for wp, url: set_wod_path, index: wp.id, method: :post do |wp_fields|%>
+            <%= wp_fields.label :wod_date, wp.title%>
+            <%= wp_fields.datetime_local_field :wod_date %> 
+            <input type="button" value="Clear" id='<%= "clear_button_#{wp.id}" %>'  onclick="this.previousElementSibling.value =''">
+
+        <% end %> 
+        <br>
+
+    <%end%>
+
+    <%= wp_h_form.submit 'Set WOD dates' %> 
+
+<% end %>

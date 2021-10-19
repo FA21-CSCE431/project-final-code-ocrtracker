@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # location: spec/feature/integration_spec.rb
 require 'rails_helper'
 
@@ -82,3 +83,9 @@ RSpec.describe 'Submitting a workout', type: :feature do
     end
 
 end
+=======
+# frozen_string_literal: true
+
+# location: spec/feature/integration_spec.rb
+require 'rails_helper'
+>>>>>>> 9645f30515eed86ee65f4943cf8cf17dbfec771b
