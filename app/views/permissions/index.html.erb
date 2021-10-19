@@ -1,7 +1,5 @@
 <%= form_with url:"/permissions", method: :post do |perm_form| %>
 <h1>Permissions</h1>
-<%#https://stackoverflow.com/questions/34751453/sort-html-table-alphabetically-on-page-load%>
-<%#<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>%>
 <input type="text" id="inputName" onkeyup="searchName()" placeholder="Search by TAMU email" title="Type in a name">
 <table id="userTable">
   <tr>
@@ -25,7 +23,6 @@
 <% end %>
 <%= link_to 'Back', '/'  %>
 
-<%#https://www.w3schools.com/howto/howto_js_filter_table.asp %>
 <script>
 function searchName() {
   var input, filter, table, tr, td, i, txtValue;

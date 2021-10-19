@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  get 'users/show'
   # resources :books
   # resources :ocrtrackers
+  resources :profiles
   root to: 'dashboards#show'
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
   devise_scope :user do
@@ -20,6 +22,8 @@ Rails.application.routes.draw do
 
   get 'permissions/', to: 'permissions#index', as: 'permissions'
   post 'permissions/', to: 'permissions#complete'
+
+  post 'profiles/:id/edit', to: 'profiles#update'
 
   resources :exercises, :workout_posts, :exercise_posts
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
