@@ -13,14 +13,12 @@
  */
 
 @import "bootstrap";
-
-html {
-    font-family: "Sora", sans-serif !important;
-}
+@import url('//fonts.googleapis.com/css?family=Lato:300, 400,700,900&display=swap');
 
 h1 {
     font-size: calc(100% + 2.7vw + 2.7vh);
     color: white;
+    font-weight: normal;
 }
 
 h2 {
@@ -29,13 +27,12 @@ h2 {
     font-weight: 300;
 }
 
-
 .navbar-brand{
-    font-size: calc(100% + 0.5vw + 0.5vh) !important; 
-    font-weight: 600;
+    font-size: calc(100% + 0.8vw + 0.8vh) !important;
 }
 
 body {
+    font-family: "Lato", sans-serif !important;
     background-image: image-url('welcome_page.jpg');
     background-repeat: no-repeat;   
     background-position: center;
@@ -51,27 +48,10 @@ body {
     border-radius: 10px;
     position: absolute;
     width: 70%;
-    top: 40%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
-}
-
-.sign-in-btn {
-    position: relative;
-    background: rgba(0, 0, 0, 0.9);
-    border-radius: 10px;
-    top: 80%;
-    left: 50%;
-    width: 20%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-}
-
-.btn {
-    color: white !important; 
-    font-size: calc(100% + 0.5vw + 0.5vh);
-    text-decoration: none !important; // removes underline from button link 
 }
 
 .flash-notice{
