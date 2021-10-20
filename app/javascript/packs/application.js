@@ -12,7 +12,7 @@ import "channels";
 // import { definitionsFromContext } from "stimulus/webpack-helpers"
 
 import "bootstrap";
-import "../stylesheets/application";
+// import "../stylesheets/application";
 
 //= require jquery3
 //= require popper
