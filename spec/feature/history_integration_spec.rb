@@ -21,6 +21,6 @@ RSpec.describe 'View submission history for a workout post', type: :feature do
 
     wp = workout_posts(:wp1)
     visit "/submissions/history/#{wp.id}"
-    expect(page).to have_content('You must be an admin to access this section')
+    expect(page.current_path).to eq root_path
   end
 end
