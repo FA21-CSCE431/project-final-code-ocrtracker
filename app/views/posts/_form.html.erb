@@ -43,27 +43,4 @@
         <%= wp_form.submit %>
     </div>
 
-<<<<<<< HEAD
 <% end %>
-
-<script>
-
-    document.getElementById("new_exercise").onclick = function() {
-
-        original = document.getElementsByClassName("new_exercise_posts")[0].cloneNode(true)
-        original.childNodes.forEach(element => {
-            element.setAttribute("name", element.getAttribute("name").replace("1", "2"))
-            element.id.replace("1", "2")
-        });
-
-        document.getElementsByTagName("form")[0].append(
-            original
-
-        );
-    };
-
-
-</script>
-=======
-<% end %>
->>>>>>> 9645f30515eed86ee65f4943cf8cf17dbfec771b
