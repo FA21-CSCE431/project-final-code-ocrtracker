@@ -11,7 +11,6 @@ class PermissionsController < ApplicationController
 
   def update
     @users = User.find_by(params[:uid])
-    # if @users.update_attributes(user_params)
     if @users.update(user_params)
       flash[:notice] = "Successfully updated users."
       redirect_to permissions_url

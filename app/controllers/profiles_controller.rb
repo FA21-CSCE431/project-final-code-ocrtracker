@@ -1,5 +1,5 @@
 class ProfilesController < ApplicationController
-  before_action :set_profile, only: %i[show edit update]
+  before_action :require_curr_user, :set_profile, only: %i[show edit update]
 
   def index
     @profile = User.all
@@ -29,5 +29,12 @@ class ProfilesController < ApplicationController
 
   def user_params
     params.require(:user).permit(:description, :avatar_url)
+  end
+
+  def require_curr_user
+    return if @profile != current_user
+
+    flash[:error] = 'You do not have access this profile'
+    redirect_to root_path
   end
 end
