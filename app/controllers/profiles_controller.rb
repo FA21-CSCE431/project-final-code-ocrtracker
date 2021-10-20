@@ -1,5 +1,6 @@
 class ProfilesController < ApplicationController
-  before_action :require_curr_user, :set_profile, only: %i[show edit update]
+  before_action :authenticate_user!, :set_profile, only: %i[show edit update]
+  before_action :profile_owner, only: [:edit, :update, :destroy]
 
   def index
     @profile = User.all
@@ -31,10 +32,11 @@ class ProfilesController < ApplicationController
     params.require(:user).permit(:description, :avatar_url)
   end
 
-  def require_curr_user
-    return if @profile != current_user
-
-    flash[:error] = 'You do not have access this profile'
+  def profile_owner
+   unless @profile.id == current_user.id
+    flash[:notice] = 'Access denied as you are not owner of this profile'
     redirect_to root_path
+   end
   end
+
 end
