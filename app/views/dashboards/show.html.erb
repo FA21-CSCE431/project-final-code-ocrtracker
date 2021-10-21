@@ -13,9 +13,9 @@
     Howdy <%= current_user.full_name %> as user
   <% end %>
   <div>
-    <%= link_to "View your profile", "/profiles/ #{current_user.id}" %>
+    <p><%= link_to "View your profile", "/profiles/ #{current_user.id}" %></p>
   </div>
   <div>
-    <%= link_to "Sign Out", destroy_user_session_path %>
+    <p><%= link_to "Sign Out", destroy_user_session_path %></p>
   </div>
 </body>
