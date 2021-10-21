@@ -1,5 +1,5 @@
 class Profile < ApplicationRecord
-  has_many :users
+  belongs_to :users
   validates :description, presence: true
   validates :avatar_url, presence: true
 end

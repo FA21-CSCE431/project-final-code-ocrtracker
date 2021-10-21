@@ -4,7 +4,6 @@ Rails.application.routes.draw do
   get 'users/show'
   # resources :books
   # resources :ocrtrackers
-  resources :profiles
   root to: 'dashboards#show'
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
   devise_scope :user do
@@ -23,7 +22,10 @@ Rails.application.routes.draw do
   get 'permissions/', to: 'permissions#index', as: 'permissions'
   post 'permissions/', to: 'permissions#complete'
 
-  post 'profiles/:id/edit', to: 'profiles#update'
+  get 'profiles/:id/', to: 'profiles#show', as: 'profiles'
+  get 'profiles/:id/edit/', to: 'profiles#edit', as: 'edit_profile'
+  post 'profiles/:id/', to: 'profiles#update'
+
 
   get 'leaderboard', to: 'dashboard#leaderboard'
 
