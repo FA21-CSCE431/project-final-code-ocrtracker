@@ -25,6 +25,8 @@ Rails.application.routes.draw do
 
   post 'profiles/:id/edit', to: 'profiles#update'
 
+  get 'leaderboard', to: 'dashboard#leaderboard'
+
   resources :exercises, :workout_posts, :exercise_posts
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
