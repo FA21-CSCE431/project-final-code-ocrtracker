@@ -2,9 +2,7 @@
 <html>
 
   <head>
-    <%= stylesheet_link_tag  'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_link_tag  'welcome', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
@@ -18,14 +16,14 @@
     </div>
 
     <div class="sign-in-btn">
-        <%= link_to image_tag("google_logo.png", :size => "50x50", class: "btn-logo") + " Sign in with Google", user_google_oauth2_omniauth_authorize_path, class: "btn" %>
-      <div class="flash-notice">
-        <% if flash.any? %>
-          <% flash.each do |key, value| -%>
-            <section class="flash flash__<%= key %>"><%= value.html_safe %></section>
-          <% end -%>
-        <% end %>
-      </div>
+      <%= link_to image_tag("google_logo.png", :size => "50x50", class: "btn-logo") + " Sign in with Google", user_google_oauth2_omniauth_authorize_path, class: "btn" %>
+        <div class="flash-notice">
+          <% if flash.any? %>
+            <% flash.each do |key, value| -%>
+              <section class="flash flash__<%= key %>"><%= value.html_safe %></section>
+            <% end -%>
+          <% end %>
+        </div>  
     </div>
 
   </body>

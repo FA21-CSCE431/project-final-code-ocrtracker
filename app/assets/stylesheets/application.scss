@@ -27,6 +27,12 @@ h2 {
     font-weight: 300;
 }
 
+p{
+    font-size: calc(100% + 0.5vw + 0.5vh);
+    color: white;
+    font-weight: 300;
+}
+
 .navbar-brand{
     font-size: calc(100% + 0.8vw + 0.8vh) !important;
 }
@@ -41,19 +47,32 @@ body {
     width: 100vw;
 }
 
-.welcome-page {
-    background: rgba(0, 0, 0, 0.7) ;
-    padding: 25px;
-    color: white;
-    border-radius: 10px;
-    position: absolute;
-    width: 70%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-}
-
 .flash-notice{
     font-size: calc(100% + 0.3vw + 0.3vh);
 }
+
+
+// scrollbar styling
+::-webkit-scrollbar {
+    width: 1vw;
+}
+
+::-webkit-scrollbar-track {
+    border-radius: 10px;
+}
+ 
+::-webkit-scrollbar-thumb {
+    background: white; 
+    border-radius: 15px;
+    height: 1px;  
+}
+
+// tables
+th {
+    color: white;
+}
+
+td {
+    color: white;
+}
+

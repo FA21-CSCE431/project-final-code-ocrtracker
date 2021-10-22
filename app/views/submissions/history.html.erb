@@ -1,10 +1,41 @@
-<h1>Submission history workout post: <%=@workout_post.title%></h1>
-<h3>Ranked exercise for this post: <%=@workout_post.ranked_exercise.title%></h3>
+<!DOCTYPE html>
+<html>
 
-<% @workout_submissions.each do |ws| %>
+    <head>
+        <%= stylesheet_link_tag  'submissions_history', media: 'all', 'data-turbolinks-track': 'reload' %>
+    </head>
 
-    <h4>User: <%=ws.user.full_name%></h4>
-    <p>Value: <%=ws.ranked_exercise_submission.unit_value%></p>
-    <p>Datetime submitted: <%=ws.submitted_datetime%></p>
+    <body id="submissions-history">
+        <br>
+        <h1>Workout Submission History</h1>
+        <br>
+        <div class="container">
 
-<% end %>
+            <h2>Workout Post: <%=@workout_post.title%></h1>
+            <h3>Exercise: <%=@workout_post.ranked_exercise.title%></h2>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">User</th>
+                    <th scope="col">Value</th>
+                    <th scope="col">Submitted On</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% @workout_submissions.each_with_index do |ws, index| %>
+                        <tr>
+                        <td><%=index.next%></td>
+                        <td><%=ws.user.full_name%></td>
+                        <td><%=ws.ranked_exercise_submission.unit_value%></td>
+                        <td><%=ws.submitted_datetime%></td>
+                        </tr>
+                    <% end %>
+                </tbody>
+            </table>
+        </div>
+
+    </body>
+
+</html>
