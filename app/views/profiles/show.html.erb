@@ -1,0 +1,9 @@
+<h1><%=@profile.full_name %></h1>
+<p><%=@profile.description %></p>
+<%= image_tag @profile.avatar_url, :size => '220x200' %>
+<div>
+  <% if current_user.full_name == @profile.full_name%>
+    <%= link_to 'Edit', edit_profile_path(@profile)%>
+  <% end %>
+  <%= link_to 'Back', '/'  %>
+</div>

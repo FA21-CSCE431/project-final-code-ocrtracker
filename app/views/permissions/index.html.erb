@@ -1,0 +1,45 @@
+<%= form_with url:"/permissions", method: :post do |perm_form| %>
+<h1>Permissions</h1>
+<input type="text" id="inputName" onkeyup="searchName()" placeholder="Search by TAMU email" title="Type in a name">
+<table id="userTable">
+  <tr>
+   <th>Email</th>
+   <th>Name</th>
+   <th>Is Admin?</th>
+ </tr>
+  <% @users.each do |user| %>
+    <%= perm_form.fields_for user, index: user.id, method: :post do |p_fields|%>
+    <tr>
+      <td><%= user.email %></td>
+      <td><%= user.full_name %></td>
+      <td><%= p_fields.check_box :is_admin %></td>
+    </tr>
+    <% end %>
+  <% end %>
+</table>
+  <div class="actions">
+      <%= perm_form.submit "Save Changes"%>
+  </div>
+<% end %>
+<%= link_to 'Back', '/'  %>
+
+<script>
+function searchName() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("inputName");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("userTable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+</script>

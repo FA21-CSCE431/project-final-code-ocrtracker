@@ -9,4 +9,15 @@ class ExerciseSubmission < ApplicationRecord
   delegate :exercise, to: :exercise_post
 
   validates :unit_value, presence: true
+
+  def humanized_unit_value
+    if exercise.unit_name.starts_with?('time')
+      uv = unit_value.to_f
+      m = (uv / 60).to_i
+      s = uv - (m * 60)
+      "#{m} minutes, #{s} seconds"
+    else
+      unit_value
+    end
+  end
 end

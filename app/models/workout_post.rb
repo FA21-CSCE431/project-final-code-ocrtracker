@@ -38,4 +38,8 @@ class WorkoutPost < ApplicationRecord
   def ranked_exercise
     ranked_exercise_post.exercise
   end
+
+  def humanized_wod_date
+    wod_date.strftime('%B %d at %I:%M %p')
+  end
 end

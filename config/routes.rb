@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  get 'users/show'
   # resources :books
   # resources :ocrtrackers
   root to: 'dashboards#show'
@@ -17,6 +18,16 @@ Rails.application.routes.draw do
 
   get 'posts/new/', to: 'posts#new'
   post 'posts/create/', to: 'posts#create'
+
+  get 'permissions/', to: 'permissions#index', as: 'permissions'
+  post 'permissions/', to: 'permissions#complete'
+
+  get 'profiles/:id/', to: 'profiles#show', as: 'profiles'
+  get 'profiles/:id/edit/', to: 'profiles#edit', as: 'edit_profile'
+  post 'profiles/:id/', to: 'profiles#update'
+
+
+  get 'leaderboard', to: 'dashboard#leaderboard'
 
   # Admin-only routes for setting WOD dates
   get '/wod/set', to: 'wod#admin_view', as: 'set_wod'

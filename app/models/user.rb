@@ -13,4 +13,5 @@ class User < ApplicationRecord
   has_many :workout_submissions, dependent: :destroy
   has_many :fistbumps, dependent: :destroy
   has_many :exercise_submissions, dependent: :destroy
+  has_many :profiles, dependent: :destroy
 end

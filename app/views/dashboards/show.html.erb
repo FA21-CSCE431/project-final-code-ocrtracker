@@ -1,8 +1,6 @@
 <html>
   <head>
-    <%# <%= stylesheet_link_tag  'application', media: 'all', 'data-turbolinks-track': 'reload' %> %>
     <%= stylesheet_link_tag  'dashboards', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%# <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %> %>
   </head>
 
   <body>
@@ -12,6 +10,9 @@
     <% else %>
     <h2>Howdy <%= current_user.full_name %> as user</h2>
     <% end %>
+    <div>
+      <p><%= link_to "View your profile", "/profiles/ #{current_user.id}" %></p>
+    </div>
     <div>
       <%= link_to "Sign Out", destroy_user_session_path %>
     </div>
