@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class ProfilesController < ApplicationController
   before_action :authenticate_user!, :set_profile, only: %i[show edit update]
-  before_action :profile_owner, only: [:edit, :update, :destroy]
+  before_action :profile_owner, only: %i[edit update]
 
   def index
     @profile = User.all
@@ -33,10 +35,9 @@ class ProfilesController < ApplicationController
   end
 
   def profile_owner
-   unless @profile.id == current_user.id
+    return if @profile.id == current_user.id
+
     flash[:notice] = 'Access denied as you are not owner of this profile'
     redirect_to root_path
-   end
   end
-
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PermissionsController < ApplicationController
   before_action :require_admin
 
@@ -12,16 +14,16 @@ class PermissionsController < ApplicationController
   def update
     @users = User.find_by(params[:uid])
     if @users.update(user_params)
-      flash[:notice] = "Successfully updated users."
+      flash[:notice] = 'Successfully updated users.'
       redirect_to permissions_url
     else
-      render :action => 'edit'
+      render action: 'edit'
     end
   end
 
   def destroy
     User.destroy(params[:uid])
-    flash[:notice] = "Successfully deleted user"
+    flash[:notice] = 'Successfully deleted user'
     redirect_to permissions_url
   end
 
