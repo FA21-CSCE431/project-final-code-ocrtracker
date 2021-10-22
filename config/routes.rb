@@ -25,6 +25,8 @@ Rails.application.routes.draw do
   # User route for viewing the current and past WODs
   get '/wod', to: 'wod#user_view', as: 'user_wod'
 
+  get 'leaderboard', to: 'dashboards#leaderboard'
+
   resources :exercises#, :workout_posts, :exercise_posts
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
