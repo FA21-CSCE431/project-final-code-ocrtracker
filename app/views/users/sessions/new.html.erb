@@ -1,17 +1,33 @@
 <!DOCTYPE html>
 <html>
+
   <head>
-    <title>Welcome page</title>
+    <%= stylesheet_link_tag  'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag  'welcome', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-<body>
-  <div class="welcometitle">
-    <h1>Welcome to TAMU OCR Tracker!</h1>
-  </div>
-  <div class="logoutheader">
-    <h2>You're Logged out! Log in to the User Dashboard</h2>
-  </div>
-  <div class="signinbutton">
-    <%= link_to "Sign in with Google", user_google_oauth2_omniauth_authorize_path %>
-  </div>
-</body>
+
+  <body>
+    <div class="welcome-page">
+      <h1>Texas A&M Obstacle Course Racing</h1>
+      <br>
+      <br>
+      <h2>Training athletes to overcome not only physical obstacles but life's obstacles,
+       while building leadership and teamwork.</h2>
+      <br>
+    </div>
+
+    <div class="sign-in-btn">
+        <%= link_to image_tag("google_logo.png", :size => "50x50", class: "btn-logo") + " Sign in with Google", user_google_oauth2_omniauth_authorize_path, class: "btn" %>
+      <div class="flash-notice">
+        <% if flash.any? %>
+          <% flash.each do |key, value| -%>
+            <section class="flash flash__<%= key %>"><%= value.html_safe %></section>
+          <% end -%>
+        <% end %>
+      </div>
+    </div>
+
+  </body>
+
 </html>

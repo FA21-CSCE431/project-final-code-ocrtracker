@@ -38,6 +38,6 @@ RSpec.describe 'Creating a workout post', type: :feature do
   scenario 'non-admin user attempts to create a workout post', type: :feature do
     login_as_user
     visit '/posts/new'
-    expect(page).to have_content 'You must be an admin to access this section'
+    expect(page.current_path).to eq root_path
   end
 end

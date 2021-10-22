@@ -4,5 +4,6 @@
 class DashboardsController < ApplicationController
   def show; end
 
+  
   def leaderboard; end
 end

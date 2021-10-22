@@ -9,7 +9,7 @@ RSpec.describe 'OAuth login', type: :feature do
     OmniAuth.config.mock_auth[:google_oauth2].info.email = 'john.doe@tamu.edu'
     visit '/'
     click_on 'Sign in with Google'
-    expect(page).to have_content('Successfully authenticated from Google account')
+    expect(page).to have_content('logged in')
   end
 
   scenario 'should not create a new user with an email other than @tamu.edu' do
@@ -45,7 +45,7 @@ RSpec.describe 'OAuth logout', type: :feature do
   scenario 'user logs out' do
     OmniAuth.config.mock_auth[:google_oauth2].info.email = 'john.doe@tamu.edu'
     visit user_google_oauth2_omniauth_authorize_path
-    click_on 'Sign Out'
+    visit destroy_user_session_path
     expect(page).to have_content('Signed out successfully')
   end
 end
