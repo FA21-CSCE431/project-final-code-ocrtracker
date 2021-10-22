@@ -5,7 +5,7 @@ FactoryBot.define do
     title { 'Pushups' }
     description { 'Pushups Description' }
     picture { 'https://www.picture_link.com' }
-    unit_name { 'time' }
+    unit_name { :time_l_to_h }
   end
 
   factory :workout_post do
