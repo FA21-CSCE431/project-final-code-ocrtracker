@@ -16,7 +16,7 @@ Rails.application.routes.draw do
 
   get 'submissions/history/:workout_post_id', to: 'submissions#history'
 
-  get 'posts/new/', to: 'posts#new'
+  get 'posts/new/', to: 'posts#new', as: 'posts_new'
   post 'posts/create/', to: 'posts#create'
 
   get 'permissions/', to: 'permissions#index', as: 'permissions'
@@ -26,8 +26,6 @@ Rails.application.routes.draw do
   get 'profiles/:id/edit/', to: 'profiles#edit', as: 'edit_profile'
   post 'profiles/:id/', to: 'profiles#update'
 
-
-  get 'leaderboard', to: 'dashboard#leaderboard'
 
   # Admin-only routes for setting WOD dates
   get '/wod/set', to: 'wod#admin_view', as: 'set_wod'
