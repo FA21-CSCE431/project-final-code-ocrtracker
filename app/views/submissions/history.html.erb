@@ -1,10 +1,10 @@
 <h1>Submission history workout post: <%=@workout_post.title%></h1>
-<h3>Ranked exercise for this post: <%=@workout_post.ranked_exercise.title%></h3>
+<h3>Ranked exercise for this post: <%="#{@workout_post.ranked_exercise.title} (#{@workout_post.ranked_exercise.humanized_unit_name})"%></h3>
 
 <% @workout_submissions.each do |ws| %>
 
     <h4>User: <%=ws.user.full_name%></h4>
-    <p>Value: <%=ws.ranked_exercise_submission.unit_value%></p>
-    <p>Datetime submitted: <%=ws.submitted_datetime%></p>
+    <p>Value: <%=ws.ranked_exercise_submission.humanized_unit_value%></p>
+    <p>Datetime submitted: <%=ws.humanized_submitted_datetime%></p>
 
 <% end %>

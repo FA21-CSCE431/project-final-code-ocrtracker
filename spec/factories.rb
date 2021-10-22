@@ -5,12 +5,11 @@ FactoryBot.define do
     title { 'Pushups' }
     description { 'Pushups Description' }
     picture { 'https://www.picture_link.com' }
-    unit_name { 'time' }
+    unit_name { :time_l_to_h }
   end
 
   factory :workout_post do
     title { 'Workout Post Title' }
-    date_created { Date.today }
   end
 
   factory :exercise_post do
@@ -44,6 +43,7 @@ FactoryBot.define do
   factory :exercise_submission do
     association :exercise_post
     association :workout_submission
+    association :user
     unit_value { '150' }
   end
 end

@@ -48,9 +48,9 @@ RSpec.describe 'Submitting to a workout post', type: :feature do
     visit "/submissions/new/#{wp.id}"
 
     # Fill in all entry boxes
-    wp.exercise_posts.each do |ep|
-      fill_in "Value for submission (#{ep.exercise.title})", with: 1
-    end
+    fill_in 'Minutes', with: '2'
+    fill_in 'Seconds', with: '30'
+    fill_in 'Number', with: '50'
 
     click_on 'Submit'
     expect(page).to have_content('successfully')

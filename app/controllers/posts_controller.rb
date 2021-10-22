@@ -26,7 +26,7 @@ class PostsController < ApplicationController
 
   # POST
   def create
-    workout_post = WorkoutPost.new(title: params[:workout_post][:title], date_created: Date.today)
+    workout_post = WorkoutPost.new(title: params[:workout_post][:title])
 
     submitted_exercise_posts = params[:workout_post][:exercise_post]
 

@@ -1,0 +1,56 @@
+inherit_from: .rubocop_todo.yml
+
+require:
+  - rubocop-performance
+  - rubocop-rails
+  - rubocop-rspec
+
+AllCops:
+  NewCops: enable
+  Exclude:
+    - 'db/**/*'
+    - 'script/**/*'
+    - 'bin/**/*'
+    - 'config/**/*'
+    - 'script/**/*' 
+    - 'bin/{rails,rake}'
+    - !ruby/regexp /old_and_unused\.rb$/
+    - 'node_modules/**/*'
+    - 'tmp/**/*'
+    - 'vendor/**/*'
+    - '.git/**/*'
+    - 'test/**/*'
+
+Layout/LineLength:
+  Max: 200
+
+Metrics/BlockLength:
+  Exclude:
+    - config/**/*
+    - spec/**/*
+
+Style/Documentation:
+  Enabled: false
+
+Layout/IndentationWidth:
+  Width: 2
+
+Naming/ClassAndModuleCamelCase:
+  Enabled: true
+
+Naming/MethodName:
+  Enabled: true
+  EnforcedStyle: snake_case #default
+
+RSpec/Capybara/FeatureMethods:
+  EnabledMethods:
+    - scenario
+
+RSpec/ExampleLength:
+  Max: 20
+
+RSpec/MultipleDescribes:
+  Enabled: false
+
+Layout/EndOfLine:
+  EnforcedStyle: lf
