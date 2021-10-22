@@ -38,6 +38,6 @@ RSpec.describe 'Creating a workout post', type: :feature do
   scenario 'non-admin user attempts to create a workout post', type: :feature do
     login_as_user
     visit '/posts/new'
-    expect(page.current_path).to eq root_path
+    expect(page).to have_current_path root_path, ignore_query: true
   end
 end
