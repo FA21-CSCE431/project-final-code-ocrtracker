@@ -72,7 +72,7 @@ RSpec.describe 'Editing an exercise', type: :feature do
     # fill_in 'Picture', with: 'test_pic'
     select Exercise.unit_names.values.first, from: 'Unit name'
     click_on 'Update Exercise'
-    expect(page).to have_current_path root_path, ignore_query: true
+    expect(page).to have_current_path exercise_path(exercises(:pushups)), ignore_query: true
   end
 
   scenario 'invalid inputs' do

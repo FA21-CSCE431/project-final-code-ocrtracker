@@ -14,16 +14,18 @@
             <br>
             <%= form_with url:"/submissions/create", method: :post do |ws_form| %>
 
-            <% @workout_post.exercise_posts.each do |ep, index| %>
-                <p><b>Exercise: <%= ep.exercise.title %></b></p>
-                <p id="label">Description: <%= ep.exercise.description %></p>
-                <p id="label">Instructions: <%= ep.specific_instructions %></p>
-                <p id="label">Unit: <%= ep.exercise.humanized_unit_name %></p>
-                <p id="label"><%= ws_form.fields_for :exercise_submission, index: ep.id, builder: SubmissionsFormBuilder do |es_form| %>
-                    <%= es_form.text_or_time_field :unit_value, unit_name: ep.exercise.unit_name %>
-                <% end %>
-                </p>
-                <br>
+                <%= ws_form.hidden_field :workout_post_id, value: @workout_post.id %>
+
+                <% @workout_post.exercise_posts.each do |ep, index| %>
+                    <p><b>Exercise: <%= ep.exercise.title %></b></p>
+                    <p id="label">Description: <%= ep.exercise.description %></p>
+                    <p id="label">Instructions: <%= ep.specific_instructions %></p>
+                    <p id="label">Unit: <%= ep.exercise.humanized_unit_name %></p>
+                    <p id="label"><%= ws_form.fields_for :exercise_submission, index: ep.id, builder: SubmissionsFormBuilder do |es_form| %>
+                        <%= es_form.text_or_time_field :unit_value, unit_name: ep.exercise.unit_name %>
+                    <% end %>
+                    </p>
+                    <br>
 
             <% end %>
                 

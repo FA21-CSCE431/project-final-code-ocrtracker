@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   get 'submissions/new/:workout_post_id', to: 'submissions#new', as: 'new_submission'
   post 'submissions/create', to: 'submissions#create'
 
-  get 'submissions/history/:workout_post_id', to: 'submissions#history'
+  get 'submissions/history/:workout_post_id', to: 'submissions#history', as: 'submissions_history'
 
   get 'posts/new/', to: 'posts#new', as: 'posts_new'
   post 'posts/create/', to: 'posts#create'

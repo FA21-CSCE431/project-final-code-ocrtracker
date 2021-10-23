@@ -53,19 +53,19 @@ RSpec.describe 'Submitting to a workout post', type: :feature do
     fill_in 'Number', with: '50'
 
     click_on 'Submit'
-    expect(page).to have_current_path new_submission_url, ignore_query: true
+    expect(page).to have_current_path root_path, ignore_query: true
   end
-  
+
   # Rainy
   scenario 'user does not fill in any fields' do
     login_as_user
-    
+
     wp = workout_posts(:wp1)
-    
+
     visit "/submissions/new/#{wp.id}"
-    
+
     click_on 'Submit'
-    
-    expect(page).to have_current_path root_path, ignore_query: true
+
+    expect(page).to have_current_path new_submission_url(wp.id), ignore_query: true
   end
 end
