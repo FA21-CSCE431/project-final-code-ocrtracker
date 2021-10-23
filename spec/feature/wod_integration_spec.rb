@@ -65,7 +65,7 @@ RSpec.describe 'Admin wod view', type: :feature do
   scenario 'non-admin user attempts to access /wod/set' do
     login_as_user
     visit set_wod_path
-    expect(page.current_path).to eq root_path
+    expect(page).to have_current_path root_path, ignore_query: true
   end
 end
 
@@ -87,6 +87,6 @@ RSpec.describe 'User wod view', type: :feature do
   scenario 'User sees submission info for past WODs' do
     login_as_user
     visit user_wod_path
-    expect(page).to have_content users(:user_account).workout_submissions.first.exercise_submissions.first.unit_value
+    expect(page).to have_content users(:user_account).workout_submissions.first.exercise_submissions.first.humanized_unit_value
   end
 end

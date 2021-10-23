@@ -18,12 +18,13 @@
   
   </h3>
 
-  <%=wp.wod_date%>
+    <%=wp.humanized_wod_date%>
 
-  <% wp.exercise_submissions_to_this_post_for_current_user(current_user).each do |es| %>
-    <h5><%=es.exercise.title%></h5>
-    <p><%="#{es.exercise.unit_name}: #{es.unit_value}"%></p>
-  <% end %>
-    
+    <% wp.exercise_submissions_to_this_post_for_current_user(current_user).each do |es| %>
+        <h5><%=es.exercise.title%></h5>
+        <p><%="#{es.exercise.humanized_unit_name}: #{es.humanized_unit_value}"%></p>
+    <% end %>
+
+    <hr>
 
 <% end %>

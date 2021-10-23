@@ -5,4 +5,20 @@ class Exercise < ApplicationRecord
   validates :title, presence: true
   validates :description, presence: true
   validates :unit_name, presence: true
+
+  enum unit_name: {
+    time_l_to_h: 'Time (Lower is better)',
+    time_h_to_l: 'Time (Higher is better)',
+    reps: 'Reps',
+    weight: 'Weight',
+    sets: 'Sets',
+    distance: 'Disatance',
+    laps: 'Laps',
+    quantity: 'Quantity'
+  }
+
+  # Return the human-readable string representing unit_value. Returns 'None' if not found
+  def humanized_unit_name
+    self.class.unit_names.fetch(unit_name, 'None')
+  end
 end

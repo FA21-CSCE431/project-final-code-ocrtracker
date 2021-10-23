@@ -3,6 +3,6 @@
 # Dashboards Controller
 class DashboardsController < ApplicationController
   def show; end
-  
-  def leaderboard; end
+
+  def leaderbaord; end
 end

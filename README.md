@@ -98,6 +98,10 @@ And now your application is setup and in production mode!
 
 TBD
 
+## References ##
+
+- https://www.w3schools.com/howto/howto_js_filter_table.asp
+
 ## Support ##
 
 Admins looking for support should first look at the application help page.

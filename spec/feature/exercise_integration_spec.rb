@@ -13,7 +13,7 @@ RSpec.describe 'Creating an exercise', type: :feature do
     fill_in 'Title', with: 'test_title'
     fill_in 'Description', with: 'test_desc'
     # fill_in 'Picture', with: 'test_pic'
-    fill_in 'Unit name', with: 'test_un'
+    select Exercise.unit_names.values.first, from: 'Unit name'
     click_on 'Create Exercise'
     expect(page).to have_content('test_title')
   end
@@ -25,7 +25,7 @@ RSpec.describe 'Creating an exercise', type: :feature do
     fill_in 'Title', with: 'test_title'
     fill_in 'Description', with: 'test_desc'
     # fill_in 'Picture', with: 'test_pic'
-    fill_in 'Unit name', with: 'test_un'
+    select Exercise.unit_names.values.first, from: 'Unit name'
     click_on 'Create Exercise'
     expect(page).to have_content('test_desc')
   end
@@ -37,15 +37,15 @@ RSpec.describe 'Creating an exercise', type: :feature do
     fill_in 'Title', with: 'test_title'
     fill_in 'Description', with: 'test_desc'
     # fill_in 'Picture', with: 'test_pic'
-    fill_in 'Unit name', with: 'test_un'
+    select Exercise.unit_names.values.first, from: 'Unit name'
     click_on 'Create Exercise'
-    expect(page).to have_content('test_un')
+    expect(page).to have_content(Exercise.unit_names.values.first)
   end
 
   scenario 'non-admin user' do
     login_as_user
     visit exercises_path
-    expect(page.current_path).to eq root_path
+    expect(page).to have_current_path root_path, ignore_query: true
   end
 
   scenario 'invalid inputs' do
@@ -70,9 +70,9 @@ RSpec.describe 'Editing an exercise', type: :feature do
     fill_in 'Title', with: 'new_test_title'
     fill_in 'Description', with: 'new_test_desc'
     # fill_in 'Picture', with: 'test_pic'
-    fill_in 'Unit name', with: 'new_test_un'
+    select Exercise.unit_names.values.first, from: 'Unit name'
     click_on 'Update Exercise'
-    expect(page).to have_content 'Exercise was successfully updated'
+    expect(page).to have_current_path root_path, ignore_query: true
   end
 
   scenario 'invalid inputs' do
@@ -86,7 +86,7 @@ RSpec.describe 'Editing an exercise', type: :feature do
   scenario 'non-admin user' do
     login_as_user
     visit edit_exercise_path(exercises(:pushups))
-    expect(page.current_path).to eq root_path
+    expect(page).to have_current_path root_path, ignore_query: true
   end
 end
 
@@ -102,7 +102,7 @@ RSpec.describe 'Viewing an exercise', type: :feature do
   scenario 'non-admin through /exercises' do
     login_as_user
     visit exercises_path
-    expect(page.current_path).to eq root_path
+    expect(page).to have_current_path root_path, ignore_query: true
   end
 
   scenario 'through /exercises/:id' do
@@ -114,7 +114,7 @@ RSpec.describe 'Viewing an exercise', type: :feature do
   scenario 'non-admin through /exercises/:id' do
     login_as_user
     visit exercise_path(exercises(:pushups))
-    expect(page.current_path).to eq root_path
+    expect(page).to have_current_path root_path, ignore_query: true
   end
 
   scenario 'non-admin through /submissions/new/:workout_post_id' do

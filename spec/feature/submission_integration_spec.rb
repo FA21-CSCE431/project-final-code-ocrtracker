@@ -48,24 +48,24 @@ RSpec.describe 'Submitting to a workout post', type: :feature do
     visit "/submissions/new/#{wp.id}"
 
     # Fill in all entry boxes
-    wp.exercise_posts.each do |ep|
-      fill_in "Value for submission (#{ep.exercise.title})", with: 1
-    end
+    fill_in 'Minutes', with: '2'
+    fill_in 'Seconds', with: '30'
+    fill_in 'Number', with: '50'
 
     click_on 'Submit'
-    expect(page).to have_content('successfully')
+    expect(page).to have_current_path new_submission_url, ignore_query: true
   end
-
+  
   # Rainy
   scenario 'user does not fill in any fields' do
     login_as_user
-
+    
     wp = workout_posts(:wp1)
-
+    
     visit "/submissions/new/#{wp.id}"
-
+    
     click_on 'Submit'
-
-    expect(page).not_to have_content('successfully')
+    
+    expect(page).to have_current_path root_path, ignore_query: true
   end
 end

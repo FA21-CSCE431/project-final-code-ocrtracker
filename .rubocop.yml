@@ -51,3 +51,6 @@ RSpec/ExampleLength:
 
 RSpec/MultipleDescribes:
   Enabled: false
+
+Layout/EndOfLine:
+  EnforcedStyle: lf

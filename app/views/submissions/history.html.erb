@@ -12,7 +12,7 @@
         <div class="container">
 
             <h2>Workout Post: <%=@workout_post.title%></h1>
-            <h3>Exercise: <%=@workout_post.ranked_exercise.title%></h2>
+            <h3>Exercise: <%="#{@workout_post.ranked_exercise.title} (#{@workout_post.ranked_exercise.humanized_unit_name})"%></h2>
 
             <table class="table">
                 <thead>
@@ -28,8 +28,8 @@
                         <tr>
                         <td><%=index.next%></td>
                         <td><%=ws.user.full_name%></td>
-                        <td><%=ws.ranked_exercise_submission.unit_value%></td>
-                        <td><%=ws.submitted_datetime%></td>
+                        <td><%=ws.ranked_exercise_submission.humanized_unit_value%></td>
+                        <td><%=ws.humanized_submitted_datetime%></td>
                         </tr>
                     <% end %>
                 </tbody>

@@ -26,7 +26,7 @@ e1 = Exercise.find_or_create_by({
                                   ' to the rest of the deltoids, serratus anterior, coracobrachialis and the'\
                                   ' midsection as a whole.',
                                   picture: 'https://www.thehindu.com/sci-tech/health/vsuju8/article34301845.ece/ALTERNATES/LANDSCAPE_1200/10MPHowto1',
-                                  unit_name: 'time'
+                                  unit_name: 'time_l_to_h'
                                 })
 
 e2 = Exercise.find_or_create_by({
@@ -34,8 +34,8 @@ e2 = Exercise.find_or_create_by({
                                   description: 'The sit-up is an abdominal endurance training exercise to strengthen,'\
                                   ' tighten and tone the abdominal muscles. It is similar to a crunch, but sit-ups'\
                                   ' have a fuller range of motion and condition additional muscles.',
-                                  picture: 'https://image.shutterstock.com/image-vector/woman-who-fat-doing-sit-260nw-715195228.jpg',
-                                  unit_name: 'time'
+                                  picture: 'https://cdn.mos.cms.futurecdn.net/4ogwV6zhannpcVUyKZMc9K-480-80.jpg',
+                                  unit_name: 'quantity'
                                 })
 
 ############ Workout Posts #############
@@ -56,14 +56,14 @@ ep1 = ExercisePost.find_or_create_by({
 ep2 = ExercisePost.find_or_create_by({
                                        exercise: e2,
                                        workout_post: wp1,
-                                       specific_instructions: '20 situps',
+                                       specific_instructions: 'As many situps as you can',
                                        is_ranked: false
                                      })
 
 ############ Workout Submissions #############
 
 ws1 = WorkoutSubmission.find_or_create_by({
-                                            user: User.find(1),
+                                            user: User.first,
                                             workout_post: wp1,
                                             submitted_datetime: DateTime.new(2021, 10, 1, 2, 3, 4)
                                           })
