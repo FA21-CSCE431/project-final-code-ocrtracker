@@ -21,6 +21,18 @@ RSpec.describe 'Editing an profile', type: :feature do
     click_on 'Save Changes'
     expect(page).to have_content 'new_test_desc'
   end
+
+  scenario 'non-permit user' do
+    login_as_user
+    visit "/profiles/#{users(:admin_account).id}/edit"
+    expect(page).to have_content 'Dashboard'
+  end
+
+  scenario 'non-permit admin' do
+    login_as_admin
+    visit "/profiles/#{users(:user_account).id}/edit"
+    expect(page).to have_content 'Dashboard'
+  end
   #
   # scenario 'valid inputs url' do
   #   login_as_admin

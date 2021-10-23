@@ -25,4 +25,22 @@ RSpec.describe 'Editing permissions', type: :feature do
     visit "/permissions"
     expect(page).to have_content 'You must be an admin to access this section'
   end
+
+  scenario 'update multiple-give' do
+    login_as_admin
+    visit "/permissions"
+    page.check("[user][#{users(:admin_account).id}][is_admin]")
+    page.check("[user][#{users(:user_account).id}][is_admin]")
+    click_on 'Save Changes'
+    expect(page).to have_content 'Users successfully updated'
+  end
+
+  scenario 'update multiple-remove' do
+    login_as_admin
+    visit "/permissions"
+    page.uncheck("[user][#{users(:admin_account).id}][is_admin]")
+    page.uncheck("[user][#{users(:user_account).id}][is_admin]")
+    click_on 'Save Changes'
+    expect(page).to have_content 'Welcome to the User Dashboard!'
+  end
 end
