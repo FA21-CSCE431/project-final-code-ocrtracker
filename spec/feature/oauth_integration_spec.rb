@@ -9,7 +9,7 @@ RSpec.describe 'OAuth login', type: :feature do
     OmniAuth.config.mock_auth[:google_oauth2].info.email = 'john.doe@tamu.edu'
     visit '/'
     click_on 'Sign in with Google'
-    expect(page).to have_content('logged in')
+    expect(page).to have_content('Welcome')
   end
 
   scenario 'should not create a new user with an email other than @tamu.edu' do

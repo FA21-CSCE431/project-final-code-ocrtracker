@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'Editing an profile', type: :feature do
@@ -25,13 +26,13 @@ RSpec.describe 'Editing an profile', type: :feature do
   scenario 'non-permit user' do
     login_as_user
     visit "/profiles/#{users(:admin_account).id}/edit"
-    expect(page).to have_content 'Dashboard'
+    expect(page).to have_current_path root_path, ignore_query: true
   end
 
   scenario 'non-permit admin' do
     login_as_admin
     visit "/profiles/#{users(:user_account).id}/edit"
-    expect(page).to have_content 'Dashboard'
+    expect(page).to have_current_path root_path, ignore_query: true
   end
   #
   # scenario 'valid inputs url' do
