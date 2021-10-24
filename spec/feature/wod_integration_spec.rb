@@ -65,7 +65,7 @@ RSpec.describe 'Admin wod view', type: :feature do
   scenario 'non-admin user attempts to access /wod/set' do
     login_as_user
     visit set_wod_path
-    expect(page).to have_content 'You must be an admin to access this section'
+    expect(page).to have_current_path root_path, ignore_query: true
   end
 end
 

@@ -53,7 +53,7 @@ RSpec.describe 'Submitting to a workout post', type: :feature do
     fill_in 'Number', with: '50'
 
     click_on 'Submit'
-    expect(page).to have_content('successfully')
+    expect(page).to have_current_path root_path, ignore_query: true
   end
 
   # Rainy
@@ -66,6 +66,6 @@ RSpec.describe 'Submitting to a workout post', type: :feature do
 
     click_on 'Submit'
 
-    expect(page).not_to have_content('successfully')
+    expect(page).to have_current_path new_submission_url(wp.id), ignore_query: true
   end
 end

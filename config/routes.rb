@@ -14,9 +14,9 @@ Rails.application.routes.draw do
   get 'submissions/new/:workout_post_id', to: 'submissions#new', as: 'new_submission'
   post 'submissions/create', to: 'submissions#create'
 
-  get 'submissions/history/:workout_post_id', to: 'submissions#history'
+  get 'submissions/history/:workout_post_id', to: 'submissions#history', as: 'submissions_history'
 
-  get 'posts/new/', to: 'posts#new'
+  get 'posts/new/', to: 'posts#new', as: 'posts_new'
   post 'posts/create/', to: 'posts#create'
 
   get 'permissions/', to: 'permissions#index', as: 'permissions'
@@ -27,14 +27,14 @@ Rails.application.routes.draw do
   post 'profiles/:id/', to: 'profiles#update'
 
 
-  get 'leaderboard', to: 'dashboard#leaderboard'
-
   # Admin-only routes for setting WOD dates
   get '/wod/set', to: 'wod#admin_view', as: 'set_wod'
   post '/wod/set', to: 'wod#update_wod'
 
   # User route for viewing the current and past WODs
   get '/wod', to: 'wod#user_view', as: 'user_wod'
+
+  get 'leaderboard', to: 'dashboards#leaderboard'
 
   resources :exercises#, :workout_posts, :exercise_posts
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

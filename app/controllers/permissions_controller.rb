@@ -7,20 +7,6 @@ class PermissionsController < ApplicationController
     @users = User.all
   end
 
-  def edit
-    @users = User.find_by(params[:uid])
-  end
-
-  def update
-    @users = User.find_by(params[:uid])
-    if @users.update(user_params)
-      flash[:notice] = 'Successfully updated users.'
-      redirect_to permissions_url
-    else
-      render action: 'edit'
-    end
-  end
-
   def destroy
     User.destroy(params[:uid])
     flash[:notice] = 'Successfully deleted user'

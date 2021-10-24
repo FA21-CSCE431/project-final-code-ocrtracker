@@ -1,0 +1,34 @@
+@media screen and (min-width: 1001px) {
+    h1 {
+        font-size: calc(10% + 2.7vw + 2.7vh);
+        color: white;
+        font-weight: normal;
+        margin-bottom: 5%;
+        margin-top: 5%;
+    }
+    p {
+        font-size: calc(5% + 1vw + 1vh);
+        color: white;
+        font-weight: normal;
+    }
+}
+// @media screen and (max-width: 1000px) {
+//     h1 {
+//         font-size: calc(10% + 2.7vw + 2.7vh);
+//         color: white;
+//         font-weight: normal;
+//     }
+//     p {
+//         font-size: calc(5% + 1vw + 1vh);
+//         color: white;
+//         font-weight: normal;
+//     }
+// }
+/* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+.row.content {height: 450px}
+
+/* Set gray background color and 100% height */
+.sidenav {
+    padding-top: 20px;
+    height: 100%;
+}

@@ -39,7 +39,7 @@ class SubmissionsController < ApplicationController
         format.html { redirect_to '/', notice: 'Workout was successfully submitted' }
         # format.json { render :show, status: :created, location: workout_submission }
       else
-        format.html { redirect_to new_submission_url(params[:workout_post_id]), status: :unprocessable_entity }
+        format.html { redirect_to new_submission_url(params[:workout_post_id]), notice: 'Workout submission was not valid' }
         # format.json { render json: workout_submission.errors, status: :unprocessable_entity }
       end
     end

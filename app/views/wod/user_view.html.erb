@@ -1,16 +1,22 @@
 <h1>View WODs</h1>
 
+<% if flash.any? %>
+  <% flash.each do |key, value| -%>
+    <section class="flash flash__<%= key %>"><%= value.html_safe %></section>
+  <% end -%>
+<% end %>
+
 <% @workout_posts.each do |wp| %>
 
-    <h3>
+  <h3>
 
-    <% if wp == @workout_posts.first %>
-        <%=="<a href='#{new_submission_path(wp)}'>#{wp.title}</a> (current WOD)" %>
-    <% else %>
-        <%=wp.title%>
-    <% end %>
-    
-    </h3>
+  <% if wp == @workout_posts.first %>
+    <%=="<a href='#{new_submission_path(wp)}'>#{wp.title}</a> (current WOD)" %>
+  <% else %>
+    <%=wp.title%>
+  <% end %>
+  
+  </h3>
 
     <%=wp.humanized_wod_date%>
 
