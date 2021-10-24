@@ -6,11 +6,12 @@ require 'rails_helper'
 RSpec.describe 'Creating a workout post', type: :feature do
   fixtures :users, :exercises, :workout_posts, :exercise_posts, :workout_submissions, :exercise_submissions
 
-  scenario 'Create workout with two exercises' do
+  scenario 'Create workout with one exercises' do
     login_as_admin
     visit '/posts/new'
 
     fill_in 'Title', with: 'new_post_title'
+    # click_on 'new'
 
     select exercises(:pushups).title, from: 'workout_post_exercise_post_1_exercise_id'
     select exercises(:situps).title, from: 'workout_post_exercise_post_2_exercise_id'
