@@ -3,7 +3,7 @@
 # Submissions Controller
 class SubmissionsController < ApplicationController
   before_action :set_workout_post, only: %i[new history create]
-  before_action :set_exercise_posts, only: %i[new]
+  before_action :set_exercise_posts, only: %i[new history]
 
   before_action :set_workout_submissions, only: %i[history]
 
@@ -30,7 +30,9 @@ class SubmissionsController < ApplicationController
 
   # POST
   def create
-    exercise_submissions = params[:exercise_submission].to_unsafe_h.map { |ep_id, fields| { exercise_post_id: ep_id, unit_value: get_uv(fields), user: current_user } }
+    exercise_submissions = params[:exercise_submission].to_unsafe_h.map do |ep_id, fields|
+      { exercise_post_id: ep_id, unit_value: get_uv(fields), user: current_user, opt_out: fields.fetch('opt_out', false) }
+    end
     @workout_submission.exercise_submissions.build(exercise_submissions)
 
     respond_to do |format|

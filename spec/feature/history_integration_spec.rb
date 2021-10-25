@@ -13,7 +13,7 @@ RSpec.describe 'View submission history for a workout post', type: :feature do
     wp = workout_posts(:wp1)
 
     visit "/submissions/history/#{wp.id}"
-    expect(page).to have_content(wp.ranked_exercise_post.exercise_submissions.first.humanized_unit_value)
+    expect(page).to have_content(wp.exercise_posts.first.exercise_submissions.first.humanized_unit_value)
   end
 
   scenario 'user visits history path' do

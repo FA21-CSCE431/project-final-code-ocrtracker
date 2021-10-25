@@ -9,11 +9,12 @@
             <button style = "border-radius: 12px; background: transparent; background-position:center; border: none;" class="btn btn-secondary"> 
                 <img src= <%= @profile.avatar_url%> height="100" width="100"/>
             </button> 
-            <p style="font-size: 14px; color: white">Edit Image URL</p>
+            <p style="font-size: 14px; color: white"><%= form.label :avatar_url, 'Edit Image URL' %></p>
             <%= form.text_area :avatar_url, cols: 35, rows: 1 %>
             <span style="color: white" class="name mt-3"><%=@profile.full_name %></span>
             <div class="text mt-3"> 
-            <p style="font-size: 14px; color: white">Edit Description</p>
+            <p style="font-size: 14px; color: white"><%= form.label :description, 'Edit Description' %></p>
+                
                 <%= form.text_area :description, cols: 35, rows: 4 %>
             </div>
             <% if current_user.is_admin? %>

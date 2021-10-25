@@ -1,11 +1,17 @@
 <!DOCTYPE html>
 <html>
 
+    <% if flash.any? %>
+    <% flash.each do |key, value| -%>
+      <section class="flash flash__<%= key %>"><%= value.html_safe %></section>
+    <% end -%>
+    <% end %>
+
     <head>
     <%= stylesheet_link_tag  'permissions', media: 'all', 'data-turbolinks-track': 'reload' %>
     </head>
     
-    <body id="submissions-page">
+    <body id="permissions-page">
     <%= form_with url:"/permissions", method: :post do |perm_form| %>
         <br>
         <h1 style="color: black">Permissions</h1>

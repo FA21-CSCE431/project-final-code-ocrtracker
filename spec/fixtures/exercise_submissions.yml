@@ -2,8 +2,10 @@ es1:
   exercise_post: ep1
   workout_submission: ws1
   unit_value: 180
+  user: user_account
 
 es2: 
   exercise_post: ep2
   workout_submission: ws1
   unit_value: 120
+  user: user_account
