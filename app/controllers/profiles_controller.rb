@@ -4,10 +4,6 @@ class ProfilesController < ApplicationController
   before_action :authenticate_user!, :set_profile, only: %i[show edit update]
   before_action :profile_owner, only: %i[edit update]
 
-  def index
-    @profile = User.all
-  end
-
   def show; end
 
   def edit; end
