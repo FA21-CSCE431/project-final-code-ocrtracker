@@ -1,15 +1,20 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-<%= stylesheet_link_tag  'exercises', media: 'all', 'data-turbolinks-track': 'reload' %>
-</head>
+    <head>
+        <%= stylesheet_link_tag  'exercises', media: 'all', 'data-turbolinks-track': 'reload' %>
+    </head>
 
-<body id="exercises">
+    <body id="exercises">
+        <br>
+        <h1>Edit Exercise</h1>
+        <br>
+        <div class="container">
+            <%= render 'form', exercise: @exercise %>
 
-<h1>Editing Exercise</h1>
+            <%= link_to 'Show', @exercise %> |
+            <%= link_to 'Back', exercises_path %>
+        </div>
+    </body>
+</html>
 
-<%= render 'form', exercise: @exercise %>
-
-<%= link_to 'Show', @exercise %> |
-<%= link_to 'Back', exercises_path %>
