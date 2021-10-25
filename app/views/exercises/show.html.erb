@@ -1,19 +1,33 @@
-<p>
-  <strong>Title:</strong>
-  <%= @exercise.title %>
-</p>
-<p>
-  <strong>Description:</strong>
-  <%= @exercise.description %>
-</p>
-<p>
-  <strong>Picture:</strong>
-  <%= image_tag(@exercise.picture, height: '100') %>
-</p>
-<p>
-  <strong>Unit name:</strong>
-  <%= @exercise.humanized_unit_name %>
-</p>
+<!DOCTYPE html>
+<html>
 
-<%= link_to 'Edit', edit_exercise_path(@exercise) %> |
-<%= link_to 'Back', exercises_path %>
+  <head>
+      <%= stylesheet_link_tag  'exercises', media: 'all', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body id="exercises">
+    <div class="container" id="show">
+      <br>
+      <p>
+        <strong>Title:</strong>
+        <%= @exercise.title %>
+      </p>
+      <p>
+        <strong>Description:</strong>
+        <%= @exercise.description %>
+      </p>
+      <p>
+        <strong>Picture:</strong>
+        <%= image_tag(@exercise.picture, height: '100') %>
+      </p>
+      <p>
+        <strong>Unit name:</strong>
+        <%= @exercise.humanized_unit_name %>
+      </p>
+
+      <%= link_to 'Edit', edit_exercise_path(@exercise) %> |
+      <%= link_to 'Back', exercises_path %>
+      <br>
+    </div>
+  </body>
+</html>

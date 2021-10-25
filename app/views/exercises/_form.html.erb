@@ -15,19 +15,22 @@
     <%= form.label :title %>
     <%= form.text_field :title %>
   </div>
+  <br>
   <div class="field">
     <%= form.label :description %>
     <%= form.text_field :description %>
   </div>
+  <br>
   <div class="field">
     <%= form.label :picture %>
     <%= form.text_field :picture %>
   </div>
+  <br>
   <div class="field">
     <%= form.label :unit_name %>
     <%= form.select :unit_name, Exercise.unit_names.map{|key, value| [value, key]} %>
   </div>
-
+  <br>
   <div class="actions">
     <%= form.submit %>
   </div>
