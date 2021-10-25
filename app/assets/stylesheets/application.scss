@@ -43,6 +43,11 @@ p#tab{
     font-size: calc(100% + 0.8vw + 0.8vh) !important;
 }
 
+.nav-link{
+    color: white;
+    font-size: calc(100% + 0.4vw + 0.4vh);
+}
+
 body {
     font-family: "Lato", sans-serif !important;
     background-image: image-url('welcome_page.jpg');
