@@ -1,19 +1,38 @@
-<h1>Set WOD dates</h1>
+<!DOCTYPE html>
+<html>
 
-<%= form_with url: set_wod_path, method: :post do |wp_h_form|%>
+    <head>
+    <%= stylesheet_link_tag  'wod_set', media: 'all', 'data-turbolinks-track': 'reload' %>
+    </head>
 
-    <% @workout_posts.each do |wp| %>
-
-        <%= wp_h_form.fields_for wp, url: set_wod_path, index: wp.id, method: :post do |wp_fields|%>
-            <%= wp_fields.label :wod_date, wp.title%>
-            <%= wp_fields.datetime_local_field :wod_date %> 
-            <input type="button" value="Clear" id='<%= "clear_button_#{wp.id}" %>'  onclick="this.previousElementSibling.value =''">
-
-        <% end %> 
+    <body id="submissions-page">
         <br>
+        <h1>Set WOD dates</h1>
+        <br>
+        <div class="container">
+            <br>
+            <%= form_with url: set_wod_path, method: :post do |wp_h_form|%>
 
-    <%end%>
+            <% @workout_posts.each do |wp| %>
 
-    <%= wp_h_form.submit 'Set WOD dates' %> 
+                <%= wp_h_form.fields_for wp, url: set_wod_path, index: wp.id, method: :post do |wp_fields|%>
+                    <%= wp_fields.label :wod_date, wp.title%>
+                    <%= wp_fields.datetime_local_field :wod_date %> 
+                    <input type="button" value="Clear" id='<%= "clear_button_#{wp.id}" %>'  onclick="this.previousElementSibling.value =''">
 
-<% end %>
+                <% end %> 
+                <br>
+
+            <%end%>
+
+            <%= wp_h_form.submit 'Set WOD dates' %> 
+
+        <% end %>
+        </div>
+
+        <div class="back-btn">
+            <%= link_to 'Back', '/'  %>
+        </div>
+    </body>
+    
+</html>
