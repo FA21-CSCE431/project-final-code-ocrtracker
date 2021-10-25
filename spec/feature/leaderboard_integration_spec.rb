@@ -35,4 +35,11 @@ RSpec.describe 'Viewing the leaderboard', type: :feature do
 
     expect(page).not_to have_content 'Situps'
   end
+
+  scenario 'No WOD, does not crash' do
+    WorkoutPost.all.destroy_all
+    login_as_user
+    visit '/leaderboard'
+    expect(page).to have_content 'Leaderboard'
+  end
 end

@@ -78,6 +78,13 @@ RSpec.describe 'User wod view', type: :feature do
     expect(page).to have_link(nil, href: new_submission_path(workout_posts(:wp2)))
   end
 
+  scenario 'No WODs, does not crash' do
+    WorkoutPost.all.destroy_all
+    login_as_user
+    visit user_wod_path
+    expect(page).to have_content 'View WODs'
+  end
+
   scenario 'User cannot see future WOD' do
     login_as_user
     visit user_wod_path

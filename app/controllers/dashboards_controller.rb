@@ -12,6 +12,11 @@ class DashboardsController < ApplicationController
 
   def set_ranked_eps
     @current_wod = WorkoutPost.current_wod
-    @ranked_eps = @current_wod.ranked_exercise_posts
+    if @current_wod.is_a?(WorkoutPost)
+      @ranked_eps = @current_wod.ranked_exercise_posts
+    else
+      @ranked_eps = []
+      @current_wod = WorkoutPost.new
+    end
   end
 end
