@@ -13,17 +13,26 @@ RSpec.describe 'Viewing the leaderboard', type: :feature do
     expect(page).to have_content workout_posts(:wp2).title
   end
 
-  scenario 'leaderboard shows ranked exercise posts' do
-    login_as_user
-    visit '/leaderboard'
+  describe 'leaderboard shows ranked exercise posts' do
+    it 'shows pushups' do
+      login_as_user
+      visit '/leaderboard'
 
-    expect(page).to have_content 'Pushups'
+      expect(page).to have_content 'Pushups'
+    end
+
+    it 'shows pullups' do
+      login_as_user
+      visit '/leaderboard'
+
+      expect(page).to have_content 'Pullups'
+    end
   end
 
   scenario 'leaderboard does not show unranked exercise posts' do
     login_as_user
     visit '/leaderboard'
 
-    expect(page).not_to have_content 'situps'
+    expect(page).not_to have_content 'Situps'
   end
 end

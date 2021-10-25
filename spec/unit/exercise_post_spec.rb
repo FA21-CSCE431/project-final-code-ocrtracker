@@ -4,27 +4,11 @@
 require 'rails_helper'
 
 RSpec.describe ExercisePost, type: :model do
-  # Create a subject to test model validity with
-  # subject do
-  #     described_class.new(
-  #         exercise: FactoryBot.create(:exercise),
-  #         workout_post: FactoryBot.create(:workout_post),
-  #         specific_instructions: '50 pushups',
-  #         is_ranked: true)
-  # end
-
-  # subject do
-  #   e = FactoryBot.create(:exercise)
-  #  wp = FactoryBot.create(:workout_post)
-  # FactoryBot.create(:exercise_post)
-  #  @subject = FactoryBot.create(:exercise_post, exercise: e, workout_post: wp)
-  # end
+  fixtures :users, :exercises, :workout_posts, :exercise_posts, :workout_submissions, :exercise_submissions, :fistbumps
 
   subject(:exercise_post) do
     FactoryBot.create(:exercise_post)
   end
-
-  # subject = FactoryBot.create(:exercise)
 
   # Ensure that the subject is valid with all fields
   it 'is valid with valid attributes' do
@@ -35,5 +19,19 @@ RSpec.describe ExercisePost, type: :model do
   it 'is not valid without specific instructions' do
     exercise_post.specific_instructions = nil
     expect(exercise_post).not_to be_valid
+  end
+
+  context 'with submissions_where_not_opted_out' do
+    it 'omits opted_out submissions' do
+      expect(exercise_posts(:ep4).submissions_where_not_opted_out).not_to include(exercise_submissions(:es9))
+    end
+
+    it 'sorts pushups descending' do
+      expect(exercise_posts(:ep4).submissions_where_not_opted_out.first).to eq(exercise_submissions(:es7))
+    end
+
+    it 'sorts situps ascending' do
+      expect(exercise_posts(:ep3).submissions_where_not_opted_out.first).to eq(exercise_submissions(:es3))
+    end
   end
 end

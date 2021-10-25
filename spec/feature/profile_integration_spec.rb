@@ -53,3 +53,35 @@ RSpec.describe 'Editing an profile', type: :feature do
   #   expect(page).to have_content 'https://fake_url.com'
   # end
 end
+
+RSpec.describe 'Viewing a profile', type: :feature do
+  fixtures :users, :exercises, :workout_posts, :exercise_posts, :workout_submissions, :exercise_submissions, :fistbumps
+
+  scenario 'user views own account' do
+    login_as_user
+    visit profiles_path(users(:user_account))
+
+    expect(page).to have_content users(:user_account).full_name
+  end
+
+  scenario 'user views a different account' do
+    login_as_user
+    visit profiles_path(users(:account3))
+
+    expect(page).to have_content users(:account3).full_name
+  end
+
+  scenario 'shows fistbumps given in the last month' do
+    login_as_user
+    visit profiles_path(users(:user_account))
+
+    expect(page).to have_content '1 FistBumps given in the last month'
+  end
+
+  scenario 'shows fistbumps recieved in the last month' do
+    login_as_user
+    visit profiles_path(users(:user_account))
+
+    expect(page).to have_content '3 FistBumps received in the last month'
+  end
+end

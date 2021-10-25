@@ -89,4 +89,10 @@ RSpec.describe 'User wod view', type: :feature do
     visit user_wod_path
     expect(page).to have_content users(:user_account).workout_submissions.first.exercise_submissions.first.humanized_unit_value
   end
+
+  scenario 'Missing submission info for a past WOD does not error' do
+    login_as_user
+    visit user_wod_path
+    expect(page).to have_content workout_posts(:wp_with_no_submissions).title
+  end
 end
