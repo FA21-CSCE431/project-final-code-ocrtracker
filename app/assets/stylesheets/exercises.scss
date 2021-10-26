@@ -4,13 +4,9 @@
     color: white;
     border-radius: 10px;
     position: relative;
-    width: 65%;
-    height: 60%;
+    width: 50%;
+    height: 70%;
     overflow: auto;
-}
-
-.container#show{
-    top: 19%;
 }
 
 h1{
@@ -23,7 +19,7 @@ h2{
     text-align: center;
 }
 
-p#label{
+p{
     font-size: calc(100% + 0.3vw + 0.3vh);
     color: white;
     font-weight: 300;
@@ -33,6 +29,10 @@ body#exercises{
     background-image: image-url('exercises.png');
 }
 
-.field{
-    width: 10%;
+th{
+    font-size: calc(100% + 0.4vw + 0.4vh);
+}
+
+td{
+    font-size: calc(100% + 0.2vw + 0.2vh);
 }
