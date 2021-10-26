@@ -13,3 +13,11 @@ admin_account:
   avatar_url: https://fake_url.com
   description: admin description
   is_admin: true
+
+account3:
+  email: 3@tamu.edu
+  full_name:  account 3
+  uid: USER3UID
+  avatar_url: https://fake_url3.com
+  description: user description3
+  is_admin: false

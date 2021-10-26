@@ -1,2 +1,51 @@
-<h1> Leaderboard Page </h1>
-<a><%= "#{current_user.full_name}"%></a>
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <%= stylesheet_link_tag  'leaderboard', media: 'all', 'data-turbolinks-track': 'reload' %>
+    </head>
+
+    <body id="leaderboard">
+        <br>
+        <h1> Leaderboard for <%=@current_wod.title%></h1>
+        <br>
+
+        <div class="container">
+            <nav>
+                <div class = "nav nav-tabs" id ="nav-tab" role="tablist" style>
+                    <% @ranked_eps.each_with_index do |ranked_ep, index|%>
+                        <button class="nav-link <%= 'active' unless index != 0%>" id="<%= ranked_ep.id%>" data-bs-toggle="tab" data-bs-target="#<%= "ep_#{ranked_ep.id}"%>" type="button" role="tab" aria-controls="<%= "ep_#{ranked_ep.id}"%>" aria-selected="<%= index == 0? 'true' : 'false'%>">
+                                <%= ranked_ep.exercise.title %>
+                        </button>
+                    <% end %>
+                </div>
+            </nav>
+            
+            <div class="tab-content">
+                <% @ranked_eps.each_with_index do |ranked_ep, index|%>
+
+                    
+                        <div class = "tab-pane fade <%= 'show active' unless index != 0%>" id="<%= "ep_#{ranked_ep.id}"%>" role="tabpanel" aria-labeledby="<%= "ep_#{ranked_ep.id}"%>">
+                            <table>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Score</th>
+                                </tr>
+                                <%ranked_ep.submissions_where_not_opted_out.each do |es|%>
+
+                                    <tr>
+                                    <td><%= es.user.full_name %></td>
+                                    <td><%= es.humanized_unit_value%></td>
+
+                                    </tr>
+
+                                <%end%>
+                            </table>
+                        
+                        </div>
+
+                <% end %>
+            </div>
+        </div>
+    </body>
+</html>

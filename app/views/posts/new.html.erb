@@ -1,5 +1,23 @@
-<h1>Create New Workout</h1>
+<!DOCTYPE html>
+<html>
 
-<%= render 'form', exercises: @exercises%>
+    <head>
+    <%= stylesheet_link_tag  'posts', media: 'all', 'data-turbolinks-track': 'reload' %>
+    </head>
 
-<%= link_to 'Back', '/' %>
+    <body id="submissions-page">
+        <br>
+        <h1>New Exercise Post</h1>
+        <br>
+        <div class="container">
+            <br>
+            <%= render 'form', exercises: @exercises%>
+                
+        </div>
+
+        <div class="back-btn">
+            <%= link_to 'Back', '/'  %>
+        </div>
+    </body>
+    
+</html>

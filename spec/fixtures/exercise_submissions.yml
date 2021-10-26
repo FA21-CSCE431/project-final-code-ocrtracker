@@ -2,8 +2,61 @@ es1:
   exercise_post: ep1
   workout_submission: ws1
   unit_value: 180
+  user: user_account
+  opt_out: false
 
 es2: 
   exercise_post: ep2
   workout_submission: ws1
   unit_value: 120
+  user: user_account
+  opt_out: false
+
+es3:
+  exercise_post: ep3
+  workout_submission: ws2
+  unit_value: 90
+  user: user_account
+  opt_out: false
+
+es4:
+  exercise_post: ep4
+  workout_submission: ws2
+  unit_value: 60
+  user: user_account
+  opt_out: false
+
+es5:
+  exercise_post: ep5
+  workout_submission: ws2
+  unit_value: 30
+  user: user_account
+  opt_out: false
+
+es6:
+  exercise_post: ep5
+  workout_submission: ws3
+  unit_value: 45
+  user: account3
+  opt_out: false
+
+es7:
+  exercise_post: ep4
+  workout_submission: ws3
+  unit_value: 46
+  user: account3
+  opt_out: false
+
+es8:
+  exercise_post: ep3
+  workout_submission: ws3
+  unit_value: 48
+  user: account3
+  opt_out: false
+
+es9:
+  exercise_post: ep4
+  workout_submission: ws_from_admin_account
+  unit_value: 44
+  user: admin_account
+  opt_out: true

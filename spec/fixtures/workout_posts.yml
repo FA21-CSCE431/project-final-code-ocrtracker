@@ -9,3 +9,7 @@ wp2:
 wp_with_wod_in_future:
   title: Workout Post 3 (WOD in future)
   wod_date: <%= 5.days.from_now %>
+
+wp_with_no_submissions:
+  title: Workout Post 4 (no submissions)
+  wod_date: <%= 3.days.ago %>

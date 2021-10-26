@@ -7,35 +7,52 @@
 
     <body id="submissions-history">
         <br>
-        <h1>Workout Submission History</h1>
+        <h1>Workout Submission History for <%=@workout_post.title%></h1>
         <br>
         <div class="container">
 
-            <h2>Workout Post: <%=@workout_post.title%></h1>
-            <h3>Exercise: <%="#{@workout_post.ranked_exercise.title} (#{@workout_post.ranked_exercise.humanized_unit_name})"%></h2>
-
-            <table class="table">
-                <thead>
-                    <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">User</th>
-                    <th scope="col">Value</th>
-                    <th scope="col">Submitted On</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% @workout_submissions.each_with_index do |ws, index| %>
-                        <tr>
-                        <td><%=index.next%></td>
-                        <td><%=ws.user.full_name%></td>
-                        <td><%=ws.ranked_exercise_submission.humanized_unit_value%></td>
-                        <td><%=ws.humanized_submitted_datetime%></td>
-                        </tr>
+            <nav>
+                <div class = "nav nav-tabs" id ="nav-tab"role="tablist">
+                    <% @exercise_posts.each_with_index do |ep, index|%>
+                        <button class="nav-link <%= 'active' unless index != 0%>" id="<%= ep.id%>" data-bs-toggle="tab" data-bs-target="#<%= "ep_#{ep.id}"%>" type="button" role="tab" aria-controls="<%= "ep_#{ep.id}"%>" aria-selected="<%= index == 0? 'true' : 'false'%>">
+                                <%= ep.exercise.title %>
+                        </button>
                     <% end %>
-                </tbody>
-            </table>
+                    
+                </div>
+            </nav>
+
+            <div class="tab-content">
+            <% @exercise_posts.each_with_index do |ep, index|%>
+
+                    <div class = "tab-pane fade <%= 'show active' unless index != 0%>" id="<%= "ep_#{ep.id}"%>" role="tabpanel" aria-labeledby="<%= "ep_#{ep.id}"%>">
+                    <p><%= "Unit Name: #{ep.exercise.humanized_unit_name }" %></p>
+                        <table>
+                            <tr>
+                                <th>Name</th>
+                                <th>Score</th>
+                            </tr>
+                            <%ep.exercise_submissions.each do |es|%>
+
+                                <tr>
+                                <td><%= es.user.full_name %></td>
+                                <td><%= es.humanized_unit_value%></td>
+
+                                </tr>
+
+                            <%end%>
+                        </table>
+                    
+                    </div>
+
+            <% end %>
+        </div>
+
+            
         </div>
 
     </body>
 
 </html>
+
+

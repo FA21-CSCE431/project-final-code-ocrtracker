@@ -78,6 +78,13 @@ RSpec.describe 'User wod view', type: :feature do
     expect(page).to have_link(nil, href: new_submission_path(workout_posts(:wp2)))
   end
 
+  scenario 'No WODs, does not crash' do
+    WorkoutPost.all.destroy_all
+    login_as_user
+    visit user_wod_path
+    expect(page).to have_content 'View WODs'
+  end
+
   scenario 'User cannot see future WOD' do
     login_as_user
     visit user_wod_path
@@ -88,5 +95,11 @@ RSpec.describe 'User wod view', type: :feature do
     login_as_user
     visit user_wod_path
     expect(page).to have_content users(:user_account).workout_submissions.first.exercise_submissions.first.humanized_unit_value
+  end
+
+  scenario 'Missing submission info for a past WOD does not error' do
+    login_as_user
+    visit user_wod_path
+    expect(page).to have_content workout_posts(:wp_with_no_submissions).title
   end
 end

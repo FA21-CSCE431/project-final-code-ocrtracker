@@ -55,8 +55,4 @@ class PostsController < ApplicationController
   def set_exercises
     @exercises = Exercise.all
   end
-
-  def exercise_post_params
-    params.require(:exercise_post).permit(:exercise_id, :workout_post_id, :specific_instructions, :is_ranked)
-  end
 end

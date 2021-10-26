@@ -9,3 +9,8 @@ situps:
   description: The sit-up is an abdominal endurance training exercise to strengthen, tighten and tone the abdominal muscles. It is similar to a crunch, but sit-ups have a fuller range of motion and condition additional muscles.
   picture: https://cdn.mos.cms.futurecdn.net/4ogwV6zhannpcVUyKZMc9K-480-80.jpg
   unit_name: quantity
+
+pullups:
+  title: Pullups
+  description: A pull-up is a common calisthenics exercise beginning from the prone position. By raising and lowering the body using the arms, pull-ups exercise the pectoral muscles, triceps, and anterior deltoids, with ancillary benefits to the rest of the deltoids, serratus anterior, coracobrachialis and the midsection as a whole.
+  unit_name: reps

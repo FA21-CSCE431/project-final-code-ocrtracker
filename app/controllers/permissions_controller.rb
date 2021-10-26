@@ -7,12 +7,6 @@ class PermissionsController < ApplicationController
     @users = User.all
   end
 
-  def destroy
-    User.destroy(params[:uid])
-    flash[:notice] = 'Successfully deleted user'
-    redirect_to permissions_url
-  end
-
   def complete
     submitted_hash = params[:user]
 
@@ -23,9 +17,5 @@ class PermissionsController < ApplicationController
         format.html { redirect_to permissions_url, notice: 'Failure' }
       end
     end
-  end
-
-  def user_params
-    params.require(:user).permit(:is_admin)
   end
 end
