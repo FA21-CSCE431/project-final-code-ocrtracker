@@ -2,3 +2,18 @@ ws1:
   user: user_account
   workout_post: wp1
   submitted_datetime: 2021-10-01 02:03:04
+
+ws2:
+  user: user_account
+  workout_post: wp2
+  submitted_datetime: 2021-10-01 02:03:04
+
+ws3:
+  user: account3
+  workout_post: wp2
+  submitted_datetime: 2020-10-02 02:03:04
+
+ws_from_admin_account:
+  user: admin_account
+  workout_post: wp2
+  submitted_datetime: 2020-10-03 02:03:04

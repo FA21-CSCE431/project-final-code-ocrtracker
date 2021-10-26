@@ -33,13 +33,11 @@ class PostsController < ApplicationController
     workout_post.exercise_posts.build(submitted_exercise_posts.values)
 
     respond_to do |format|
-      if workout_post.valid? && workout_post.exercise_posts.all?(&:valid?)
-        workout_post.save
-        workout_post.exercise_posts.each(&:save!)
-        format.html { redirect_to '/', notice: 'Workout was successfully posted' }
+      if workout_post.save
+        format.html { redirect_to submissions_history_path(workout_post.id), notice: 'Workout was successfully posted' }
         # format.json { render :show, status: :created, location: workout_submission }
       else
-        format.html { redirect_to '/', notice: 'Error: Could not post workout' }
+        format.html { redirect_to posts_new_path, notice: 'Error: Could not post workout' }
         # format.html { render :new, status: :unprocessable_entity }
       end
     end
@@ -56,9 +54,5 @@ class PostsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_exercises
     @exercises = Exercise.all
-  end
-
-  def exercise_post_params
-    params.require(:exercise_post).permit(:exercise_id, :workout_post_id, :specific_instructions, :is_ranked)
   end
 end

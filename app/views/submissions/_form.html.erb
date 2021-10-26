@@ -1,22 +1,49 @@
-<h1><%= @workout_post.title %></h1>
-<%= form_with url:"/submissions/create", method: :post do |ws_form| %>
+<!DOCTYPE html>
+<html>
 
-    <%= ws_form.hidden_field :workout_post_id, value: @workout_post.id %>
+    <head>
+    <%= stylesheet_link_tag  'submissions', media: 'all', 'data-turbolinks-track': 'reload' %>
+    </head>
 
-    <% @workout_post.exercise_posts.each do |ep| %>
-        <p>Exercise title: <%= ep.exercise.title %></p>
-        <p>Exercise description: <%= ep.exercise.description %></p>
-        <p>Specific instructions: <%= ep.specific_instructions %></p>
-        <p>Unit for submission: <%= ep.exercise.humanized_unit_name %></p>
-        <%= ws_form.fields_for :exercise_submission, index: ep.id, builder: SubmissionsFormBuilder do |es_form| %>
-            <%= es_form.text_or_time_field :unit_value, unit_name: ep.exercise.unit_name %>
-        <% end %>
-    <% end %>
+    <body id="submissions-page">
+        <br>
+        <h1>New Workout Submission</h1>
+        <br>
+        <div class="container">
+            <h2><%= @workout_post.title %></h2>
+            <br>
+            <%= form_with url:"/submissions/create", method: :post do |ws_form| %>
 
-    <div class="actions">
-        <%= ws_form.submit "Submit"%>
-    </div>
+                <%= ws_form.hidden_field :workout_post_id, value: @workout_post.id %>
 
-<% end %>
+                <% @workout_post.exercise_posts.each do |ep, index| %>
+                    <p><b>Exercise: <%= ep.exercise.title %></b></p>
+                    <p id="label">Description: <%= ep.exercise.description %></p>
+                    <p id="label">Instructions: <%= ep.specific_instructions %></p>
+                    <p id="label">Unit: <%= ep.exercise.humanized_unit_name %></p>
+                    <p id="label"><%= ws_form.fields_for :exercise_submission, index: ep.id, builder: SubmissionsFormBuilder do |es_form| %>
+                        <%= es_form.text_or_time_field :unit_value, unit_name: ep.exercise.unit_name %>
+                        <% if ep.is_ranked %>
+                            <p id="label">Opt out?: <%= es_form.check_box :opt_out %></p>
+                        <% else %>
+                            <p>Not ranked</p>
+                        <%end%>
+                    <% end %>
+                    </p>
+                    <br>
 
+            <% end %>
+                
+            <div class="actions">
+                <%= ws_form.submit "Submit"%>
+            </div>
 
+            <% end %>
+        </div>
+
+        <div class="back-btn">
+            <%= link_to 'Back', '/'  %>
+        </div>
+    </body>
+    
+</html>

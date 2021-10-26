@@ -21,3 +21,9 @@ ep4:
   workout_post: wp2
   specific_instructions: 15 pushups
   is_ranked: true
+
+ep5:
+  exercise: pullups
+  workout_post: wp2
+  specific_instructions: 10 pullups
+  is_ranked: true

@@ -11,6 +11,10 @@ class WorkoutPost < ApplicationRecord
                                 where.not(wod_date: nil).where('wod_date <= ?', DateTime.now).order('wod_date DESC')
                               }
 
+  scope :current_wod, lambda {
+    where.not(wod_date: nil).where('wod_date <= ?', DateTime.now).order('wod_date DESC').first
+  }
+
   # Give the last 10 workout posts that have been created
   scope :recent_workout_posts, lambda {
                                  limit(10).order('created_at DESC')
@@ -31,12 +35,8 @@ class WorkoutPost < ApplicationRecord
     end
   end
 
-  def ranked_exercise_post
-    exercise_posts.detect(&:is_ranked)
-  end
-
-  def ranked_exercise
-    ranked_exercise_post.exercise
+  def ranked_exercise_posts
+    exercise_posts.where(is_ranked: true)
   end
 
   def humanized_wod_date

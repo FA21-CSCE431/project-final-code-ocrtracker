@@ -1,10 +1,58 @@
-<h1>Submission history workout post: <%=@workout_post.title%></h1>
-<h3>Ranked exercise for this post: <%="#{@workout_post.ranked_exercise.title} (#{@workout_post.ranked_exercise.humanized_unit_name})"%></h3>
+<!DOCTYPE html>
+<html>
 
-<% @workout_submissions.each do |ws| %>
+    <head>
+        <%= stylesheet_link_tag  'submissions_history', media: 'all', 'data-turbolinks-track': 'reload' %>
+    </head>
 
-    <h4>User: <%=ws.user.full_name%></h4>
-    <p>Value: <%=ws.ranked_exercise_submission.humanized_unit_value%></p>
-    <p>Datetime submitted: <%=ws.humanized_submitted_datetime%></p>
+    <body id="submissions-history">
+        <br>
+        <h1>Workout Submission History for <%=@workout_post.title%></h1>
+        <br>
+        <div class="container">
 
-<% end %>
+            <nav>
+                <div class = "nav nav-tabs" id ="nav-tab"role="tablist">
+                    <% @exercise_posts.each_with_index do |ep, index|%>
+                        <button class="nav-link <%= 'active' unless index != 0%>" id="<%= ep.id%>" data-bs-toggle="tab" data-bs-target="#<%= "ep_#{ep.id}"%>" type="button" role="tab" aria-controls="<%= "ep_#{ep.id}"%>" aria-selected="<%= index == 0? 'true' : 'false'%>">
+                                <%= ep.exercise.title %>
+                        </button>
+                    <% end %>
+                    
+                </div>
+            </nav>
+
+            <div class="tab-content">
+            <% @exercise_posts.each_with_index do |ep, index|%>
+
+                    <div class = "tab-pane fade <%= 'show active' unless index != 0%>" id="<%= "ep_#{ep.id}"%>" role="tabpanel" aria-labeledby="<%= "ep_#{ep.id}"%>">
+                    <p><%= "Unit Name: #{ep.exercise.humanized_unit_name }" %></p>
+                        <table>
+                            <tr>
+                                <th>Name</th>
+                                <th>Score</th>
+                            </tr>
+                            <%ep.exercise_submissions.each do |es|%>
+
+                                <tr>
+                                <td><%= es.user.full_name %></td>
+                                <td><%= es.humanized_unit_value%></td>
+
+                                </tr>
+
+                            <%end%>
+                        </table>
+                    
+                    </div>
+
+            <% end %>
+        </div>
+
+            
+        </div>
+
+    </body>
+
+</html>
+
+

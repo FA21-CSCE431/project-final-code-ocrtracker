@@ -1,0 +1,33 @@
+<html>
+  <head>
+    <%= stylesheet_link_tag  'profiles', media: 'all', 'data-turbolinks-track': 'reload' %>
+  </head>
+  <%= form_with model: @profile, url:"/profiles/#{current_user.id}", method: :post do |form| %>
+    <div class="container mt-6 mb-4 p-3 d-flex justify-content-center">
+        <div class="card p-4" style="background: rgba(33, 37, 41, 0.98); border-radius: 12px">
+            <div class=" image d-flex flex-column justify-content-center align-items-center"> 
+            <button style = "border-radius: 12px; background: transparent; background-position:center; border: none;" class="btn btn-secondary"> 
+                <img src= <%= @profile.avatar_url%> height="100" width="100"/>
+            </button> 
+            <p style="font-size: 14px; color: white"><%= form.label :avatar_url, 'Edit Image URL' %></p>
+            <%= form.text_area :avatar_url, cols: 35, rows: 1 %>
+            <span style="color: white" class="name mt-3"><%=@profile.full_name %></span>
+            <div class="text mt-3"> 
+            <p style="font-size: 14px; color: white"><%= form.label :description, 'Edit Description' %></p>
+                
+                <%= form.text_area :description, cols: 35, rows: 4 %>
+            </div>
+            <% if current_user.is_admin? %>
+                <div class=" px-2 rounded mt-4 date "> <span style="color: white" class="join">OCRTracker Admin</span> </div>
+            <%end%>
+            <% if !current_user.is_admin? %>
+                <div class=" px-2 rounded mt-4 date "> <span style="color: white" class="join">OCRTracker Member</span> </div>
+            <%end%>
+            <div class="actions" style= "margin-top: 4%">
+                <%= form.submit "Save Changes", :class => "btn1"%>
+            </div>
+            </div>
+        </div>
+    </div>
+  <% end %>
+</html>

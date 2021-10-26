@@ -1,0 +1,15 @@
+fb1:
+  user: account3
+  exercise_submission: es1
+
+fb2:
+  user: account3
+  exercise_submission: es3
+
+fb3:
+  user: account3
+  exercise_submission: es5
+
+fb4:
+  user: user_account
+  exercise_submission: es6

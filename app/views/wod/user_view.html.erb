@@ -1,24 +1,45 @@
-<h1>View WODs</h1>
+<!DOCTYPE html>
+<html>
 
-<% @workout_posts.each do |wp| %>
+  <head>
+      <%= stylesheet_link_tag  'wod', media: 'all', 'data-turbolinks-track': 'reload' %>
+  </head>
 
-    <h3>
+  <body id="wod">
+    <br>
+    <h1>View WODs</h1>
+    <br>
 
-    <% if wp == @workout_posts.first %>
-        <%=="<a href='#{new_submission_path(wp)}'>#{wp.title}</a> (current WOD)" %>
-    <% else %>
-        <%=wp.title%>
-    <% end %>
-    
-    </h3>
+    <div class="container">
 
-    <%=wp.humanized_wod_date%>
+      <% if flash.any? %>
+        <% flash.each do |key, value| -%>
+          <section class="flash flash__<%= key %>"><%= value.html_safe %></section>
+        <% end -%>
+      <% end %>
 
-    <% wp.exercise_submissions_to_this_post_for_current_user(current_user).each do |es| %>
-        <h5><%=es.exercise.title%></h5>
-        <p><%="#{es.exercise.humanized_unit_name}: #{es.humanized_unit_value}"%></p>
-    <% end %>
+      <% @workout_posts.each do |wp| %>
 
-    <hr>
+        <h2>
 
-<% end %>
+        <% if wp == @workout_posts.first %>
+          <%=="Current: <a href='#{new_submission_path(wp)}'>#{wp.title}</a>"%>
+        <% else %>
+          <%=wp.title%>
+        <% end %>
+      
+        <%=wp.humanized_wod_date%>
+        <br>
+        </h2>
+        <% wp.exercise_submissions_to_this_post_for_current_user(current_user).each do |es| %>
+          <p><%="#{es.exercise.title} (#{es.exercise.humanized_unit_name}: #{es.humanized_unit_value})"%></p>
+        <% end %>
+        <hr>
+        <br>
+      <% end %>
+
+    </div>
+
+  </body>
+
+</html>

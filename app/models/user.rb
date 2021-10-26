@@ -13,4 +13,17 @@ class User < ApplicationRecord
   has_many :workout_submissions, dependent: :destroy
   has_many :fistbumps, dependent: :destroy
   has_many :exercise_submissions, dependent: :destroy
+  has_many :profiles, dependent: :destroy
+
+  def fistbumps_recieved_in_last_month
+    count = 0
+    exercise_submissions.each do |es|
+      count += es.fistbumps.where('created_at > ?', 1.month.ago).count
+    end
+    count
+  end
+
+  def fistbumps_given_in_last_month
+    fistbumps.where('created_at > ?', 1.month.ago).count
+  end
 end
