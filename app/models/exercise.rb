@@ -12,7 +12,7 @@ class Exercise < ApplicationRecord
     reps: 'Reps',
     weight: 'Weight',
     sets: 'Sets',
-    distance: 'Disatance',
+    distance: 'Distance',
     laps: 'Laps',
     quantity: 'Quantity'
   }
