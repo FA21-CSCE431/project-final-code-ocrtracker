@@ -9,6 +9,8 @@
             <p>
               <% if @profile.image.attached? %>
                 <%= image_tag @profile.image.variant(resize: "200x200") %>
+              <% else %>
+                <img src= <%= @profile.avatar_url%> height="100" width="100"/>
               <% end %>
             </p>
           </button>

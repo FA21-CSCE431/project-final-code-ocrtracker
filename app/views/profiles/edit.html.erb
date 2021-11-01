@@ -10,6 +10,8 @@
               <div class="">
                 <% if @profile.image.attached? %>
                   <%= image_tag @profile.image, style: "width: 100px; display: block" %>
+                <% else %>
+                  <img src= <%= @profile.avatar_url%> height="100" width="100"/>
                 <% end %>
 
                 <%= form.label :image %>
