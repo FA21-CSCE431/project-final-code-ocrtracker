@@ -29,7 +29,7 @@
                 <%= perm_form.fields_for user, index: user.id, method: :post do |p_fields|%>
                 <tr>
                   <td><%= user.email %></td>
-                  <td><%= user.full_name %></td>
+                  <td><%= link_to "#{user.full_name}",  "/profiles/#{user.id}"%></td>
                   <td><%= p_fields.check_box :is_admin %></td>
                 </tr>
                 <% end %>
