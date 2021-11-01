@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   get 'profiles/:id/edit/', to: 'profiles#edit', as: 'edit_profile'
   post 'profiles/:id/', to: 'profiles#update'
 
+  get 'members/', to: 'members#index', as: 'members'
 
   # Admin-only routes for setting WOD dates
   get '/wod/set', to: 'wod#admin_view', as: 'set_wod'
