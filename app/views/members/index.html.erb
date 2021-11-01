@@ -27,8 +27,8 @@
               <% @users.each do |user| %>
                 <%= perm_form.fields_for user, index: user.id, method: :post do |p_fields|%>
                 <tr>
-                  <td><%= user.email %></td>
                   <td><%= link_to "#{user.full_name}",  "/profiles/#{user.id}"%></td>
+                  <td><%= user.email %></td>
                 </tr>
                 <% end %>
               <% end %>
