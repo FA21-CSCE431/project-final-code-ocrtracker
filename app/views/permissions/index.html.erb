@@ -10,7 +10,7 @@
     <head>
     <%= stylesheet_link_tag  'permissions', media: 'all', 'data-turbolinks-track': 'reload' %>
     </head>
-    
+
     <body id="permissions-page">
     <%= form_with url:"/permissions", method: :post do |perm_form| %>
         <br>
@@ -30,17 +30,17 @@
                 <tr>
                   <td><%= user.email %></td>
                   <td><%= user.full_name %></td>
-                  <td><%= p_fields.check_box :is_admin %></td>
+                  <td><%= p_fields.check_box( class: (@user.id == current_user.id) ? "disabled​" : "" ), :is_admin %></td>
                 </tr>
                 <% end %>
               <% end %>
             </table>
             <br>
-            <%= perm_form.submit 'Save Changes', :class => "form1" %> 
+            <%= perm_form.submit 'Save Changes', :class => "form1" %>
         </div>
       <% end %>
     </body>
-    
+
 </html>
 
 <script>
