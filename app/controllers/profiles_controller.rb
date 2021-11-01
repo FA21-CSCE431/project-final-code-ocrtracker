@@ -33,7 +33,6 @@ class ProfilesController < ApplicationController
   def profile_owner
     return if @profile.id == current_user.id
 
-    flash[:notice] = 'Access denied as you are not owner of this profile'
     redirect_to root_path
   end
 end
