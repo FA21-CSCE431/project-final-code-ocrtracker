@@ -14,6 +14,7 @@ class User < ApplicationRecord
   has_many :fistbumps, dependent: :destroy
   has_many :exercise_submissions, dependent: :destroy
   has_many :profiles, dependent: :destroy
+  has_one_attached :image, dependent: :destroy
 
   def fistbumps_recieved_in_last_month
     count = 0
