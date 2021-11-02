@@ -34,9 +34,15 @@
                                 <%ranked_ep.submissions_where_not_opted_out.each do |es|%>
 
                                     <tr>
+                                    <td>
+                                      <% if @es.user.image.attached? %>
+                                        <%= image_tag @es.user.image, style: "width: 100px; display: block" %>
+                                      <% else %>
+                                        <img src= <%= @es.user.avatar_url%> height="100" width="100"/>
+                                      <% end %>
+                                    </td>
                                     <td><%= link_to "#{es.user.full_name}", "/profiles/#{es.user.id}"%></td>
                                     <td><%= es.humanized_unit_value%></td>
-
                                     </tr>
 
                                 <%end%>

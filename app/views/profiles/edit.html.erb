@@ -7,15 +7,14 @@
         <div class="card p-4" style="background: rgba(33, 37, 41, 0.98); border-radius: 12px">
             <div class=" image d-flex flex-column justify-content-center align-items-center">
             <button style = "border-radius: 12px; background: transparent; background-position:center; border: none;" class="btn btn-secondary">
-              <div class="">
+              <div>
                 <% if @profile.image.attached? %>
                   <%= image_tag @profile.image, style: "width: 100px; display: block" %>
                 <% else %>
                   <img src= <%= @profile.avatar_url%> height="100" width="100"/>
                 <% end %>
 
-                <%= form.label :image %>
-                <%= form.file_field :image %>
+                <%= form.file_field :image, style: "width: 100px; display: block" %>
               </div>
             </button>
 
