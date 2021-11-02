@@ -35,10 +35,10 @@
 
                                     <tr>
                                     <td>
-                                      <% if @es.user.image.attached? %>
-                                        <%= image_tag @es.user.image, style: "width: 100px; display: block" %>
+                                      <% if es.user.image.attached? %>
+                                        <%= image_tag es.user.image, style: "width: 100px; display: block" %>
                                       <% else %>
-                                        <img src= <%= @es.user.avatar_url%> height="100" width="100"/>
+                                        <img src= <%= es.user.avatar_url%> height="100" width="100"/>
                                       <% end %>
                                     </td>
                                     <td><%= link_to "#{es.user.full_name}", "/profiles/#{es.user.id}"%></td>
