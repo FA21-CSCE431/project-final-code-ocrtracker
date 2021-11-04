@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   end
 
   get 'submissions/new/:workout_post_id', to: 'submissions#new', as: 'new_submission'
+  get 'submissions/:id/edit/', to: 'submissions#edit', as: 'edit_submission'
   post 'submissions/create', to: 'submissions#create'
 
   get 'submissions/history/:workout_post_id', to: 'submissions#history', as: 'submissions_history'
@@ -37,5 +38,6 @@ Rails.application.routes.draw do
   get 'leaderboard', to: 'dashboards#leaderboard'
 
   resources :exercises#, :workout_posts, :exercise_posts
+  resources :submissions
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

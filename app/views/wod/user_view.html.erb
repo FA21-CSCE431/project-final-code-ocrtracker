@@ -17,13 +17,16 @@
           <section class="flash flash__<%= key %>"><%= value.html_safe %></section>
         <% end -%>
       <% end %>
-
       <% @workout_posts.each do |wp| %>
-
+        
         <h2>
 
         <% if wp == @workout_posts.first %>
-          <%=="Current: <a href='#{new_submission_path(wp)}'>#{wp.title}</a>"%>
+          <% if @current_submission.empty? %>
+            <%=="Current: <a href='#{new_submission_path(wp)}'>#{wp.title}</a>"%>
+          <% else %>
+            <%=="Current: <a href='#{edit_submission_path(@current_submission.first)}'>#{wp.title}</a>"%>
+          <% end %>
         <% else %>
           <%=wp.title%>
         <% end %>
