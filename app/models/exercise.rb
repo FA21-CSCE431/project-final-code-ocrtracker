@@ -5,6 +5,7 @@ class Exercise < ApplicationRecord
   validates :title, presence: true
   validates :description, presence: true
   validates :unit_name, presence: true
+  has_one_attached :image, dependent: :destroy
 
   enum unit_name: {
     time_l_to_h: 'Time (Lower is better)',
