@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# location: spec/feature/permission_integration_spec.rb
 require 'rails_helper'
 
 RSpec.describe 'Editing permissions', type: :feature do

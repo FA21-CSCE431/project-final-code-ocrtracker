@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# location: spec/feature/profile_integration_spec.rb
 require 'rails_helper'
 
 RSpec.describe 'Editing an profile', type: :feature do
