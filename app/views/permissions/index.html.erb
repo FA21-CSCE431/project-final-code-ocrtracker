@@ -28,15 +28,9 @@
               <% @users.each do |user| %>
                 <%= perm_form.fields_for user, index: user.id, method: :post do |p_fields|%>
                 <tr>
-                  <% if user.email == 'tamuocr@gmail.com' %>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  <% else %>
-                    <td><%= user.email %></td>
-                    <td><%= link_to "#{user.full_name}",  "/profiles/#{user.id}"%></td>
-                    <td><%= p_fields.check_box :is_admin %></td>
-                  <% end %>
+                  <td><%= user.email %></td>
+                  <td><%= link_to "#{user.full_name}",  "/profiles/#{user.id}"%></td>
+                  <td><%= p_fields.check_box :is_admin %></td>
                 </tr>
                 <% end %>
               <% end %>
