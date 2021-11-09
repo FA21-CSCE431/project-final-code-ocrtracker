@@ -8,13 +8,13 @@
     <% end %>
 
     <head>
-    <%= stylesheet_link_tag  'permissions', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag  'members', media: 'all', 'data-turbolinks-track': 'reload' %>
     </head>
 
     <body id="members-page">
     <%= form_with url:"/members", method: :post do |perm_form| %>
         <br>
-        <h1 style="color: white">Members</h1>
+        <h1>Members</h1>
         <br>
         <div class="container">
             <br>
@@ -29,11 +29,13 @@
                 <%= perm_form.fields_for user, index: user.id, method: :post do |p_fields|%>
                 <tr>
                   <td>
-                    <% if user.image.attached? %>
-                      <%= image_tag user.image, style: "width: 100px; display: block" %>
-                    <% else %>
-                      <img src= <%= user.avatar_url%> height="100" width="100"/>
-                    <% end %>
+                    <div class="profile-picture">
+                      <% if user.image.attached? %>
+                        <%= image_tag user.image%>
+                      <% else %>
+                        <img src= <%= user.avatar_url%>
+                      <% end %>
+                    </div>
                   </td>
                   <td><%= link_to "#{user.full_name}",  "/profiles/#{user.id}"%></td>
                   <td><%= user.email %></td>
