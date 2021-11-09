@@ -4,7 +4,7 @@
     color: white;
     border-radius: 10px;
     position: relative;
-    width: 65%;
+    width: 45%;
     height: 65%;
     overflow: auto;
 }
@@ -30,8 +30,17 @@ body#members-page {
     background-color: rgba(0, 0, 0, 0.8);
 }
 
-.profile-piture{
-    width: 75px;
-    height: 75px;
+th{
+    font-size: calc(100% + 0.3vw + 0.3vh);
+}
+
+td{
+    font-size: calc(100% + 0.1vw + 0.1vh);
+}
+
+.profile-picture{
+    width: 70px;
+    height: 70px;
     border-radius: 50%;
+    display: block;
 }
