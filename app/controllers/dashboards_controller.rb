@@ -8,6 +8,28 @@ class DashboardsController < ApplicationController
 
   def leaderboard; end
 
+  def like
+    submission = ExerciseSubmission.find(params[:exercise_submission_id])
+
+    Fistbump.create(user: current_user, exercise_submission: submission) unless Fistbump.liked?(current_user, submission)
+
+    respond_to do |format|
+      format.html { redirect_to '/leaderboard' }
+    end
+  end
+
+  def unlike
+    submission = ExerciseSubmission.find(params[:exercise_submission_id])
+
+    fb = Fistbump.where(user: current_user, exercise_submission: submission).first
+
+    Fistbump.destroy(fb.id) if fb
+
+    respond_to do |format|
+      format.html { redirect_to '/leaderboard' }
+    end
+  end
+
   private
 
   def set_ranked_eps
