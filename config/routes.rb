@@ -36,6 +36,8 @@ Rails.application.routes.draw do
   get '/wod', to: 'wod#user_view', as: 'user_wod'
 
   get 'leaderboard', to: 'dashboards#leaderboard'
+  post 'leaderboard/like/:exercise_submission_id', to: 'dashboards#like', as: 'leaderboard_like'
+  post 'leaderboard/unlike/:exercise_submission_id', to: 'dashboards#unlike', as: 'leaderboard_unlike'
 
   resources :exercises#, :workout_posts, :exercise_posts
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

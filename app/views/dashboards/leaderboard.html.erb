@@ -31,6 +31,7 @@
                                     <th></th>
                                     <th>Name</th>
                                     <th>Score</th>
+                                    <th></th>
                                 </tr>
                                 <%ranked_ep.submissions_where_not_opted_out.each do |es|%>
 
@@ -44,6 +45,19 @@
                                     </td>
                                     <td><%= link_to "#{es.user.full_name}", "/profiles/#{es.user.id}"%></td>
                                     <td><%= es.humanized_unit_value%></td>
+                                    <td>
+                                      <span <%= es.exercise_post_id %>>
+                                        <%= es.get_likes.size %> &#128077
+                                      </span>
+
+                                      <a>
+                                        <% if current_user.liked? es %>
+                                        <div><%= link_to 'Fistbumpt', leaderboard_unlike_path(es), method: :post %></div>
+                                        <% else %>
+                                        <div><%= link_to 'Fistbump', leaderboard_like_path(es), method: :post %></div>
+                                        <% end %>
+                                      </a>
+                                    </td>
                                     </tr>
 
                                 <%end%>
