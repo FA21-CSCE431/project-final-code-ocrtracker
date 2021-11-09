@@ -20,8 +20,10 @@
         <%= @exercise.description %>
       </p>
       <p>
-        <strong>Picture:</strong>
-        <%= image_tag(@exercise.picture, height: '100') %>
+        <strong>Image:</strong>
+        <% if @exercise.image.attached? %>
+          <%= image_tag @exercise.image, style: "width: 100px; display: block" %>
+        <% end %>
       </p>
       <p>
         <strong>Unit Name:</strong>

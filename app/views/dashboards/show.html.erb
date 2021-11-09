@@ -18,6 +18,19 @@
         </div>
       </div>  
     </div>
+
+    <div class='trendline-chart'>
+      <%= column_chart WorkoutSubmission.trendline, xtitle: 'Date', ytitle: 'Workouts completed', precision:0 %>
+
+      <%# example_data = [["October 28", 5], ["October 29", 5], ["October 30", 6], ["October 31", 4], ["November 1", 7]] %>
+      <%# column_chart example_data, xtitle: 'Date', ytitle: 'Workouts completed', precision:0 %>
+    </div>
+
+    <div>
+      <p class='text-center'>Total workouts completed: <%= WorkoutSubmission.count %></p>
+    </div>
+
+
   </body>
   
 </html>
