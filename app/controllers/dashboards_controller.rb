@@ -20,7 +20,7 @@ class DashboardsController < ApplicationController
   def unlike
     @post = ExerciseSubmission.find(params[:exercise_submission_id])
     @post.unliked_by current_user
-    
+
     respond_to do |format|
       format.html { redirect_to '/leaderboard' }
     end
