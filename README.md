@@ -98,7 +98,7 @@ And now your application is setup and in production mode!
 
 For continuous development, we set up Heroku to automatically deploy our apps when their respective github branches are updated.
 
-  `Staging app: test branch`
+  `Review app: test branch`
 
   `Production app: main branch`
 
