@@ -16,7 +16,7 @@ class User < ApplicationRecord
   has_many :profiles, dependent: :destroy
   has_one_attached :image, dependent: :destroy
 
-  acts_as_voter
+  # acts_as_voter
 
   def fistbumps_recieved_in_last_month
     count = 0

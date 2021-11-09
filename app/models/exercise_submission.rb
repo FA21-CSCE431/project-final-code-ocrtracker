@@ -10,7 +10,7 @@ class ExerciseSubmission < ApplicationRecord
 
   validates :unit_value, presence: true
 
-  acts_as_votable
+  # acts_as_votable
 
   def humanized_unit_value
     if exercise.unit_name.starts_with?('time')

@@ -62,13 +62,6 @@ ActiveRecord::Schema.define(version: 2021_11_09_012642) do
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "opt_out"
     t.bigint "user_id"
-    t.integer "cached_votes_total", default: 0
-    t.integer "cached_votes_score", default: 0
-    t.integer "cached_votes_up", default: 0
-    t.integer "cached_votes_down", default: 0
-    t.integer "cached_weighted_score", default: 0
-    t.integer "cached_weighted_total", default: 0
-    t.float "cached_weighted_average", default: 0.0
     t.index ["exercise_post_id"], name: "index_exercise_submissions_on_exercise_post_id"
     t.index ["user_id"], name: "index_exercise_submissions_on_user_id"
     t.index ["workout_submission_id"], name: "index_exercise_submissions_on_workout_submission_id"
@@ -102,22 +95,6 @@ ActiveRecord::Schema.define(version: 2021_11_09_012642) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
-  end
-
-  create_table "votes", force: :cascade do |t|
-    t.string "votable_type"
-    t.bigint "votable_id"
-    t.string "voter_type"
-    t.bigint "voter_id"
-    t.boolean "vote_flag"
-    t.string "vote_scope"
-    t.integer "vote_weight"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["votable_id", "votable_type", "vote_scope"], name: "index_votes_on_votable_id_and_votable_type_and_vote_scope"
-    t.index ["votable_type", "votable_id"], name: "index_votes_on_votable_type_and_votable_id"
-    t.index ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope"
-    t.index ["voter_type", "voter_id"], name: "index_votes_on_voter_type_and_voter_id"
   end
 
   create_table "workout_posts", force: :cascade do |t|

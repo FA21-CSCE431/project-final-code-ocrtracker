@@ -9,8 +9,9 @@ class DashboardsController < ApplicationController
   def leaderboard; end
 
   def like
-    @post = ExerciseSubmission.find(params[:exercise_submission_id])
-    @post.liked_by current_user
+    submission = ExerciseSubmission.find(params[:exercise_submission_id])
+
+    Fistbump.create(user: current_user, exercise_submission: submission) unless Fistbump.liked?(current_user, submission)
 
     respond_to do |format|
       format.html { redirect_to '/leaderboard' }
@@ -18,8 +19,11 @@ class DashboardsController < ApplicationController
   end
 
   def unlike
-    @post = ExerciseSubmission.find(params[:exercise_submission_id])
-    @post.unliked_by current_user
+    submission = ExerciseSubmission.find(params[:exercise_submission_id])
+
+    fb = Fistbump.where(user: current_user, exercise_submission: submission).first
+
+    Fistbump.destroy(fb.id) if fb
 
     respond_to do |format|
       format.html { redirect_to '/leaderboard' }
