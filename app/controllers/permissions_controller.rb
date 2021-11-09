@@ -10,7 +10,7 @@ class PermissionsController < ApplicationController
   def complete
     submitted_hash = params[:user]
 
-    permanent_admin = User.find(email: 'tamuocr@gmail.com')
+    permanent_admin = User.where(email: 'tamuocr@gmail.com').first
     submitted_hash.except!(permanent_admin.id) if permanent_admin
 
     respond_to do |format|
