@@ -24,7 +24,7 @@
                     <p id="label"><%= ws_form.fields_for :exercise_submission, index: es.exercise_post.id, builder: SubmissionsFormBuilder do |es_form| %>
                         <%= es_form.text_or_time_field :unit_value, unit_name: es.exercise_post.exercise.unit_name, :value => es.unit_value%>
                         <% if es.exercise_post.is_ranked %>
-                            <p id="label">Opt out?: <%= es_form.check_box :opt_out %></p>
+                            <p id="label">Opt out?: <%= es_form.check_box :opt_out, :checked => es.opt_out %></p>
                         <% else %>
                             <p>Not ranked</p>
                         <%end%>

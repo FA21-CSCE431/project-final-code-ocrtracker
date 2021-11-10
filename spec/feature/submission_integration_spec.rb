@@ -37,7 +37,7 @@ RSpec.describe 'Viewing a workout post', type: :feature do
 end
 
 RSpec.describe 'Submitting to a workout post', type: :feature do
-  fixtures :users, :exercises, :workout_posts, :exercise_posts
+  fixtures :users, :exercises, :workout_posts, :exercise_posts, :workout_submissions
 
   # Sunny
   scenario 'user fills in all available fields' do
@@ -68,4 +68,13 @@ RSpec.describe 'Submitting to a workout post', type: :feature do
 
     expect(page).to have_current_path new_submission_url(wp.id), ignore_query: true
   end
+
+  scenario 'user goes back to edit a workout submission' do
+     login_as_user
+     ws = workout_submissions(:ws2)
+
+     visit "/submissions/#{ws.id}/edit"
+     expect(page).to have_content('Edit Workout Submission')
+  end
+
 end

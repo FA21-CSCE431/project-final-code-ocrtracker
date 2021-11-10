@@ -14,9 +14,7 @@ class SubmissionsController < ApplicationController
   def history; end
 
   # GET
-  def index
-    
-  end
+  def index; end
 
   # GET
   def show; end
@@ -29,14 +27,12 @@ class SubmissionsController < ApplicationController
 
   # GET
   def edit
-    @current_submission = WorkoutSubmission.where(user_id: current_user.id, workout_post_id: WorkoutPost.current_wod).first;
-    @workout_post= WorkoutPost.current_wod
-    
+    @current_submission = WorkoutSubmission.where(user_id: current_user.id, workout_post_id: WorkoutPost.current_wod).first
+    @workout_post = WorkoutPost.current_wod
   end
 
   # POST
   def create
-    
     exercise_submissions = params[:exercise_submission].to_unsafe_h.map do |ep_id, fields|
       { exercise_post_id: ep_id, unit_value: get_uv(fields), user: current_user, opt_out: fields.fetch('opt_out', false) }
     end
@@ -56,58 +52,24 @@ class SubmissionsController < ApplicationController
   end
 
   # PATCH/PUT
-  # def update
-  #   respond_to do |format|
-  #     if @workout.update
-  #       format.html { redirect_to '/', notice: 'Submission was successfully updated' }
-  #       #format.json { render :show, status: :ok, location: @exercise }
-  #     else
-  #       render edit
-  #       #format.json { render json: @workout_submission.errors, status: :unprocessable_entity }
-  #     end
-  #   end
-  # end
-
-  # def update
-  #   # Find object using form parameters
-  #   exercise_submissions = params[:exercise_submission].to_unsafe_h.map do |ep_id, fields|
-  #     { exercise_post_id: ep_id, unit_value: get_uv(fields), user: current_user, opt_out: fields.fetch('opt_out', false) }
-  #   end
-  #   @workout_submission.exercise_submissions.build(exercise_submissions)
-
-  #   # Update the object
-  #   if @workout_submission.update
-  #     # If update succeeds, redirect to the list action
-  #     flash[:notice] = "Sauce updated."
-  #     format.html { redirect_to '/', notice: 'Workout was successfully submitted' }
-  #   else
-  #     # If save fails, redisplay the form so user can fix problems
-  #     render('edit')
-  #   end
-  # end 
-
   def update
-    @current_submission = WorkoutSubmission.where(user_id: current_user.id, workout_post_id: WorkoutPost.current_wod).first;
+    @current_submission = WorkoutSubmission.where(user_id: current_user.id, workout_post_id: WorkoutPost.current_wod).first
     old_submissions = @current_submission.exercise_submissions
-    logger.debug(old_submissions.size)
     exercise_submissions = []
     workout_sub = params[:workout_submission]
-    logger.debug(workout_sub)
     exercise_subs = workout_sub[:exercise_submission]
-      logger.debug(exercise_subs)
-      exercise_subs.each_key { |k|
-      logger.debug(exercise_subs[k])
+    exercise_subs.each_key do |k|
       exercise_submission = {}
-      exercise_submission["exercise_post_id"] = k
-      exercise_submission["unit_value"] = get_uv(exercise_subs[k])
-      exercise_submission["user"]= current_user
-      exercise_submission["opt_out"] =  exercise_subs[k][:opt_out]
+      exercise_submission['exercise_post_id'] = k
+      exercise_submission['unit_value'] = get_uv(exercise_subs[k])
+      exercise_submission['user'] = current_user
+      exercise_submission['opt_out'] = exercise_subs[k][:opt_out]
       exercise_submissions.push(exercise_submission)
-    }
-    logger.debug(exercise_submissions)
+    end
     old_submissions.each do |ex_sub|
       ex_sub.destroy
     end
+
     @current_submission.exercise_submissions.build(exercise_submissions)
     respond_to do |format|
       # If the workout submission and all exercise submissions are valid
@@ -119,18 +81,7 @@ class SubmissionsController < ApplicationController
         # format.json { render json: workout_submission.errors, status: :unprocessable_entity }
       end
     end
-
-    
-    # respond_to do |format|
-    #   if @workout_submission.update
-    #     format.html { redirect_to @workout_submission, notice: 'Exercise was successfully updated' }
-    #     format.json { render :show, status: :ok, location: @workout_submission }
-    #   else
-    #     format.html { render :edit, status: :unprocessable_entity }
-    #     format.json { render json: @workout_submission.errors, status: :unprocessable_entity }
-    #   end
-    # end
-end
+  end
 
   # DELETE
   def destroy; end

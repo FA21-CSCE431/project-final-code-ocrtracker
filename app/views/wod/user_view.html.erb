@@ -22,6 +22,7 @@
         <h2>
 
         <% if wp == @workout_posts.first %>
+          <%=="Current: <a href='#{new_submission_path(wp)}'>#{wp.title}</a>"%>
           <% if @current_submission.empty? %>
             <%=="Current: <a href='#{new_submission_path(wp)}'>#{wp.title}</a>"%>
           <% else %>

@@ -31,11 +31,10 @@ class WodController < ApplicationController
 
   def set_recent_workout_posts
     @workout_posts = WorkoutPost.recent_workout_posts
-    
   end
 
   def set_all_current_or_past_wps_with_wod_dates
     @workout_posts = WorkoutPost.current_or_past_wod
-    @current_submission = WorkoutSubmission.where(user_id: current_user.id, workout_post_id: WorkoutPost.current_wod);
+    @current_submission = WorkoutSubmission.where(user_id: current_user.id, workout_post_id: WorkoutPost.current_wod)
   end
 end
