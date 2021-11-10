@@ -29,3 +29,11 @@ p{
 body#wod{
     background-image: image-url('wod.png');
 }
+
+th{
+    font-size: calc(100% + 0.3vw + 0.3vh);
+}
+
+td{
+    font-size: calc(100% + 0.1vw + 0.1vh);
+}
