@@ -37,6 +37,8 @@ Rails.application.routes.draw do
 
   get 'leaderboard', to: 'dashboards#leaderboard'
 
+  get 'documentation', to: 'documentation#index'
+
   resources :exercises#, :workout_posts, :exercise_posts
   resources :submissions
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
