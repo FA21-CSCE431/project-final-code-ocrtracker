@@ -26,7 +26,10 @@ class SubmissionsController < ApplicationController
   end
 
   # GET
-  def edit; end
+  def edit
+    @current_submission = WorkoutSubmission.where(user_id: current_user.id, workout_post_id: WorkoutPost.current_wod).first
+    @workout_post = WorkoutPost.current_wod
+  end
 
   # POST
   def create
@@ -48,7 +51,34 @@ class SubmissionsController < ApplicationController
   end
 
   # PATCH/PUT
-  def update; end
+  def update
+    @current_submission = WorkoutSubmission.where(user_id: current_user.id, workout_post_id: WorkoutPost.current_wod).first
+    old_submissions = @current_submission.exercise_submissions
+    exercise_submissions = []
+    workout_sub = params[:workout_submission]
+    exercise_subs = workout_sub[:exercise_submission]
+    exercise_subs.each_key do |k|
+      exercise_submission = {}
+      exercise_submission['exercise_post_id'] = k
+      exercise_submission['unit_value'] = get_uv(exercise_subs[k])
+      exercise_submission['user'] = current_user
+      exercise_submission['opt_out'] = exercise_subs[k][:opt_out]
+      exercise_submissions.push(exercise_submission)
+    end
+    old_submissions.each(&:destroy)
+
+    @current_submission.exercise_submissions.build(exercise_submissions)
+    respond_to do |format|
+      # If the workout submission and all exercise submissions are valid
+      if @current_submission.update(@current_submission.attributes)
+        format.html { redirect_to '/', notice: 'Workout was successfully submitted' }
+        # format.json { render :show, status: :created, location: workout_submission }
+      else
+        format.html { redirect_to '/', notice: 'Workout submission was not valid' }
+        # format.json { render json: workout_submission.errors, status: :unprocessable_entity }
+      end
+    end
+  end
 
   # DELETE
   def destroy; end

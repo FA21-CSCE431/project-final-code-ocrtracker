@@ -31,12 +31,14 @@
                             <tr>
                                 <th>Name</th>
                                 <th>Score</th>
+                                <th>Submitted at</th>
                             </tr>
                             <%ep.exercise_submissions.each do |es|%>
 
                                 <tr>
                                 <td><%= es.user.full_name %></td>
                                 <td><%= es.humanized_unit_value%></td>
+                                <td><%= es.workout_submission.humanized_submitted_datetime %></td>
 
                                 </tr>
 
