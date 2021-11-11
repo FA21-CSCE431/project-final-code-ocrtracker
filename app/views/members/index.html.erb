@@ -8,35 +8,40 @@
     <% end %>
 
     <head>
-    <%= stylesheet_link_tag  'permissions', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag  'members', media: 'all', 'data-turbolinks-track': 'reload' %>
     </head>
 
-    <body id="permissions-page">
-    <%= form_with url:"/permissions", method: :post do |perm_form| %>
+    <body id="members-page">
+    <%= form_with url:"/members", method: :post do |perm_form| %>
         <br>
-        <h1 style="color: black">Permissions</h1>
+        <h1>Members</h1>
         <br>
         <div class="container">
             <br>
-            <input type="text" size="30" style="margin-bottom: 3%; border-radius: 10px; border: none;" id="inputName" onkeyup="searchName()" placeholder=" Search by TAMU email" title="Type in a name">
+            <input type="text" size="30" style="margin-bottom: 3%; border-radius: 10px; border: none;" id="inputName" onkeyup="searchName()" placeholder="Search by Name" title="Type in a name">
             <table id="userTable">
               <tr>
-              <th style="width:20%">Email</th>
+              <th style="width:10%;"></th>
               <th style="width:20%">Name</th>
-              <th style="width:20%">Is Admin?</th>
+              <th style="width:20%">Email</th>
             </tr>
               <% @users.each do |user| %>
                 <%= perm_form.fields_for user, index: user.id, method: :post do |p_fields|%>
                 <tr>
-                  <td><%= user.email %></td>
+                  <td align="center">
+                    <% if user.image.attached? %>
+                      <%= image_tag user.image, style: "width: 70px; height: 70px; object-fit: cover; object-position: 50% 50%; border-radius: 50%; display: block" %>
+                    <% else %>
+                      <img src= <%= user.avatar_url%> class="profile-picture"/>
+                    <% end %>
+                  </td>
                   <td><%= link_to "#{user.full_name}",  "/profiles/#{user.id}"%></td>
-                  <td><%= p_fields.check_box :is_admin %></td>
+                  <td><%= user.email %></td>
                 </tr>
                 <% end %>
               <% end %>
             </table>
             <br>
-            <%= perm_form.submit 'Save Changes', :class => "form1" %>
         </div>
       <% end %>
     </body>

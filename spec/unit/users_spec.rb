@@ -22,10 +22,10 @@ RSpec.describe Users, type: :model do
   end
 
   it 'only counts fistbumps recieved from the last month' do
-    # Original = 3, add 1 from 2 months ago and 1 from 10 days ago, expect 4
+    # Original = 4, add 1 from 2 months ago and 1 from 10 days ago, expect 5
     users(:account3).fistbumps.create([{ exercise_submission: exercise_submissions(:es2), created_at: Time.current - 2.months },
                                        { exercise_submission: exercise_submissions(:es4), created_at: Time.current - 10.days }])
-    expect(users(:user_account).fistbumps_recieved_in_last_month).to eq(4)
+    expect(users(:user_account).fistbumps_recieved_in_last_month).to eq(5)
   end
 
   it 'only counts fistbumps given in the last month' do

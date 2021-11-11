@@ -7,27 +7,52 @@
 
     <body id="wod">
         <br>
-        <h1>Set WOD dates</h1>
+        <h1>Set WOD Dates</h1>
         <br>
 
         <div class="container">
+           
             <%= form_with url: set_wod_path, method: :post do |wp_h_form|%>
-
+                <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Details</th>
+                    <th>Date</th>
+                    <th></th>
+                </tr>
                 <% @workout_posts.each do |wp| %>
 
                     <%= wp_h_form.fields_for wp, url: set_wod_path, index: wp.id, method: :post do |wp_fields|%>
-                        <%= wp_fields.label :wod_date, wp.title%>
-                        <%= wp_fields.datetime_local_field :wod_date %> 
-                        <input type="button" value="Clear" id='<%= "clear_button_#{wp.id}" %>'  onclick="this.previousElementSibling.value =''">
+                        <tr style='border-bottom: 1px solid #ffffff;'>
+                        <td><%= wp_fields.label :wod_date, wp.title%></td>
+                        <td>
+                        
+                        <% wp.exercise_posts.each do |ep|%>
 
+                        
+                        <%= '*' if ep.is_ranked?%>
+                        <%=ep.exercise.title%>
+                        <%= ": #{truncate(ep.specific_instructions, length: 25)}" %>
+                        <br>
+                        <% end %>
+                        
+
+                        </td>
+                        <td><%= wp_fields.datetime_local_field :wod_date %></td>
+                        <td><input type="button" value="Clear" id='<%= "clear_button_#{wp.id}" %>'  onclick="this.previousElementSibling.value =''"></td>
+                        </tr>
+                        
                     <% end %> 
                     <br>
 
                 <%end%>
 
+                <table>
+                <br>
                 <%= wp_h_form.submit 'Set WOD dates' %> 
 
             <% end %>   
+           
         </div>
     </body>
 

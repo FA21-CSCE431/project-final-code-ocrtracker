@@ -12,6 +12,7 @@ import "channels";
 // import { definitionsFromContext } from "stimulus/webpack-helpers"
 
 import "bootstrap";
+import "chartkick/chart.js"
 // import "../stylesheets/application";
 
 //= require jquery3

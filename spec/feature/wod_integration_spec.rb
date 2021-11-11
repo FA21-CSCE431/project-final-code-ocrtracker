@@ -102,4 +102,16 @@ RSpec.describe 'User wod view', type: :feature do
     visit user_wod_path
     expect(page).to have_content workout_posts(:wp_with_no_submissions).title
   end
+
+  scenario 'Admin sees links to submissions history for previous WODs' do
+    login_as_admin
+    visit user_wod_path
+    expect(page).to have_link(nil, href: submissions_history_path(workout_posts(:wp1)))
+  end
+
+  scenario 'User cannot see links to submissions history for previous WODs' do
+    login_as_user
+    visit user_wod_path
+    expect(page).not_to have_link(nil, href: submissions_history_path(workout_posts(:wp1)))
+  end
 end

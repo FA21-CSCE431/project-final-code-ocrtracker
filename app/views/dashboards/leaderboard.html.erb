@@ -20,28 +20,57 @@
                     <% end %>
                 </div>
             </nav>
-            
+
             <div class="tab-content">
                 <% @ranked_eps.each_with_index do |ranked_ep, index|%>
 
-                    
+
                         <div class = "tab-pane fade <%= 'show active' unless index != 0%>" id="<%= "ep_#{ranked_ep.id}"%>" role="tabpanel" aria-labeledby="<%= "ep_#{ranked_ep.id}"%>">
                             <table>
                                 <tr>
+                                    <th>Image</th>
                                     <th>Name</th>
                                     <th>Score</th>
+                                    <th>Fistbumps</th>
                                 </tr>
                                 <%ranked_ep.submissions_where_not_opted_out.each do |es|%>
 
                                     <tr>
-                                    <td><%= es.user.full_name %></td>
+                                    <td>
+                                      <% if es.user.image.attached? %>
+                                        <%= image_tag es.user.image, style: "width: 70px; height: 70px; object-fit: cover; object-position: 50% 50%; border-radius: 50%" %>
+                                      <% else %>
+                                        <img src= <%= es.user.avatar_url%> class="profile-picture"/>
+                                      <% end %>
+                                    </td>
+                                    <td><%= link_to "#{es.user.full_name}", "/profiles/#{es.user.id}"%></td>
                                     <td><%= es.humanized_unit_value%></td>
+                                    <td>
+                                      <span>
+                                        <%= es.fistbumps.count %>
+                                        <% if Fistbump.liked?(current_user, es) %>
+                                          <%== link_to leaderboard_unlike_path(es), method: :post do %>
 
+                                            <%=image_tag 'fistbump_liked.png', width: 50%>
+                                          
+                                          <% end %>
+                                          
+                                        <% else %>
+                                          <%== link_to leaderboard_like_path(es), method: :post do%>
+                                            <%=image_tag 'fistbump_not_liked.png', width: 50%>
+                                          
+                                          <% end %>
+                                          
+                                        <% end %>
+                                          
+                                      </span>
+
+                                    </td>
                                     </tr>
 
                                 <%end%>
                             </table>
-                        
+
                         </div>
 
                 <% end %>

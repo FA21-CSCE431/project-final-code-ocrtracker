@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# location: spec/feature/permission_integration_spec.rb
 require 'rails_helper'
 
 RSpec.describe 'Editing permissions', type: :feature do
@@ -43,5 +44,11 @@ RSpec.describe 'Editing permissions', type: :feature do
     page.uncheck("[user][#{users(:user_account).id}][is_admin]")
     click_on 'Save Changes'
     expect(page).to have_content 'Welcome'
+  end
+
+  scenario 'permanent admin (tamuocr@gmail.com) is not displayed' do
+    login_as_admin
+    visit '/permissions'
+    expect(page).not_to have_content 'tamuocr@gmail.com'
   end
 end

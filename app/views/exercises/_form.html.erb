@@ -22,8 +22,10 @@
   </div>
   <br>
   <div class="field"> 
-    <%= form.label :picture %>
-    <%= form.text_area :picture, :size=>"50" %>
+    <% if exercise.image.attached? %>
+      <%= image_tag exercise.image, style: "width: 100px; display: block" %>
+    <% end %>
+    <%= form.file_field :image, style: "display: block" %>
   </div>
   <br>
   <div class="field">

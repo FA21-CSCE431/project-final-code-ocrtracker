@@ -4,17 +4,23 @@
   </head>
   <div class="container mt-6 mb-4 p-3 d-flex justify-content-center">
     <div class="card p-4" style="background: rgba(33, 37, 41, 0.98); border-radius: 12px">
-        <div class=" image d-flex flex-column justify-content-center align-items-center"> 
-          <button style = "border-radius: 12px; background: transparent; background-position:center; border: none" class="btn btn-secondary"> 
-            <img src= <%= @profile.avatar_url%> height="100" width="100"/>
-          </button> 
+        <div class=" image d-flex flex-column justify-content-center align-items-center">
+          <button style = "border-radius: 12px; background: transparent; background-position:center; border: none" class="btn btn-secondary">
+            <p>
+              <% if @profile.image.attached? %>
+                <%= image_tag @profile.image.variant(resize: "200x200") %>
+              <% else %>
+                <img src= <%= @profile.avatar_url%> height="100" width="100"/>
+              <% end %>
+            </p>
+          </button>
             <span style="color: white" class="name mt-3"><%=@profile.full_name %></span>
-          <div class="d-flex flex-row justify-content-center align-items-center mt-3"> 
+          <div class="d-flex flex-row justify-content-center align-items-center mt-3">
             <span style="color: white" class="number"><%=@profile.fistbumps_recieved_in_last_month%>
               <span style="color: white" class="follow">FistBumps received in the last month</span>
             </span>
           </div>
-          <div class="d-flex flex-row justify-content-center align-items-center mt-3"> 
+          <div class="d-flex flex-row justify-content-center align-items-center mt-3">
             <span style="color: white" class="number"><%=@profile.fistbumps_given_in_last_month%>
               <span style="color: white" class="follow">FistBumps given in the last month</span>
             </span>

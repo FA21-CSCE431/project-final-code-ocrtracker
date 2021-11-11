@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# location: spec/feature/profile_integration_spec.rb
 require 'rails_helper'
 
 RSpec.describe 'Editing an profile', type: :feature do
@@ -82,6 +83,6 @@ RSpec.describe 'Viewing a profile', type: :feature do
     login_as_user
     visit profiles_path(users(:user_account))
 
-    expect(page).to have_content '3 FistBumps received in the last month'
+    expect(page).to have_content '4 FistBumps received in the last month'
   end
 end
