@@ -7,7 +7,7 @@ class SubmissionsFormBuilder < ActionView::Helpers::FormBuilder
       if options[:value].nil?
         label('minutes') + text_field('minutes', objectify_options(options)) + label('seconds') + text_field('seconds', objectify_options(options))
       else
-        label('minutes') + text_field('minutes',:value => ((options[:value].to_i)/60))+ label('seconds') + text_field('seconds', :value => ((options[:value].to_f)%60))
+        label('minutes') + text_field('minutes', value: (options[:value].to_i / 60)) + label('seconds') + text_field('seconds', value: (options[:value].to_f % 60))
       end
     else
       label('unit_value', 'Number') + text_field(attribute, objectify_options(options))

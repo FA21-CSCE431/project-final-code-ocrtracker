@@ -70,11 +70,10 @@ RSpec.describe 'Submitting to a workout post', type: :feature do
   end
 
   scenario 'user goes back to edit a workout submission' do
-     login_as_user
-     ws = workout_submissions(:ws2)
+    login_as_user
+    ws = workout_submissions(:ws2)
 
-     visit "/submissions/#{ws.id}/edit"
-     expect(page).to have_content('Edit Workout Submission')
+    visit "/submissions/#{ws.id}/edit"
+    expect(page).to have_content('Edit Workout Submission')
   end
-
 end

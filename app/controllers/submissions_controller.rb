@@ -36,7 +36,6 @@ class SubmissionsController < ApplicationController
     exercise_submissions = params[:exercise_submission].to_unsafe_h.map do |ep_id, fields|
       { exercise_post_id: ep_id, unit_value: get_uv(fields), user: current_user, opt_out: fields.fetch('opt_out', false) }
     end
-    logger.debug(exercise_submissions)
     @workout_submission.exercise_submissions.build(exercise_submissions)
 
     respond_to do |format|
@@ -66,9 +65,7 @@ class SubmissionsController < ApplicationController
       exercise_submission['opt_out'] = exercise_subs[k][:opt_out]
       exercise_submissions.push(exercise_submission)
     end
-    old_submissions.each do |ex_sub|
-      ex_sub.destroy
-    end
+    old_submissions.each(&:destroy)
 
     @current_submission.exercise_submissions.build(exercise_submissions)
     respond_to do |format|
