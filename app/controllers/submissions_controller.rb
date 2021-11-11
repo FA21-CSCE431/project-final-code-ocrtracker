@@ -9,7 +9,7 @@ class SubmissionsController < ApplicationController
 
   before_action :require_admin, only: %i[history]
 
-  before_action :build_workout_submission, only: %i[create]
+  # before_action :build_workout_submission, only: %i[create]
 
   def history; end
 
@@ -21,22 +21,37 @@ class SubmissionsController < ApplicationController
 
   # GET
   def new
-    @workout_submission = WorkoutSubmission.new
-    @exercise_submission = ExerciseSubmission.new
+    @workout_submission = WorkoutSubmission.find_or_initialize_by(user_id: current_user.id, workout_post_id: params[:workout_post_id])
+    # @exercise_submission = ExerciseSubmission.new
   end
 
   # GET
-  def edit
-    @current_submission = WorkoutSubmission.where(user_id: current_user.id, workout_post_id: WorkoutPost.current_wod).first
-    @workout_post = WorkoutPost.current_wod
-  end
+  # def edit
+  #   @current_submission = WorkoutSubmission.where(user_id: current_user.id, workout_post_id: WorkoutPost.current_wod).first
+  #   @workout_post = WorkoutPost.current_wod
+  # end
 
   # POST
   def create
-    exercise_submissions = params[:exercise_submission].to_unsafe_h.map do |ep_id, fields|
+    @workout_submission = @workout_post.workout_submissions.find_or_initialize_by(user: current_user)
+
+    @workout_submission.assign_attributes(submitted_datetime: DateTime.now) unless @workout_submission.submitted_datetime
+
+    exercise_submissions_data = params[:exercise_submission].to_unsafe_h.map do |ep_id, fields|
       { exercise_post_id: ep_id, unit_value: get_uv(fields), user: current_user, opt_out: fields.fetch('opt_out', false) }
     end
-    @workout_submission.exercise_submissions.build(exercise_submissions)
+    # @workout_submission.exercise_submissions.build(exercise_submissions)
+    # @workout_submission.exercise_submissions.upsert_all(exercise_submissions, unique_by: :user_id)
+
+    exercise_submissions_data.each do |es_data|
+      # puts "OLD: ", @workout_submission.exercise_submissions.find_by(user: current_user, exercise_post_id: es_data[:exercise_post_id]).attributes
+
+      # ughhh = @workout_submission.exercise_submissions.find_or_initialize_by(user: current_user, exercise_post_id: es_data[:exercise_post_id])
+      # ughhh.assign_attributes(es_data)
+      # puts "ughhhH", ughhh.attributes
+      @workout_submission.exercise_submissions.find_or_initialize_by(user: current_user, exercise_post_id: es_data[:exercise_post_id]).update(es_data)
+      # puts "NEW: ", @workout_submission.exercise_submissions.find_by(user: current_user, exercise_post_id: es_data[:exercise_post_id]).attributes
+    end
 
     respond_to do |format|
       # If the workout submission and all exercise submissions are valid
@@ -51,34 +66,34 @@ class SubmissionsController < ApplicationController
   end
 
   # PATCH/PUT
-  def update
-    @current_submission = WorkoutSubmission.where(user_id: current_user.id, workout_post_id: WorkoutPost.current_wod).first
-    old_submissions = @current_submission.exercise_submissions
-    exercise_submissions = []
-    workout_sub = params[:workout_submission]
-    exercise_subs = workout_sub[:exercise_submission]
-    exercise_subs.each_key do |k|
-      exercise_submission = {}
-      exercise_submission['exercise_post_id'] = k
-      exercise_submission['unit_value'] = get_uv(exercise_subs[k])
-      exercise_submission['user'] = current_user
-      exercise_submission['opt_out'] = exercise_subs[k][:opt_out]
-      exercise_submissions.push(exercise_submission)
-    end
-    old_submissions.each(&:destroy)
+  # def update
+  #   @current_submission = WorkoutSubmission.where(user_id: current_user.id, workout_post_id: WorkoutPost.current_wod).first
+  #   old_submissions = @current_submission.exercise_submissions
+  #   exercise_submissions = []
+  #   workout_sub = params[:workout_submission]
+  #   exercise_subs = workout_sub[:exercise_submission]
+  #   exercise_subs.each_key do |k|
+  #     exercise_submission = {}
+  #     exercise_submission['exercise_post_id'] = k
+  #     exercise_submission['unit_value'] = get_uv(exercise_subs[k])
+  #     exercise_submission['user'] = current_user
+  #     exercise_submission['opt_out'] = exercise_subs[k][:opt_out]
+  #     exercise_submissions.push(exercise_submission)
+  #   end
+  #   old_submissions.each(&:destroy)
 
-    @current_submission.exercise_submissions.build(exercise_submissions)
-    respond_to do |format|
-      # If the workout submission and all exercise submissions are valid
-      if @current_submission.update(@current_submission.attributes)
-        format.html { redirect_to '/', notice: 'Workout was successfully submitted' }
-        # format.json { render :show, status: :created, location: workout_submission }
-      else
-        format.html { redirect_to '/', notice: 'Workout submission was not valid' }
-        # format.json { render json: workout_submission.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+  #   @current_submission.exercise_submissions.build(exercise_submissions)
+  #   respond_to do |format|
+  #     # If the workout submission and all exercise submissions are valid
+  #     if @current_submission.update(@current_submission.attributes)
+  #       format.html { redirect_to '/', notice: 'Workout was successfully submitted' }
+  #       # format.json { render :show, status: :created, location: workout_submission }
+  #     else
+  #       format.html { redirect_to '/', notice: 'Workout submission was not valid' }
+  #       # format.json { render json: workout_submission.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
 
   # DELETE
   def destroy; end

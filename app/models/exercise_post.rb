@@ -13,4 +13,8 @@ class ExercisePost < ApplicationRecord
       exercise_submissions.where(opt_out: false).order('unit_value::float DESC')
     end
   end
+
+  def exercise_submission_for_user(user)
+    exercise_submissions.where(user: user).first_or_initialize
+  end
 end

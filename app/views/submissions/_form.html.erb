@@ -7,7 +7,11 @@
 
     <body id="submissions-page">
         <br>
-        <h1>New Workout Submission</h1>
+        <% if @workout_submission.new_record? %>
+            <h1>New Workout Submission</h1>
+          <% else %>
+            <h1>Edit Workout Submission</h1>
+        <% end %>
         <br>
         <div class="container">
             <h2><%= @workout_post.title %></h2>
@@ -22,9 +26,10 @@
                     <p id="label">Instructions: <%= ep.specific_instructions %></p>
                     <p id="label">Unit: <%= ep.exercise.humanized_unit_name %></p>
                     <p id="label"><%= ws_form.fields_for :exercise_submission, index: ep.id, builder: SubmissionsFormBuilder do |es_form| %>
-                        <%= es_form.text_or_time_field :unit_value, unit_name: ep.exercise.unit_name %>
+                        <% es = ep.exercise_submission_for_user(current_user) %>
+                        <%= es_form.text_or_time_field :unit_value, unit_name: ep.exercise.unit_name, value: es.unit_value %>
                         <% if ep.is_ranked %>
-                            <p id="label">Opt out?: <%= es_form.check_box :opt_out %></p>
+                            <p id="label">Opt out?: <%= es_form.check_box :opt_out, checked: es.opt_out %></p>
                         <% else %>
                             <p>Not ranked</p>
                         <%end%>
