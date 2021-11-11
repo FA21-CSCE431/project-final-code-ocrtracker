@@ -11,10 +11,11 @@
             <%= wp_form.fields_for ExercisePost.new, index:1 do |ep_form|%>
 
                 <%= ep_form.label :exercise_id, "Exercise"%>
-                <%= ep_form.select(:exercise_id, Exercise.all.collect {|e| [e.title, e.id]},  {prompt: "Select"}, {class: 'form-control'}) %>
+                <%= ep_form.select(:exercise_id, Exercise.all.collect {|e| ["#{e.title}: #{e.humanized_unit_name}", e.id]},  {prompt: "Select"}, {class: 'form-control'}) %>
                 <br>
                 <%= ep_form.label :specific_instructions, "Specific instructions"%>
-                <%= ep_form.text_field :specific_instructions%>
+                <br>
+                <%= ep_form.text_area :specific_instructions, style: 'width: 80%'%>
                 <br>
                 <%= ep_form.label :is_ranked, "Ranked?"%>
                 <%= ep_form.check_box :is_ranked%>

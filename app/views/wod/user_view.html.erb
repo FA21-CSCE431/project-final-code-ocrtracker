@@ -24,15 +24,25 @@
 
         <% if wp == @workout_posts.first %>
           <%=="Current: <a href='#{new_submission_path(wp)}'>#{wp.title}</a>"%>
+          <%#"<a href='#{submissions_history_path(wp)}'>View submissions history</a>"%>
+        <% elsif current_user.is_admin? %>
+          <%=="<a href='#{submissions_history_path(wp)}'>#{wp.title}</a>"%>
         <% else %>
           <%=wp.title%>
         <% end %>
       
+
         <%=wp.humanized_wod_date%>
+        <% if wp == @workout_posts.first && current_user.is_admin? %>
+          <%=="<a href='#{submissions_history_path(wp)}'>(View history)</a>"%>
+        
+        <% end %>
+
+        
         <br>
         </h2>
         <% wp.exercise_submissions_to_this_post_for_current_user(current_user).each do |es| %>
-          <p><%="#{es.exercise.title} (#{es.exercise.humanized_unit_name}: #{es.humanized_unit_value})"%></p>
+          <p><%="#{es.exercise.title}: #{es.humanized_unit_value}"%></p>
         <% end %>
         <hr>
         <br>
