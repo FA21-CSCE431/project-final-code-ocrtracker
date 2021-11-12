@@ -25,7 +25,7 @@
           <% if @current_submission.empty? %>
             <%=="Current: <a href='#{new_submission_path(wp)}'>#{wp.title}</a>"%>
           <% else %>
-            <%=="Current: <a href='#{edit_submission_path(@current_submission.first)}'>#{wp.title}</a>"%>
+            <%=="Current: <a href='#{edit_submission_path(wp)}'>#{wp.title}</a>"%>
           <% end %>
           <%#"<a href='#{submissions_history_path(wp)}'>View submissions history</a>"%>
         <% elsif current_user.is_admin? %>

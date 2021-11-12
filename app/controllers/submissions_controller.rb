@@ -2,7 +2,7 @@
 
 # Submissions Controller
 class SubmissionsController < ApplicationController
-  before_action :set_workout_post, only: %i[new history create]
+  before_action :set_workout_post, only: %i[new history create edit update]
   before_action :set_exercise_posts, only: %i[new history]
 
   before_action :set_workout_submissions, only: %i[history]
@@ -21,61 +21,47 @@ class SubmissionsController < ApplicationController
 
   # GET
   def new
+    redirect_to edit_submission_path(params[:workout_post_id]) if WorkoutSubmission.exists?(user_id: current_user.id, workout_post_id: params[:workout_post_id])
+
     @workout_submission = WorkoutSubmission.new
-    @exercise_submission = ExerciseSubmission.new
+    # @workout_submission = WorkoutSubmission.find_or_initialize_by(user_id: current_user.id, workout_post_id: params[:workout_post_id])
+    # @exercise_submission = ExerciseSubmission.new
   end
 
   # GET
   def edit
-    @current_submission = WorkoutSubmission.where(user_id: current_user.id, workout_post_id: WorkoutPost.current_wod).first
-    @workout_post = WorkoutPost.current_wod
+    redirect_to new_submission_path(params[:workout_post_id]) if WorkoutSubmission.where(user_id: current_user.id, workout_post_id: params[:workout_post_id]).empty?
+    @workout_submission = WorkoutSubmission.where(user_id: current_user.id, workout_post_id: WorkoutPost.current_wod).first
+    # @workout_post = WorkoutPost.current_wod
   end
 
   # POST
   def create
-    exercise_submissions = params[:exercise_submission].to_unsafe_h.map do |ep_id, fields|
+    exercise_submissions_data = params[:exercise_submission].to_unsafe_h.map do |ep_id, fields|
       { exercise_post_id: ep_id, unit_value: get_uv(fields), user: current_user, opt_out: fields.fetch('opt_out', false) }
     end
-    @workout_submission.exercise_submissions.build(exercise_submissions)
-
+    @workout_submission.exercise_submissions.build(exercise_submissions_data)
     respond_to do |format|
       # If the workout submission and all exercise submissions are valid
       if @workout_submission.save
-        format.html { redirect_to '/', notice: 'Workout was successfully submitted' }
-        # format.json { render :show, status: :created, location: workout_submission }
+        format.html { redirect_to '/wod', notice: 'Workout was successfully submitted' }
       else
         format.html { redirect_to new_submission_url(params[:workout_post_id]), notice: 'Workout submission was not valid' }
-        # format.json { render json: workout_submission.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # PATCH/PUT
   def update
-    @current_submission = WorkoutSubmission.where(user_id: current_user.id, workout_post_id: WorkoutPost.current_wod).first
-    old_submissions = @current_submission.exercise_submissions
-    exercise_submissions = []
-    workout_sub = params[:workout_submission]
-    exercise_subs = workout_sub[:exercise_submission]
-    exercise_subs.each_key do |k|
-      exercise_submission = {}
-      exercise_submission['exercise_post_id'] = k
-      exercise_submission['unit_value'] = get_uv(exercise_subs[k])
-      exercise_submission['user'] = current_user
-      exercise_submission['opt_out'] = exercise_subs[k][:opt_out]
-      exercise_submissions.push(exercise_submission)
-    end
-    old_submissions.each(&:destroy)
+    @workout_submission = @workout_post.workout_submissions.where(user: current_user).first
 
-    @current_submission.exercise_submissions.build(exercise_submissions)
+    exercise_submissions_data = params[:exercise_submission].to_unsafe_h.transform_values { |fields| { unit_value: get_uv(fields), opt_out: fields.fetch('opt_out', false) } }
+
     respond_to do |format|
       # If the workout submission and all exercise submissions are valid
-      if @current_submission.update(@current_submission.attributes)
-        format.html { redirect_to '/', notice: 'Workout was successfully submitted' }
-        # format.json { render :show, status: :created, location: workout_submission }
+      if ExerciseSubmission.update(exercise_submissions_data.keys, exercise_submissions_data.values)
+        format.html { redirect_to '/wod', notice: 'Submission was successfully edited' }
       else
-        format.html { redirect_to '/', notice: 'Workout submission was not valid' }
-        # format.json { render json: workout_submission.errors, status: :unprocessable_entity }
+        format.html { redirect_to edit_submission_url(params[:workout_post_id]), notice: 'Workout submission was not valid' }
       end
     end
   end
