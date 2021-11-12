@@ -12,7 +12,9 @@ Rails.application.routes.draw do
   end
 
   get 'submissions/new/:workout_post_id', to: 'submissions#new', as: 'new_submission'
+  get 'submissions/edit/:workout_post_id', to: 'submissions#edit', as: 'edit_submission'
   post 'submissions/create', to: 'submissions#create'
+  post 'submissions/update', to: 'submissions#update'
 
   get 'submissions/history/:workout_post_id', to: 'submissions#history', as: 'submissions_history'
 

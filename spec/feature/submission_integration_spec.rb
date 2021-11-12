@@ -36,12 +36,12 @@ RSpec.describe 'Viewing a workout post', type: :feature do
   end
 end
 
-RSpec.describe 'Submitting to a workout post', type: :feature do
+RSpec.describe 'Submitting a new workout submission', type: :feature do
   fixtures :users, :exercises, :workout_posts, :exercise_posts, :workout_submissions
 
   # Sunny
   scenario 'user fills in all available fields' do
-    login_as_user
+    login_as_admin
 
     wp = workout_posts(:wp1)
 
@@ -53,12 +53,12 @@ RSpec.describe 'Submitting to a workout post', type: :feature do
     fill_in 'Number', with: '50'
 
     click_on 'Submit'
-    expect(page).to have_current_path root_path, ignore_query: true
+    expect(page).to have_current_path user_wod_path, ignore_query: true
   end
 
   # Rainy
   scenario 'user does not fill in any fields' do
-    login_as_user
+    login_as_admin
 
     wp = workout_posts(:wp1)
 
@@ -69,11 +69,48 @@ RSpec.describe 'Submitting to a workout post', type: :feature do
     expect(page).to have_current_path new_submission_url(wp.id), ignore_query: true
   end
 
+  scenario 'user gets redirected to new if they do not have a submission' do
+    scenario 'user gets redirected to edit if they have a submission' do
+      login_as_admin
+      wp = workout_posts(:wp1)
+      visit "/submissions/edit/#{wp.id}"
+      expect(page).to have_current_path "/submissions/new/#{wp.id}", ignore_query: true
+    end
+  end
+end
+
+RSpec.describe 'Editing a workout submission', type: :feature do
+  fixtures :users, :exercises, :workout_posts, :exercise_posts, :workout_submissions
+
+  scenario 'user fills in all available fields' do
+    login_as_admin
+
+    wp = workout_posts(:wp1)
+
+    visit "/submissions/edit/#{wp.id}"
+
+    # Fill in all entry boxes
+    fill_in 'Minutes', with: '2'
+    fill_in 'Seconds', with: '30'
+    fill_in 'Number', with: '50'
+
+    click_on 'Submit'
+    expect(page).to have_current_path user_wod_path, ignore_query: true
+  end
+
   scenario 'user goes back to edit a workout submission' do
     login_as_user
-    ws = workout_submissions(:ws2)
+    wp = workout_posts(:wp1)
 
-    visit "/submissions/new/#{ws.workout_post.id}"
+    visit "/submissions/edit/#{wp.id}"
     expect(page).to have_content('Edit Workout Submission')
+  end
+
+  scenario 'user gets redirected to edit if they have a submission' do
+    login_as_user
+    wp = workout_posts(:wp1)
+
+    visit "/submissions/new/#{wp.id}"
+    expect(page).to have_current_path "/submissions/edit/#{wp.id}", ignore_query: true
   end
 end
