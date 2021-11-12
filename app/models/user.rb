@@ -15,7 +15,7 @@ class User < ApplicationRecord
   has_many :exercise_submissions, dependent: :destroy
   has_many :profiles, dependent: :destroy
   has_one_attached :image, dependent: :destroy
-  validates :image, blob: { content_type: ['image/png', 'image/jpg', 'image/jpeg'], size_range: 1..5.megabytes }
+  validates :image, blob: { content_type: ['image/png', 'image/jpg', 'image/jpeg'], size_range: 1..(5.megabytes) }
 
   # acts_as_voter
 
