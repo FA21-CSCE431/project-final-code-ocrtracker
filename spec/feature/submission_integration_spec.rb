@@ -70,12 +70,10 @@ RSpec.describe 'Submitting a new workout submission', type: :feature do
   end
 
   scenario 'user gets redirected to new if they do not have a submission' do
-    scenario 'user gets redirected to edit if they have a submission' do
-      login_as_admin
-      wp = workout_posts(:wp1)
-      visit "/submissions/edit/#{wp.id}"
-      expect(page).to have_current_path "/submissions/new/#{wp.id}", ignore_query: true
-    end
+    login_as_admin
+    wp = workout_posts(:wp1)
+    visit "/submissions/edit/#{wp.id}"
+    expect(page).to have_current_path "/submissions/new/#{wp.id}", ignore_query: true
   end
 end
 

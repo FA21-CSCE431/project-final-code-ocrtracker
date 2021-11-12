@@ -12,7 +12,7 @@
     </head>
 
     <body id="members-page">
-    <%= form_with url:"/members", method: :post do |perm_form| %>
+    <%= form_with url:"/members", method: :get do |perm_form| %>
         <br>
         <h1>Members</h1>
         <br>
@@ -26,7 +26,7 @@
               <th style="width:20%">Email</th>
             </tr>
               <% @users.each do |user| %>
-                <%= perm_form.fields_for user, index: user.id, method: :post do |p_fields|%>
+                <%= perm_form.fields_for user, index: user.id, method: :get do |p_fields|%>
                 <tr>
                   <td align="center">
                     <% if user.image.attached? %>
@@ -56,7 +56,7 @@ function searchName() {
   table = document.getElementById("userTable");
   tr = table.getElementsByTagName("tr");
   for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[0];
+    td = tr[i].getElementsByTagName("td")[1];
     if (td) {
       txtValue = td.textContent || td.innerText;
       if (txtValue.toUpperCase().indexOf(filter) > -1) {
