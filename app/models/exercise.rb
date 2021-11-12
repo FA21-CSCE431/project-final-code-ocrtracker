@@ -6,7 +6,7 @@ class Exercise < ApplicationRecord
   validates :description, presence: true
   validates :unit_name, presence: true
   has_one_attached :image, dependent: :destroy
-  validates :image, presence: true, blob: { content_type: ['image/png', 'image/jpg', 'image/jpeg'], size_range: 1..5.megabytes }
+  validates :image, blob: { content_type: ['image/png', 'image/jpg', 'image/jpeg'], size_range: 1..5.megabytes }
 
   enum unit_name: {
     time_l_to_h: 'Time (Lower is better)',
