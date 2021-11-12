@@ -45,4 +45,10 @@ RSpec.describe 'Editing permissions', type: :feature do
     click_on 'Save Changes'
     expect(page).to have_content 'Welcome'
   end
+
+  scenario 'permanent admin (tamuocr@gmail.com) is not displayed' do
+    login_as_admin
+    visit '/permissions'
+    expect(page).not_to have_content 'tamuocr@gmail.com'
+  end
 end

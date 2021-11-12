@@ -21,3 +21,10 @@ account3:
   avatar_url: https://fake_url3.com
   description: user description3
   is_admin: false
+  
+permanent_admin_account:
+  email: tamuocr@gmail.com
+  full_name:  permanent admin account
+  uid: PERMANENTADMINUID
+  description: permanent admin description
+  is_admin: true

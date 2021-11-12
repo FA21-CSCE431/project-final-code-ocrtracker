@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+    <%= stylesheet_link_tag  'submissions', media: 'all', 'data-turbolinks-track': 'reload' %>
+    </head>
+
+    <body id="submissions-page">
+        <br>
+        <h1>Edit Workout Submission</h1>
+        <br>
+        <div class="container">
+            <h2><%= @workout_post.title %></h2>
+            <br>
+            <%= form_for(@current_submission, url: submission_path) do |ws_form| %>
+
+                <%= ws_form.hidden_field :workout_post_id, value: @workout_post.id %>
+
+                <% @current_submission.exercise_submissions.each do |es, index| %>
+                    <p><b>Exercise: <%= es.exercise_post.exercise.title %></b></p>
+                    <p id="label">Description: <%= es.exercise_post.exercise.description %></p>
+                    <p id="label">Instructions: <%= es.exercise_post.specific_instructions %></p>
+                    <p id="label">Unit: <%= es.exercise_post.exercise.humanized_unit_name %></p>
+                    <p id="label"><%= ws_form.fields_for :exercise_submission, index: es.exercise_post.id, builder: SubmissionsFormBuilder do |es_form| %>
+                        <%= es_form.text_or_time_field :unit_value, unit_name: es.exercise_post.exercise.unit_name, :value => es.unit_value%>
+                        <% if es.exercise_post.is_ranked %>
+                            <p id="label">Opt out?: <%= es_form.check_box :opt_out, :checked => es.opt_out %></p>
+                        <% else %>
+                            <p>Not ranked</p>
+                        <%end%>
+                    <% end %>
+                    </p>
+                    <br>
+
+            <% end %>
+                
+            <div class="actions">
+                <%= ws_form.submit "Submit"%>
+            </div>
+
+            <% end %>
+        </div>
+
+        <div class="back-btn">
+            <%= link_to 'Back', '/'  %>
+        </div>
+    </body>
+    
+</html>

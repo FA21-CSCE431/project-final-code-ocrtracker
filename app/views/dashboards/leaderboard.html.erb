@@ -28,10 +28,10 @@
                         <div class = "tab-pane fade <%= 'show active' unless index != 0%>" id="<%= "ep_#{ranked_ep.id}"%>" role="tabpanel" aria-labeledby="<%= "ep_#{ranked_ep.id}"%>">
                             <table>
                                 <tr>
-                                    <th></th>
+                                    <th>Image</th>
                                     <th>Name</th>
                                     <th>Score</th>
-                                    <th></th>
+                                    <th>Fistbumps</th>
                                 </tr>
                                 <%ranked_ep.submissions_where_not_opted_out.each do |es|%>
 
@@ -47,16 +47,24 @@
                                     <td><%= es.humanized_unit_value%></td>
                                     <td>
                                       <span>
-                                        <%= es.fistbumps.count %> &#128077
+                                        <%= es.fistbumps.count %>
+                                        <% if Fistbump.liked?(current_user, es) %>
+                                          <%== link_to leaderboard_unlike_path(es), method: :post do %>
+
+                                            <%=image_tag 'fistbump_liked.png', width: 50%>
+                                          
+                                          <% end %>
+                                          
+                                        <% else %>
+                                          <%== link_to leaderboard_like_path(es), method: :post do%>
+                                            <%=image_tag 'fistbump_not_liked.png', width: 50%>
+                                          
+                                          <% end %>
+                                          
+                                        <% end %>
+                                          
                                       </span>
 
-                                      <a>
-                                        <% if Fistbump.liked?(current_user, es) %>
-                                        <div><%= link_to 'Fistbumpt', leaderboard_unlike_path(es), method: :post %></div>
-                                        <% else %>
-                                        <div><%= link_to 'Fistbump', leaderboard_like_path(es), method: :post %></div>
-                                        <% end %>
-                                      </a>
                                     </td>
                                     </tr>
 
