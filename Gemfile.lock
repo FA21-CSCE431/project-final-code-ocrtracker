@@ -54,13 +54,14 @@ GEM
       activesupport (= 6.1.4.1)
       marcel (~> 1.0.0)
       mini_mime (>= 1.1.0)
+    activestorage-validator (0.2.0)
+      rails (>= 6.0.4.1)
     activesupport (6.1.4.1)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
       tzinfo (~> 2.0)
       zeitwerk (~> 2.3)
-    acts_as_votable (0.13.2)
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
     ast (2.4.2)
@@ -402,7 +403,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  acts_as_votable
+  activestorage-validator
   bootsnap (>= 1.4.4)
   bootstrap (~> 5.1.0)
   brakeman

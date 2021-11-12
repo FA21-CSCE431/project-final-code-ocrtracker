@@ -15,6 +15,33 @@
 @import "bootstrap";
 @import url('//fonts.googleapis.com/css?family=Lato:300, 400,700,900&display=swap');
 
+// Small devices (landscape phones, 576px and up)
+@media only screen and (min-device-width: 576px) { 
+    .container{
+        width: 100%; 
+    }
+}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) { 
+  
+}
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) { 
+    
+}
+
+// X-Large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) { 
+    
+}
+
+// XX-Large devices (larger desktops, 1400px and up)
+@media (min-width: 1400px) { 
+    
+}
+
 h1 {
     font-size: calc(100% + 2.5vw + 2.5vh);
     color: white;
@@ -94,3 +121,9 @@ td {
     width: 10%;
 }
 
+.universal-button{
+    border-radius: 10px;
+    background-color: white;
+    border: none;
+    font-weight: bold;
+}

@@ -2,6 +2,7 @@
 <html>
 
   <head>
+    <%= stylesheet_link_tag  'documentation', media: 'all', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
@@ -10,8 +11,23 @@
     <br>
     <div class="container">
     <% if @current_user.is_admin %>
-        <h2>Documentation for Admin </h2>
+    <div class="card">
+      <div class="card-header" id="section1">
+        <h5 class="mb-0">
+          <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            Documentation for Admin 
+          </button>
+        </h5>
+      </div>
+
+      <div id="collapseOne" class="collapse show" aria-labelledby="section1" data-parent="#accordion">
+        <div class="card-body">
         <p>Welcome to OCR Tracker! As an admin of the organization you have special responsibilities and privileges on the website. On this page, we will walk you through the process of using the website to post workouts, keep track of members&apos; progress and submit your own scores. Please reach out to another admin for any additional questions.</p>
+        </div>
+      </div>
+    </div>
+        
+        
         <h2>Admin Priveleges</h2>
         <p>In the navigation bar above, you will see a tab called &apos;Management&apos;. Clicking on the tab opens up a dropdown menu including the options Exercises, New Post, Set WOD, and Permissions. Each of these links is only for admin use and is used to keep the website up to date for use</p>
         <h3>Exercises</h3>

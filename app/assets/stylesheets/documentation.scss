@@ -19,22 +19,8 @@ h2{
     text-align: center;
 }
 
-p#label{
+p{
     font-size: calc(100% + 0.3vw + 0.3vh);
     color: white;
     font-weight: 300;
-}
-
-body{
-    background-image: image-url('posts_new.jpg');
-    background-color: rgba(0, 0, 0, 0.8);
-}
-
-.back-btn{
-    position: relative;
-    transform: translate(-50%, -50%);
-}
-
-.form-control{
-   width: 50%
 }
