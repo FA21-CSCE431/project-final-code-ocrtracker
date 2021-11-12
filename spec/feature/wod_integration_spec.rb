@@ -82,7 +82,7 @@ RSpec.describe 'User wod view', type: :feature do
     WorkoutPost.all.destroy_all
     login_as_user
     visit user_wod_path
-    expect(page).to have_content 'View WODs'
+    expect(page).to have_content 'View Workout of the Day'
   end
 
   scenario 'User cannot see future WOD' do
