@@ -76,13 +76,13 @@ RSpec.describe 'Viewing a profile', type: :feature do
     login_as_user
     visit profiles_path(users(:user_account))
 
-    expect(page).to have_content '1 FistBumps given in the last month'
+    expect(page).to have_content '1 Fistbumps given in the last month'
   end
 
   scenario 'shows fistbumps recieved in the last month' do
     login_as_user
     visit profiles_path(users(:user_account))
 
-    expect(page).to have_content '4 FistBumps received in the last month'
+    expect(page).to have_content '4 Fistbumps received in the last month'
   end
 end
