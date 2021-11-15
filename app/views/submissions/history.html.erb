@@ -6,55 +6,64 @@
     </head>
 
     <body id="submissions-history">
-        <br>
+        
         <h1>Workout Submission History for <%=@workout_post.title%></h1>
-        <br>
-        <div class="container">
+        
+        <div class="container-fluid">
 
-            <nav>
-                <div class = "nav nav-tabs" id ="nav-tab"role="tablist">
-                    <% @exercise_posts.each_with_index do |ep, index|%>
-                        <button class="nav-link <%= 'active' unless index != 0%>" id="<%= ep.id%>" data-bs-toggle="tab" data-bs-target="#<%= "ep_#{ep.id}"%>" type="button" role="tab" aria-controls="<%= "ep_#{ep.id}"%>" aria-selected="<%= index == 0? 'true' : 'false'%>">
-                                <%= ep.exercise.title %>
-                        </button>
-                    <% end %>
-                    
+            <div class="row">
+                <div class="col-1 col-lg-2">
+                    <br>
                 </div>
-            </nav>
 
-            <div class="tab-content">
-            <% @exercise_posts.each_with_index do |ep, index|%>
+                <div class="content col-10 col-lg-8">
+                    <nav>
+                        <div class = "nav nav-tabs" id ="nav-tab"role="tablist">
+                            <% @exercise_posts.each_with_index do |ep, index|%>
+                                <button class="nav-link <%= 'active' unless index != 0%>" id="<%= ep.id%>" data-bs-toggle="tab" data-bs-target="#<%= "ep_#{ep.id}"%>" type="button" role="tab" aria-controls="<%= "ep_#{ep.id}"%>" aria-selected="<%= index == 0? 'true' : 'false'%>">
+                                        <%= ep.exercise.title %>
+                                </button>
+                            <% end %>
+                            
+                        </div>
+                    </nav>
 
-                    <div class = "tab-pane fade <%= 'show active' unless index != 0%>" id="<%= "ep_#{ep.id}"%>" role="tabpanel" aria-labeledby="<%= "ep_#{ep.id}"%>">
-                    <p><%= "Unit Name: #{ep.exercise.humanized_unit_name }" %></p>
-                        <table>
-                            <tr>
-                                <th>Name</th>
-                                <th>Score</th>
-                                <th>Submitted at</th>
-                            </tr>
-                            <%ep.exercise_submissions.each do |es|%>
+                    <div class="tab-content">
+                        <% @exercise_posts.each_with_index do |ep, index|%>
 
-                                <tr>
-                                <td><%= es.user.full_name %></td>
-                                <td><%= es.humanized_unit_value%></td>
-                                <td><%= es.workout_submission.humanized_submitted_datetime %></td>
+                                <div class = "tab-pane fade <%= 'show active' unless index != 0%>" id="<%= "ep_#{ep.id}"%>" role="tabpanel" aria-labeledby="<%= "ep_#{ep.id}"%>">
+                                <p><%= "Unit Name: #{ep.exercise.humanized_unit_name }" %></p>
+                                    <table>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Score</th>
+                                            <th>Submitted at</th>
+                                        </tr>
+                                        <%ep.exercise_submissions.each do |es|%>
 
-                                </tr>
+                                            <tr>
+                                            <td><%= es.user.full_name %></td>
+                                            <td><%= es.humanized_unit_value%></td>
+                                            <td><%= es.workout_submission.humanized_submitted_datetime %></td>
 
-                            <%end%>
-                        </table>
-                    
+                                            </tr>
+
+                                        <%end%>
+                                    </table>
+                                
+                                </div>
+
+                        <% end %>
                     </div>
+                </div>
 
-            <% end %>
+                <div class="col-1 col-lg-2">
+                    <br>
+                </div>
+
+            </div>
         </div>
-
-            
-        </div>
-
     </body>
-
 </html>
 
 

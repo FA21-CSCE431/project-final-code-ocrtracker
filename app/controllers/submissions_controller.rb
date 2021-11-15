@@ -37,6 +37,7 @@ class SubmissionsController < ApplicationController
 
   # POST
   def create
+    update(params) if WorkoutSubmission.exists?(user_id: current_user.id, workout_post_id: params[:workout_post_id])
     exercise_submissions_data = params[:exercise_submission].to_unsafe_h.map do |ep_id, fields|
       { exercise_post_id: ep_id, unit_value: get_uv(fields), user: current_user, opt_out: fields.fetch('opt_out', false) }
     end
@@ -52,6 +53,7 @@ class SubmissionsController < ApplicationController
   end
 
   def update
+    create(params) if WorkoutSubmission.where(user_id: current_user.id, workout_post_id: params[:workout_post_id]).empty?
     @workout_submission = @workout_post.workout_submissions.where(user: current_user).first
 
     exercise_submissions_data = params[:exercise_submission].to_unsafe_h.transform_values { |fields| { unit_value: get_uv(fields), opt_out: fields.fetch('opt_out', false) } }

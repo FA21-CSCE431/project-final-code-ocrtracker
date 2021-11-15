@@ -16,7 +16,7 @@ RSpec.describe 'Creating a workout post', type: :feature do
     select exercises(:pushups).title, from: 'workout_post_exercise_post_1_exercise_id'
     # select exercises(:situps).title, from: 'workout_post_exercise_post_2_exercise_id'
 
-    page.all(:fillable_field, 'Specific instructions')[0].set('si1')
+    page.all(:fillable_field, 'Specific Instructions')[0].set('si1')
     # page.all(:fillable_field, 'Specific instructions')[1].set('si2')
 
     page.find('#workout_post_exercise_post_1_is_ranked').set(true)

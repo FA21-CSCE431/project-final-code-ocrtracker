@@ -6,14 +6,26 @@
     </head>
 
     <body id="exercises">
-        <br>
+        
         <h1>Edit Exercise</h1>
-        <br>
-        <div class="container">
-            <%= render 'form', exercise: @exercise %>
+        
+        <div class="container-fluid">
+            <div class = "row">
+                <div class="col-1 col-lg-2">
+                    <br>
+                </div>
 
-            <%= link_to 'Show', @exercise %> |
-            <%= link_to 'Back', exercises_path %>
+                <div class="content col-10 col-lg-8">
+                    <%= render 'form', exercise: @exercise %>
+
+                    <%= link_to 'Show', @exercise %> |
+                    <%= link_to 'Back', exercises_path %>
+                </div>
+
+                <div class="col-1 col-lg-2">
+                    <br>
+                </div>
+            </div>
         </div>
     </body>
 </html>
