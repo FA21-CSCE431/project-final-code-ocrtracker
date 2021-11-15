@@ -17,7 +17,7 @@ class ExerciseSubmission < ApplicationRecord
       uv = unit_value.to_f
       m = (uv / 60).to_i
       s = uv - (m * 60)
-      "#{m} minutes, #{s} seconds"
+      "#{m} minutes, #{s.round(3)} seconds"
     else
       unit_value
     end
