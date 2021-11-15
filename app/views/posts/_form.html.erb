@@ -1,11 +1,34 @@
 
 <%= form_with model: WorkoutPost.new, url:"/posts/create", method: :post do |wp_form| %>
 
-<div class="container">
-    <div class="row">
-        <div class="col-sm">
-            <%= wp_form.label :title, "Title"%>
-            <%= wp_form.text_field :title%>
+    <h2 style="text-align: center;">
+        <%= wp_form.label :title, "Title"%>
+        <%= wp_form.text_field :title, class: 'form-control'%>
+    </h2>
+    <hr>
+    <div class='new_exercise_posts'>
+        <input type="button" class ="universal-button" id = "new_exercise" value="Add">
+        <div id="1">
+            <%= wp_form.fields_for ExercisePost.new, index:1 do |ep_form|%>
+
+                <p>
+                    <%= ep_form.label :exercise_id, "Exercise"%>
+                    <%= ep_form.select(:exercise_id, Exercise.all.collect {|e| ["#{e.title}: #{e.humanized_unit_name}", e.id]},  {prompt: "Select"}, {class: 'form-control'}) %>
+                </p>
+
+                <p>
+                    <%= ep_form.label :specific_instructions, "Specific Instructions"%>
+                    <%= ep_form.text_area :specific_instructions, class: 'form-control'%>
+                </p>
+          
+                <p>
+                    <%= ep_form.label :is_ranked, "Ranked"%> 
+                    <%= ep_form.check_box :is_ranked%>
+                </p>
+                
+            <% end %>
+        <input type="button" class = "universal-button"  onclick="delete_exercise(this)" value="Delete">
+    
         </div>
 
         <div class="col-sm">
@@ -35,7 +58,12 @@
             <%= wp_form.submit %>
         </div>
     </div>
-</div>
+
+
+    <div class="actions">
+        <%= wp_form.submit%>
+        
+    </div>
 
 <% end %>
 
