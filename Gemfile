@@ -36,6 +36,7 @@ gem 'jbuilder', '~> 2.7'
 # gem 'pundit'
 
 # Use Active Storage variant
+gem 'activestorage-validator'
 gem 'google-cloud-storage', '~> 1.8', require: false
 gem 'image_processing', '~> 1.2'
 

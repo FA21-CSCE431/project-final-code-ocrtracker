@@ -25,6 +25,16 @@ RSpec.describe 'OAuth login', type: :feature do
   end
 end
 
+RSpec.describe 'Safegaurd login', type: :feature do
+  fixtures :users
+  scenario 'should only allow tamuocr@gmail.com email through' do
+    OmniAuth.config.mock_auth[:google_oauth2].info.email = 'tamuocr@gmail.com'
+    visit '/'
+    click_on 'Sign in with Google'
+    expect(page).to have_content('Welcome')
+  end
+end
+
 RSpec.describe 'Admin vs User access', type: :feature do
   fixtures :users
   scenario 'admin logs in' do

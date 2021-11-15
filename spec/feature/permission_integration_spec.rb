@@ -46,6 +46,43 @@ RSpec.describe 'Editing permissions', type: :feature do
     expect(page).to have_content 'Welcome'
   end
 
+  scenario 'update multiple-mix' do
+    login_as_admin
+    visit '/permissions'
+    page.uncheck("[user][#{users(:admin_account).id}][is_admin]")
+    page.check("[user][#{users(:user_account).id}][is_admin]")
+    click_on 'Save Changes'
+    expect(page).to have_content 'Welcome'
+  end
+
+  scenario 'testing safegaurd-rm' do
+    login_as_safegaurd
+    visit '/permissions'
+    page.uncheck("[user][#{users(:admin_account).id}][is_admin]")
+    page.uncheck("[user][#{users(:user_account).id}][is_admin]")
+    click_on 'Save Changes'
+    expect(page).to have_content 'Users successfully updated'
+  end
+
+  scenario 'testing safegaurd-give' do
+    login_as_safegaurd
+    visit '/permissions'
+    page.check("[user][#{users(:admin_account).id}][is_admin]")
+    page.check("[user][#{users(:user_account).id}][is_admin]")
+    click_on 'Save Changes'
+    expect(page).to have_content 'Users successfully updated'
+  end
+
+  scenario 'testing safegaurd-mox' do
+    login_as_safegaurd
+    visit '/permissions'
+    page.check("[user][#{users(:admin_account).id}][is_admin]")
+    page.uncheck("[user][#{users(:user_account).id}][is_admin]")
+    page.check("[user][#{users(:account3).id}][is_admin]")
+    click_on 'Save Changes'
+    expect(page).to have_content 'Users successfully updated'
+  end
+
   scenario 'permanent admin (tamuocr@gmail.com) is not displayed' do
     login_as_admin
     visit '/permissions'
