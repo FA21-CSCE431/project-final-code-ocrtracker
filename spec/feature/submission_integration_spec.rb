@@ -112,3 +112,57 @@ RSpec.describe 'Editing a workout submission', type: :feature do
     expect(page).to have_current_path "/submissions/edit/#{wp.id}", ignore_query: true
   end
 end
+
+RSpec.describe 'viewing workout history', type: :feature do
+  fixtures :users, :exercises, :workout_posts, :exercise_posts, :workout_submissions
+
+  scenario 'admin wants to view workout history' do
+    login_as_admin
+
+    wp = workout_posts(:wp1)
+
+    visit "/submissions/history/#{wp.id}"
+
+    expect(page).to have_content 'Workout Post 1'
+  end
+
+  scenario 'future workout history' do
+    login_as_admin
+
+    wp = workout_posts(:wp_with_wod_in_future)
+
+    visit "/submissions/history/#{wp.id}"
+
+    expect(page).to have_content 'Workout Post 3 (WOD in future)'
+  end
+
+  scenario 'no workout history' do
+    login_as_admin
+
+    wp = workout_posts(:wp_with_no_submissions)
+
+    visit "/submissions/history/#{wp.id}"
+
+    expect(page).to have_content 'Workout Post 4 (no submissions)'
+  end
+
+  scenario 'user wants to view workout history' do
+    login_as_user
+
+    wp = workout_posts(:wp1)
+
+    visit "/submissions/history/#{wp.id}"
+
+    expect(page).to have_current_path root_path, ignore_query: true
+  end
+
+  scenario 'user no workout history' do
+    login_as_user
+
+    wp = workout_posts(:wp_with_no_submissions)
+
+    visit "/submissions/history/#{wp.id}"
+
+    expect(page).to have_current_path root_path, ignore_query: true
+  end
+end

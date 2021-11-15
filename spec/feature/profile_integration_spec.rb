@@ -45,6 +45,33 @@ RSpec.describe 'Editing an profile', type: :feature do
     expect(page).to have_content 'new_test_desc'
   end
 
+  scenario 'user empty description' do
+    login_as_user
+    visit "/profiles/#{users(:user_account).id}/edit"
+    fill_in 'Edit Description', with: ''
+    # fill_in 'Picture', with: 'test_pic'
+    click_on 'Save Changes'
+    expect(page).to have_content ''
+  end
+
+  scenario 'non-safegaurd profile' do
+    login_as_safegaurd
+    visit "/profiles/#{users(:permanent_admin_account).id}/edit"
+    fill_in 'Edit Description', with: 'new_test_desc'
+    # fill_in 'Picture', with: 'test_pic'
+    click_on 'Save Changes'
+    expect(page).to have_content 'new_test_desc'
+  end
+
+  scenario 'safegaurd empty description' do
+    login_as_safegaurd
+    visit "/profiles/#{users(:permanent_admin_account).id}/edit"
+    fill_in 'Edit Description', with: ''
+    # fill_in 'Picture', with: 'test_pic'
+    click_on 'Save Changes'
+    expect(page).to have_content ''
+  end
+
   scenario 'non-permit user' do
     login_as_user
     visit "/profiles/#{users(:admin_account).id}/edit"
