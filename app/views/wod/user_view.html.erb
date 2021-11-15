@@ -6,50 +6,62 @@
   </head>
 
   <body id="wod">
-    <br>
     <h1>View Workout of the Day</h1>
-    <br>
 
-    <div class="container">
+    <div class="container-fluid">
+      <div class = "row">
 
-      <% if flash.any? %>
-        <% flash.each do |key, value| -%>
-          <section class="flash flash__<%= key %>"><%= value.html_safe %></section>
-        <% end -%>
-      <% end %>
-      <% @workout_posts.each do |wp| %>
-        
-        <h2>
+        <div class="col-1 col-lg-2">
+          <br>
+        </div>
 
-        <% if wp == @workout_posts.first %>
-          <% if @current_submission.empty? %>
-            <%=="Current: <a href='#{new_submission_path(wp)}'>#{wp.title}</a>"%>
-          <% else %>
-            <%=="Current: <a href='#{edit_submission_path(wp)}'>#{wp.title}</a>"%>
+        <div class="content col-10 col-lg-8">
+
+          <% if flash.any? %>
+            <% flash.each do |key, value| -%>
+              <section class="flash flash__<%= key %>"><%= value.html_safe %></section>
+            <% end -%>
           <% end %>
-          <%#"<a href='#{submissions_history_path(wp)}'>View submissions history</a>"%>
-        <% elsif current_user.is_admin? %>
-          <%=="<a href='#{submissions_history_path(wp)}'>#{wp.title}</a>"%>
-        <% else %>
-          <%=wp.title%>
-        <% end %>
-      
+          <% @workout_posts.each do |wp| %>
+            
+            <h2>
 
-        <%=wp.humanized_wod_date%>
-        <% if wp == @workout_posts.first && current_user.is_admin? %>
-          <%=="<a href='#{submissions_history_path(wp)}'>(View history)</a>"%>
-        
-        <% end %>
+            <% if wp == @workout_posts.first %>
+              <% if @current_submission.empty? %>
+                <%=="Current: <a href='#{new_submission_path(wp)}'>#{wp.title}</a>"%>
+              <% else %>
+                <%=="Current: <a href='#{edit_submission_path(wp)}'>#{wp.title}</a>"%>
+              <% end %>
+              <%#"<a href='#{submissions_history_path(wp)}'>View submissions history</a>"%>
+            <% elsif current_user.is_admin? %>
+              <%=="<a href='#{submissions_history_path(wp)}'>#{wp.title}</a>"%>
+            <% else %>
+              <%=wp.title%>
+            <% end %>
+          
 
-        
-        <br>
-        </h2>
-        <% wp.exercise_submissions_to_this_post_for_current_user(current_user).each do |es| %>
-          <p><%="#{es.exercise.title}: #{es.humanized_unit_value}"%></p>
-        <% end %>
-        <hr>
-        <br>
-      <% end %>
+            <%=wp.humanized_wod_date%>
+            <% if wp == @workout_posts.first && current_user.is_admin? %>
+              <%=="<a href='#{submissions_history_path(wp)}'>(View history)</a>"%>
+            
+            <% end %>
+
+            
+            <br>
+            </h2>
+            <% wp.exercise_submissions_to_this_post_for_current_user(current_user).each do |es| %>
+              <p><%="#{es.exercise.title}: #{es.humanized_unit_value}"%></p>
+            <% end %>
+            <hr>
+            <br>
+          <% end %>
+        </div>
+
+        <div class="col-1 col-lg-2">
+          <br>
+        </div>
+
+      </div>
 
     </div>
 

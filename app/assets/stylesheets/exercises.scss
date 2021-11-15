@@ -1,25 +1,28 @@
-.container {
+.content {
     background: rgba(33, 37, 41, 0.98) ;
     padding: 25px;
     color: white;
     border-radius: 10px;
     position: relative;
-    height: 70%;
     overflow: auto;
+    height: 70vh;
 }
 
 h1{
+    font-size: calc(100% + 1.5vw + 1.5vh);
     position: relative;
     text-align: center;
     color: white;
+    padding: 25px;
 }
 
 h2{
+    font-size: calc(100% + 1vw + 1vh);
     text-align: center;
 }
 
 p{
-    font-size: calc(100% + 0.3vw + 0.3vh);
+    font-size: calc(100% + 0.5vw + 0.5vh);
     color: white;
     font-weight: 300;
 }
