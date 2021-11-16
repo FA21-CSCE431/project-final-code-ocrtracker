@@ -18,7 +18,7 @@ RSpec.describe 'Creating a workout post', type: :feature do
 
     page.find('#workout_post_exercise_post_1_is_ranked').set(true)
 
-    click_on 'Create Workout post'
+    click_on 'Create Workout Post'
 
     expect(page).to have_content 'new_post_title'
   end
@@ -27,7 +27,7 @@ RSpec.describe 'Creating a workout post', type: :feature do
     login_as_admin
     visit '/posts/new'
 
-    click_on 'Create Workout post'
+    click_on 'Create Workout Post'
 
     expect(page).to have_current_path posts_new_path, ignore_query: true
   end
