@@ -125,10 +125,10 @@ RSpec.describe 'Viewing a profile', type: :feature do
   scenario 'shows fistbumps recieved in the last month' do
     login_as_user
     visit profiles_path(users(:user_account))
-    
+
     expect(page).to have_content '4 Fistbumps received in the last month'
   end
-  
+
   scenario 'Upload invalid file type' do
     login_as_user
     visit edit_profile_path(users(:user_account))
