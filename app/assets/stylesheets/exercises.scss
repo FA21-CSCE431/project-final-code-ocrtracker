@@ -8,6 +8,10 @@
     height: 65vh;
 }
 
+.content#show{
+    height: 50vh;
+}
+
 h1{
     font-size: calc(100% + 1.3vw + 1.3vh);
     position: relative;
@@ -51,4 +55,8 @@ td{
 
 .actions{
     padding-top: 100px; 
+}
+
+.universal-button{
+    margin-top: 20px;
 }

@@ -17,8 +17,7 @@
 
                 <div class="content col-10 col-lg-8">
                     <%= render 'form', exercise: @exercise %>
-                    <br>
-                    <%= link_to 'Back', exercises_path%>
+                    <%= button_to 'Back', exercises_path, :method => "get", :class => "universal-button", :style => "margin-left: 0%; display: inline; float: left; display: flex; flex-wrap: wrap;"%>
                 </div>
 
                 <div class="col-1 col-lg-2">
