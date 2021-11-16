@@ -125,4 +125,10 @@ RSpec.describe 'Editing permissions', type: :feature do
     visit '/permissions'
     expect(page).not_to have_content 'tamuocr@gmail.com'
   end
+
+  scenario 'visit login path after logging in' do
+    login_as_user
+    visit '/users/sign_in'
+    expect(page).to have_current_path root_path
+  end
 end

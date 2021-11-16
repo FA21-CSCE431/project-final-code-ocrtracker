@@ -95,6 +95,21 @@ RSpec.describe 'Editing a workout submission', type: :feature do
     expect(page).to have_content('23').and have_content('24').and have_content('25')
   end
 
+  scenario 'user clears all available fields' do
+    login_as_user
+
+    wp = workout_posts(:wp1)
+    visit "/submissions/edit/#{wp.id}"
+
+    # Fill in all entry boxes
+    fill_in 'Minutes', with: ''
+    fill_in 'Seconds', with: ''
+    fill_in 'Number', with: ''
+
+    click_on 'Submit'
+    expect(page).to have_current_path "/submissions/edit/#{wp.id}", ignore_query: true
+  end
+
   scenario 'user goes back to edit a workout submission' do
     login_as_user
     wp = workout_posts(:wp1)
