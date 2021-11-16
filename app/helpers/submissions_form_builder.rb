@@ -9,7 +9,7 @@ class SubmissionsFormBuilder < ActionView::Helpers::FormBuilder
         label('minutes') + text_field('minutes', value: (options[:value].to_i / 60)) + label('seconds') + text_field('seconds', value: (options[:value].to_f % 60).round(3))
       end
     else
-      label('unit_value', 'Number') + text_field(attribute)
+      label('unit_value', 'Number') + text_field(attribute, value: options[:value])
     end
   end
 end
