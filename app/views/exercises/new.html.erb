@@ -6,15 +6,26 @@
     </head>
 
     <body id="exercises">
-        <br>
+ 
         <h1>New Exercise</h1>
-        <br>
-        <div class="container">
-            <%= render 'form', exercise: @exercise %>
-            <br>
-            <%= link_to 'Back', exercises_path %>
-        </div>
     
+        <div class="container-fluid">
+            <div class = "row">
+                <div class="col-1 col-lg-2">
+                    <br>
+                </div>
+
+                <div class="content col-10 col-lg-8">
+                    <%= render 'form', exercise: @exercise %>
+                    <%= button_to 'Back', exercises_path, :method => "get", :class => "universal-button", :style => "margin-left: 0%; display: inline; float: left; display: flex; flex-wrap: wrap;"%>
+                </div>
+
+                <div class="col-1 col-lg-2">
+                    <br>
+                </div>
+            </div>
+        </div>
+
     </body>    
     
 </html>

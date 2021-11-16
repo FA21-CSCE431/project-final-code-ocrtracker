@@ -10,7 +10,6 @@ RSpec.describe 'Editing an profile', type: :feature do
     login_as_admin
     visit "/profiles/#{users(:admin_account).id}/edit"
     fill_in 'Edit Description', with: 'new_test_desc'
-    # fill_in 'Picture', with: 'test_pic'
     click_on 'Save Changes'
     expect(page).to have_content 'new_test_desc'
   end
@@ -19,7 +18,6 @@ RSpec.describe 'Editing an profile', type: :feature do
     login_as_admin
     visit "/profiles/#{users(:admin_account).id}/edit"
     fill_in 'Edit Description', with: ''
-    # fill_in 'Picture', with: 'test_pic'
     click_on 'Save Changes'
     expect(page).to have_content ''
   end
@@ -40,7 +38,6 @@ RSpec.describe 'Editing an profile', type: :feature do
     login_as_user
     visit "/profiles/#{users(:user_account).id}/edit"
     fill_in 'Edit Description', with: 'new_test_desc'
-    # fill_in 'Picture', with: 'test_pic'
     click_on 'Save Changes'
     expect(page).to have_content 'new_test_desc'
   end
@@ -49,7 +46,6 @@ RSpec.describe 'Editing an profile', type: :feature do
     login_as_user
     visit "/profiles/#{users(:user_account).id}/edit"
     fill_in 'Edit Description', with: ''
-    # fill_in 'Picture', with: 'test_pic'
     click_on 'Save Changes'
     expect(page).to have_content ''
   end
@@ -58,7 +54,6 @@ RSpec.describe 'Editing an profile', type: :feature do
     login_as_safegaurd
     visit "/profiles/#{users(:permanent_admin_account).id}/edit"
     fill_in 'Edit Description', with: 'new_test_desc'
-    # fill_in 'Picture', with: 'test_pic'
     click_on 'Save Changes'
     expect(page).to have_content 'new_test_desc'
   end
@@ -67,7 +62,6 @@ RSpec.describe 'Editing an profile', type: :feature do
     login_as_safegaurd
     visit "/profiles/#{users(:permanent_admin_account).id}/edit"
     fill_in 'Edit Description', with: ''
-    # fill_in 'Picture', with: 'test_pic'
     click_on 'Save Changes'
     expect(page).to have_content ''
   end
@@ -95,24 +89,6 @@ RSpec.describe 'Editing an profile', type: :feature do
     visit "/profiles/#{users(:user_account).id}/edit"
     expect(page).to have_current_path root_path, ignore_query: true
   end
-  #
-  # scenario 'valid inputs url' do
-  #   login_as_admin
-  #   visit "/profiles/#{users(:admin_account).id}/edit"
-  #   fill_in 'Avatar url', with: 'https://fake_url.com'
-  #   # fill_in 'Picture', with: 'test_pic'
-  #   click_on 'Save Changes'
-  #   expect(page).to have_content 'https://fake_url.com'
-  # end
-  #
-  # scenario 'non-admin user url' do
-  #   login_as_user
-  #   visit "/profiles/#{users(:user_account).id}/edit"
-  #   fill_in 'Avatar url', with: 'https://fake_url.com'
-  #   # fill_in 'Picture', with: 'test_pic'
-  #   click_on 'Save Changes'
-  #   expect(page).to have_content 'https://fake_url.com'
-  # end
 end
 
 RSpec.describe 'Viewing a profile', type: :feature do
@@ -143,13 +119,21 @@ RSpec.describe 'Viewing a profile', type: :feature do
     login_as_user
     visit profiles_path(users(:user_account))
 
-    expect(page).to have_content '1 FistBumps given in the last month'
+    expect(page).to have_content '1 Fistbumps given in the last month'
   end
 
   scenario 'shows fistbumps recieved in the last month' do
     login_as_user
     visit profiles_path(users(:user_account))
 
-    expect(page).to have_content '4 FistBumps received in the last month'
+    expect(page).to have_content '4 Fistbumps received in the last month'
+  end
+
+  scenario 'Upload invalid file type' do
+    login_as_user
+    visit edit_profile_path(users(:user_account))
+    attach_file('user_image', 'spec/feature/profile_integration_spec.rb')
+    click_on 'Save Changes'
+    expect(page).to have_current_path(edit_profile_path(users(:user_account)))
   end
 end

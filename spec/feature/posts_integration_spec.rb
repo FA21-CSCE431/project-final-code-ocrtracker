@@ -11,18 +11,14 @@ RSpec.describe 'Creating a workout post', type: :feature do
     visit '/posts/new'
 
     fill_in 'Title', with: 'new_post_title'
-    # click_on 'new'
 
     select exercises(:pushups).title, from: 'workout_post_exercise_post_1_exercise_id'
-    # select exercises(:situps).title, from: 'workout_post_exercise_post_2_exercise_id'
 
-    page.all(:fillable_field, 'Specific instructions')[0].set('si1')
-    # page.all(:fillable_field, 'Specific instructions')[1].set('si2')
+    page.all(:fillable_field, 'Specific Instructions')[0].set('si1')
 
     page.find('#workout_post_exercise_post_1_is_ranked').set(true)
-    # page.find('#workout_post_exercise_post_2_is_ranked').set(false)
 
-    click_on 'Create Workout post'
+    click_on 'Create Workout Post'
 
     expect(page).to have_content 'new_post_title'
   end
@@ -31,7 +27,7 @@ RSpec.describe 'Creating a workout post', type: :feature do
     login_as_admin
     visit '/posts/new'
 
-    click_on 'Create Workout post'
+    click_on 'Create Workout Post'
 
     expect(page).to have_current_path posts_new_path, ignore_query: true
   end

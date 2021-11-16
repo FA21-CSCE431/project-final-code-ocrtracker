@@ -6,33 +6,44 @@
   </head>
 
   <body id="exercises">
-    <br>
     <h1>Exercise Information</h1>
-    <br>
-    <div class="container" id="show">
-      <br>
-      <p>
-        <strong>Title:</strong>
-        <%= @exercise.title %>
-      </p>
-      <p>
-        <strong>Description:</strong>
-        <%= @exercise.description %>
-      </p>
-      <p>
-        <strong>Image:</strong>
-        <% if @exercise.image.attached? %>
-          <%= image_tag @exercise.image, style: "width: 100px; display: block" %>
-        <% end %>
-      </p>
-      <p>
-        <strong>Unit Name:</strong>
-        <%= @exercise.humanized_unit_name %>
-      </p>
 
-      <%= link_to 'Edit', edit_exercise_path(@exercise) %> |
-      <%= link_to 'Back', exercises_path %>
-      <br>
+    <div class="container-fluid">
+      <div class = "row">
+
+        <div class="col-1 col-lg-3">
+          <br>
+        </div>
+
+        <div class="content col-10 col-lg-6" id="show">
+          <p style="text-align: center;">
+            <strong>Title:</strong>
+            <%= @exercise.title %>
+          </p>
+          <p style="text-align: center;">
+            <strong>Description:</strong>
+            <%= @exercise.description %>
+          </p>
+          <p style="text-align: center;">
+            <strong>Image:</strong>
+            <% if @exercise.image.attached? %>
+              <%= image_tag @exercise.image, style: "width: 100px; display: block; margin-left: auto; margin-right: auto;" %>
+            <% end %>
+          </p>
+          <p style="text-align: center;">
+            <strong>Unit Name:</strong>
+            <%= @exercise.humanized_unit_name %>
+          </p>
+          <%= button_to "Back", exercises_path, :method => "get",:class => "universal-button", :style => "margin-left: 0%; display: inline; float: left; display: flex; flex-wrap: wrap;" %>
+          <%= button_to "Edit", edit_exercise_path(@exercise), :method => "get",:class => "universal-button", :style => "margin-left: 0%; display: inline; float: right; display: flex; flex-wrap: wrap; margin-right: 2%" %>
+          <br>
+        </div>
+
+        <div class="col-1 col-lg-3">
+          <br>
+        </div>
+
+      </div>
     </div>
   </body>
 </html>

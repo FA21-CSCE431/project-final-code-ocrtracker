@@ -1,31 +1,51 @@
-.container {
-    background: rgba(33, 37, 41, 0.98) ;
-    padding: 25px;
+.content {
+    background: rgba(33, 37, 41, 0.98);
+    padding: 20px;
     color: white;
     border-radius: 10px;
     position: relative;
-    width: 65%;
-    height: 65%;
     overflow: auto;
+    height: 70vh;
 }
 
 h1{
+    font-size: calc(100% + 1.3vw + 1.3vh);
     position: relative;
     text-align: center;
     color: white;
+    padding-bottom: 20px;
+    padding-top: 20px;
 }
 
 h2{
-    font-size: calc(100% + 0.6vw + 0.6vh);
+    font-size: calc(100% + 0.7vw + 0.7vh);
     text-align: center;
 }
 
 p{
-    font-size: calc(100% + 0.3vw + 0.3vh);
+    font-size: calc(100% + 0.5vw + 0.5vh);
     color: white;
     font-weight: 300;
 }
 
 body#wod{
     background-image: image-url('wod.png');
+}
+
+th{
+    font-size: calc(100% + 0.3vw + 0.3vh);
+    padding: 10px;
+}
+
+td{
+    font-size: calc(100% + 0.1vw + 0.1vh);
+    padding: 10px;
+}
+
+.title{
+    font-weight: bold;
+}
+
+.universal-button{
+    margin-bottom: 10px;
 }

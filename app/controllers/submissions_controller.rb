@@ -37,6 +37,7 @@ class SubmissionsController < ApplicationController
 
   # POST
   def create
+    update(params) if WorkoutSubmission.exists?(user_id: current_user.id, workout_post_id: params[:workout_post_id])
     exercise_submissions_data = params[:exercise_submission].to_unsafe_h.map do |ep_id, fields|
       { exercise_post_id: ep_id, unit_value: get_uv(fields), user: current_user, opt_out: fields.fetch('opt_out', false) }
     end
@@ -52,13 +53,15 @@ class SubmissionsController < ApplicationController
   end
 
   def update
+    create(params) if WorkoutSubmission.where(user_id: current_user.id, workout_post_id: params[:workout_post_id]).empty?
     @workout_submission = @workout_post.workout_submissions.where(user: current_user).first
 
     exercise_submissions_data = params[:exercise_submission].to_unsafe_h.transform_values { |fields| { unit_value: get_uv(fields), opt_out: fields.fetch('opt_out', false) } }
 
     respond_to do |format|
       # If the workout submission and all exercise submissions are valid
-      if ExerciseSubmission.update(exercise_submissions_data.keys, exercise_submissions_data.values)
+      if exercise_submissions_data.all? { |_k, v| v[:unit_value] }
+        ExerciseSubmission.update(exercise_submissions_data.keys, exercise_submissions_data.values)
         format.html { redirect_to '/wod', notice: 'Submission was successfully edited' }
       else
         format.html { redirect_to edit_submission_url(params[:workout_post_id]), notice: 'Workout submission was not valid' }

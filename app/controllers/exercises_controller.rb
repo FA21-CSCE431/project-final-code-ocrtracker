@@ -7,7 +7,7 @@ class ExercisesController < ApplicationController
 
   # GET /exercises
   def index
-    @exercises = Exercise.all
+    @exercises = Exercise.order('updated_at DESC')
   end
 
   # GET /exercises/1

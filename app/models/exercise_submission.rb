@@ -10,14 +10,12 @@ class ExerciseSubmission < ApplicationRecord
 
   validates :unit_value, presence: true
 
-  # acts_as_votable
-
   def humanized_unit_value
     if exercise.unit_name.starts_with?('time')
       uv = unit_value.to_f
       m = (uv / 60).to_i
       s = uv - (m * 60)
-      "#{m} minutes, #{s} seconds"
+      "#{m} minutes, #{s.round(3)} seconds"
     else
       unit_value
     end
