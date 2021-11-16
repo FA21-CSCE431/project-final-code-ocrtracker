@@ -45,7 +45,7 @@
 
                                 </td>
                                 <td><%= wp_fields.datetime_local_field :wod_date %></td>
-                                <td><input type="button" value="Clear" id='<%= "clear_button_#{wp.id}" %>'  onclick="this.parentElement.previousElementSibling.firstChild.value =''"></td>
+                                <td><input class ="universal-button" type="button" value="Clear" id='<%= "clear_button_#{wp.id}" %>'  onclick="this.parentElement.previousElementSibling.firstChild.value =''"></td>
                                 </tr>
                                 
                             <% end %> 
@@ -54,7 +54,7 @@
 
                         <table>
                         <br>
-                        <%= wp_h_form.submit 'Set WOD dates' %> 
+                        <%= wp_h_form.submit 'Set WOD dates', :class => "universal-button" %> 
 
                     <% end %>   
                 </div>
