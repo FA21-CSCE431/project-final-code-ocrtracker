@@ -46,45 +46,40 @@
 
     document.getElementById("new_exercise").onclick = function() {
 
-        original = document.getElementsByClassName("new_exercise_posts")[0].cloneNode(true)
-        last_index = original.childNodes.length
-        if(last_index>5){
-            duplicate = original.childNodes[last_index-1].cloneNode(true)
-            old_index = document.getElementsByClassName("new_exercise_posts")[0].childNodes[last_index-1].id
-        }
-        else{
-            if(original.childNodes[last_index-1].nodeType !== 3){
-                duplicate = original.childNodes[last_index-1].cloneNode(true)
-                old_index = document.getElementsByClassName("new_exercise_posts")[0].childNodes[last_index-1].id
-            }
-            else{
-                duplicate = original.childNodes[last_index-2].cloneNode(true)
-                old_index = document.getElementsByClassName("new_exercise_posts")[0].childNodes[last_index-2].id
-            }
-        }
-        new_index= parseInt(old_index, 10) + 1
-        duplicate.id = new_index.toString()
-        duplicate.childNodes.forEach(node => {
-            if(node.nodeType == 1){
-                if(node.attributes[0]!==undefined){
-                    node.attributes[0].value = node.attributes[0].value.replace(old_index, new_index.toString())
+        duplicate = document.getElementById(1).cloneNode(true);
+
+        for(var i=1; i<4; i++) {
+            var node = duplicate.children[i];
+
+            for(var j=0; j<node.children.length; j++){
+
+                child = node.children[j];
+
+                // using time stamp so ids will be unique without having to keep track
+                var new_index = new Date().getTime();
+                if(child.attributes[0]!==undefined && child.attributes[0].localName != 'name'){
+                    child.attributes[0].value = child.attributes[0].value.replace('1', new_index.toString())
                 }
-                if(node.id!==undefined){
-                    node.id = node.id.replace(old_index, new_index.toString())
-                    if(node.id.includes("specific_instructions")){
-                        node.value = ""
-                    } 
-                    if(node.id.includes("is_ranked")){
-                        node.checked = false
-                    }
+                if(child.id!==undefined){
+                    child.id = child.id.replace('1',new_index.toString());
                 }
-                if(node.name!==undefined){
-                    node.name = node.name.replace(old_index, new_index.toString())
+                if(child.name!==undefined){
+                    child.name = child.name.replace('1',new_index.toString());
                 }
 
-            }
+                if(child.id.includes("is_ranked")){
+                    child.checked = false
+                }
+                else if(child.value){
+                    child.value = '';
+                }
+                node.children[j] = child
+            };
 
-        })
+        }
+
+        duplicate.id = new_index;
+
         document.getElementsByClassName("new_exercise_posts")[0].append(duplicate)
     };
 
