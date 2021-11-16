@@ -24,7 +24,6 @@
                 <tr>
                   <th>Title</th>
                   <th>Description</th>
-                  <th>Image</th>
                   <th>Unit Name</th>
                   <th colspan="3"></th>
                 </tr>
@@ -35,13 +34,9 @@
                   <tr>
                     <td><%= exercise.title %></td>
                     <td><%= exercise.description %></td>
-                    <td>
-                      <% if exercise.image.attached? %>
-                        <%= image_tag exercise.image, style: "width: 100px; display: block" %>
-                      <% end %>
-                    </td>
                     <td><%= exercise.humanized_unit_name %></td>
-                    <td><%= button_to "Show", exercise_path(exercise), :method => "get",:class => "universal-button", :style => "margin-left: 0%; display: inline; float: left; display: flex; flex-wrap: wrap;" %><%= button_to "Edit", edit_exercise_path(exercise), :method => "get",:class => "universal-button", :style => "margin-left: 0%; display: inline; float: left; display: flex; flex-wrap: wrap; margin-left: 5%" %></td>
+                    <td><%= button_to "Show", exercise_path(exercise), :method => "get",:class => "universal-button", :style => "margin-left: 40%; display: inline; float: left; display: flex; flex-wrap: wrap;" %></td>
+                    <td><%= button_to "Edit", edit_exercise_path(exercise), :method => "get",:class => "universal-button", :style => "margin-left: 20%; display: inline; float: left; display: flex; flex-wrap: wrap; margin-left: 5%" %></td>
                   </tr>
                 <% end %>
               </tbody>

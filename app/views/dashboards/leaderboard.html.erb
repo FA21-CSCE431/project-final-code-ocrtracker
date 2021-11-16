@@ -45,7 +45,7 @@
                                                 <img src= <%= es.user.avatar_url%> class="profile-picture"/>
                                             <% end %>
                                             </td>
-                                            <td><%= link_to "#{es.user.full_name}", "/profiles/#{es.user.id}"%></td>
+                                            <td><%= link_to "#{es.user.full_name}", "/profiles/#{es.user.id}", style: "text-decoration:none; font-weight: bold"%></td>
                                             <td><%= es.humanized_unit_value%></td>
                                             <td>
                                             <span>

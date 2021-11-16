@@ -14,38 +14,46 @@
 
         <div class="container-fluid">
             <div class="row">
-                <div class="col-2 col-lg-3">
+                <div class="col-2">
                     <br>
                 </div>
 
-                <div class="content col-8 col-lg-6">
+                <div class="content col-8">
                     <h2><%= @workout_post.title %></h2>
                     <br>
 
-                    
                     <%= form_with url:"/submissions/#{editing ? 'update' : 'create'}", method: :post do |ws_form| %>
 
                         <%= ws_form.hidden_field :workout_post_id, value: @workout_post.id %>
 
                         <% @workout_post.exercise_posts.each do |ep, index| %>
-                            <p id="label"><b>Exercise: <%= ep.exercise.title %></b></p>
-                            <p id="label">Description: <%= ep.exercise.description %></p>
-                            <p id="label">Instructions: <%= ep.specific_instructions %></p>
-                            <p id="label">Unit: <%= ep.exercise.humanized_unit_name %></p>
-                                <% es = ep.exercise_submission_for_user(current_user) %>
-                            <p id="label"><%= ws_form.fields_for :exercise_submission, index: es.new_record? ? ep.id : es.id, builder: SubmissionsFormBuilder do |es_form| %>
-                                <%= es_form.text_or_time_field :unit_value, unit_name: ep.exercise.unit_name, value: es.unit_value %>
-                                <% if ep.is_ranked %>
-                                    <p id="label">Opt out: <%= es_form.check_box :opt_out, checked: es.opt_out %></p>
-                                <% else %>
-                                    <p>Not ranked</p>
-                                <%end%>
-                            <% end %>
-                            </p>
-
+                        <div class="row">
+                            <div class="col">
+                                <p id="label"><b>Exercise: <%= ep.exercise.title %></b></p>
+                                <p id="label">Description: <%= ep.exercise.description %></p>
+                                <p id="label">Instructions: <%= ep.specific_instructions %></p>
+                                <p id="label">Unit: <%= ep.exercise.humanized_unit_name %></p>
+                                    <% es = ep.exercise_submission_for_user(current_user) %>
+                                <p id="label"><%= ws_form.fields_for :exercise_submission, index: es.new_record? ? ep.id : es.id, builder: SubmissionsFormBuilder do |es_form| %>
+                                    <%= es_form.text_or_time_field :unit_value, unit_name: ep.exercise.unit_name, value: es.unit_value %>
+                                    <% if ep.is_ranked %>
+                                        <p id="label">Opt out: <%= es_form.check_box :opt_out, checked: es.opt_out %></p>
+                                    <% else %>
+                                        <p>Not ranked</p>
+                                    <%end%>
+                                </div>
+                                <div class="col">
+                                    <p id ="label">Image:</p>
+                                    <% if ep.exercise.image.attached? %>
+                                        <%= image_tag ep.exercise.image.variant(resize: "200x200")%>
+                                    <% end %>
+                                </div>
+                            </div>
+                        <% end %>
+                    </p>
                     <% end %>
 
-                    <div class="row">
+                    <div class="row" style = "margin-top: -8%">
                     
                         <div class="back-btn col-6 d-flex justify-content-start" style="float: left;">
                             <%= button_to 'Back', user_wod_path, :class => "universal-button"%>
@@ -59,7 +67,7 @@
                     <% end %>
                 </div>
 
-                <div class="col-2 col-lg-3">
+                <div class="col-2">
                     <br>
                 </div>
 
