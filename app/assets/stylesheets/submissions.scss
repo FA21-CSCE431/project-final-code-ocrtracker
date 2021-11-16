@@ -5,7 +5,7 @@
     border-radius: 10px;
     position: relative;
     overflow: auto;
-    height: 70vh;
+    height: 65vh;
 }
 
 h1{
@@ -29,6 +29,14 @@ p#label{
 
 body#submissions-page{
     background-image: image-url('submissions_page.png');
+}
+
+.back-btn{
+    padding-top: 100px; 
+}
+
+.actions{
+    padding-top: 100px; 
 }
 
 

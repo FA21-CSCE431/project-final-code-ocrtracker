@@ -28,7 +28,7 @@
                         <%= ws_form.hidden_field :workout_post_id, value: @workout_post.id %>
 
                         <% @workout_post.exercise_posts.each do |ep, index| %>
-                            <p><b>Exercise: <%= ep.exercise.title %></b></p>
+                            <p id="label"><b>Exercise: <%= ep.exercise.title %></b></p>
                             <p id="label">Description: <%= ep.exercise.description %></p>
                             <p id="label">Instructions: <%= ep.specific_instructions %></p>
                             <p id="label">Unit: <%= ep.exercise.humanized_unit_name %></p>
@@ -42,12 +42,18 @@
                                 <%end%>
                             <% end %>
                             </p>
-                            <br>
 
                     <% end %>
-                        
-                    <div class="actions">
-                        <%= ws_form.submit "Submit", :class => "universal-button"%>
+
+                    <div class="row">
+                    
+                        <div class="back-btn col-6 d-flex justify-content-start" style="float: left;">
+                            <%= button_to 'Back', user_wod_path, :class => "universal-button"%>
+                        </div>
+                            
+                        <div class="actions col-6 d-flex justify-content-end">
+                            <%= ws_form.submit "Submit", :class => "universal-button"%>
+                        </div>
                     </div>
 
                     <% end %>
@@ -59,9 +65,5 @@
 
             </div>
         </div>
-
-            <div class="back-btn">
-                <%= link_to 'Back', user_wod_path %>
-            </div>
     </body>
 </html>

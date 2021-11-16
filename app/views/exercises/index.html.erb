@@ -16,7 +16,8 @@
         </div>
 
         <div class="content col-10 col-lg-8">
-          <%= link_to 'New Exercise', new_exercise_path %>
+          <%= button_to "New Exercise", new_exercise_path, :method => "get",:class => "universal-button", :style => "" %>
+          <br>
           <div class="table-responsive">
             <table>
               <thead>
@@ -40,7 +41,7 @@
                       <% end %>
                     </td>
                     <td><%= exercise.humanized_unit_name %></td>
-                    <td style="width:5%"><%= link_to 'Show', exercise %> <%= link_to 'Edit', edit_exercise_path(exercise) %></td>
+                    <td><%= button_to "Show", exercise_path(exercise), :method => "get",:class => "universal-button", :style => "margin-left: 0%; display: inline; float: left; display: flex; flex-wrap: wrap;" %><%= button_to "Edit", edit_exercise_path(exercise), :method => "get",:class => "universal-button", :style => "margin-left: 0%; display: inline; float: left; display: flex; flex-wrap: wrap; margin-left: 5%" %></td>
                   </tr>
                 <% end %>
               </tbody>

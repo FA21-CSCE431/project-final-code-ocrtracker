@@ -34,9 +34,8 @@
             <strong>Unit Name:</strong>
             <%= @exercise.humanized_unit_name %>
           </p>
-
-          <%= link_to 'Edit', edit_exercise_path(@exercise) %> |
-          <%= link_to 'Back', exercises_path %>
+          <%= button_to "Edit", edit_exercise_path(@exercise), :method => "get",:class => "universal-button", :style => "margin-left: 0%; display: inline; float: left; display: flex; flex-wrap: wrap; margin-right: 2%" %>
+          <%= button_to "Back", exercises_path, :method => "get",:class => "universal-button", :style => "margin-left: 0%; display: inline; float: left; display: flex; flex-wrap: wrap;" %>
           <br>
         </div>
 
