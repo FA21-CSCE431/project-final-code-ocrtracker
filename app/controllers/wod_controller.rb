@@ -13,12 +13,9 @@ class WodController < ApplicationController
   def update_wod
     submitted_hash = params[:workout_post]
 
+    WorkoutPost.update(submitted_hash.keys, submitted_hash.values.map { |x| { wod_date: x[:wod_date] } })
     respond_to do |format|
-      if WorkoutPost.update(submitted_hash.keys, submitted_hash.values.map { |x| { wod_date: x[:wod_date] } })
-        format.html { redirect_to set_wod_path, notice: 'WOD dates successfully updated' }
-      else
-        format.html { redirect_to set_wod_path, notice: 'Failure' }
-      end
+      format.html { redirect_to set_wod_path, notice: 'WOD dates successfully updated' }
     end
   end
 
@@ -26,8 +23,6 @@ class WodController < ApplicationController
   def user_view; end
 
   private
-
-  # Use callbacks to share common setup or constraints between actions.
 
   def set_recent_workout_posts
     @workout_posts = WorkoutPost.recent_workout_posts

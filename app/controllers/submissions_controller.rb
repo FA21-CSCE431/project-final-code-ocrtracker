@@ -60,7 +60,8 @@ class SubmissionsController < ApplicationController
 
     respond_to do |format|
       # If the workout submission and all exercise submissions are valid
-      if ExerciseSubmission.update(exercise_submissions_data.keys, exercise_submissions_data.values)
+      if exercise_submissions_data.all? { |_k, v| v[:unit_value] }
+        ExerciseSubmission.update(exercise_submissions_data.keys, exercise_submissions_data.values)
         format.html { redirect_to '/wod', notice: 'Submission was successfully edited' }
       else
         format.html { redirect_to edit_submission_url(params[:workout_post_id]), notice: 'Workout submission was not valid' }

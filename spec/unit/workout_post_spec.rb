@@ -22,7 +22,7 @@ RSpec.describe WorkoutPost, type: :model do
   end
 
   it 'gives the correct current_wod' do
-    expect(described_class.current_wod).to eql(workout_posts(:wp2))
+    expect(described_class.current_wod.id).to eql(workout_posts(:wp2).id)
   end
 
   it 'does not give future wods' do

@@ -17,8 +17,6 @@ class User < ApplicationRecord
   has_one_attached :image, dependent: :destroy
   validates :image, blob: { content_type: ['image/png', 'image/jpg', 'image/jpeg'], size_range: 1..(5.megabytes) }
 
-  # acts_as_voter
-
   def fistbumps_recieved_in_last_month
     count = 0
     exercise_submissions.each do |es|
