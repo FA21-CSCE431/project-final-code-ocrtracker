@@ -30,27 +30,39 @@
               <% if @current_submission.empty? %>
                 <%=="Current: <a href='#{new_submission_path(wp)}'>#{wp.title}</a>"%>
               <% else %>
-                <%=="Current: <a href='#{edit_submission_path(wp)}'>#{wp.title}</a>"%>
+                <%=="Current: #{wp.title}"%>
               <% end %>
               <%#"<a href='#{submissions_history_path(wp)}'>View submissions history</a>"%>
             <% elsif current_user.is_admin? %>
-              <%=="<a href='#{submissions_history_path(wp)}'>#{wp.title}</a>"%>
+              <%=wp.title%>
             <% else %>
               <%=wp.title%>
             <% end %>
           
 
             <%=wp.humanized_wod_date%>
-            <% if wp == @workout_posts.first && current_user.is_admin? %>
-              <%=="<a href='#{submissions_history_path(wp)}'>(View history)</a>"%>
             
-            <% end %>
-
             
             <br>
             </h2>
             <% wp.exercise_submissions_to_this_post_for_current_user(current_user).each do |es| %>
               <p><%="#{es.exercise.title}: #{es.humanized_unit_value}"%></p>
+            <% end %>
+            <% if wp == @workout_posts.first %>
+              <% if @current_submission.empty? %>
+                <%=="Current: <a href='#{new_submission_path(wp)}'>#{wp.title}</a>"%>
+              <% else %>
+              <div class="row">
+                <div class="col">
+                  <%= button_to "Submit Scores", edit_submission_path(wp), :method => "get",:class => "universal-button", :style => "margin-left: 0%; display: inline; float: left; display: flex; flex-wrap: wrap;" %>
+                </div> 
+              <% end %>
+            <% end %>
+            <% if current_user.is_admin? %>
+              <div class="col">
+                <%= button_to "View History", submissions_history_path(wp), :method => "get",:class => "universal-button", :style => "margin-right: 0%; display: inline; float: right; display: flex; flex-wrap: wrap;" %>
+              </div> 
+              </div>              
             <% end %>
             <hr>
             <br>
