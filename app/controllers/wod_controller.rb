@@ -13,12 +13,9 @@ class WodController < ApplicationController
   def update_wod
     submitted_hash = params[:workout_post]
 
+    WorkoutPost.update(submitted_hash.keys, submitted_hash.values.map { |x| { wod_date: x[:wod_date] } })
     respond_to do |format|
-      if WorkoutPost.update(submitted_hash.keys, submitted_hash.values.map { |x| { wod_date: x[:wod_date] } })
-        format.html { redirect_to set_wod_path, notice: 'WOD dates successfully updated' }
-      else
-        format.html { redirect_to set_wod_path, notice: 'Failure' }
-      end
+      format.html { redirect_to set_wod_path, notice: 'WOD dates successfully updated' }
     end
   end
 
@@ -27,13 +24,12 @@ class WodController < ApplicationController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
-
   def set_recent_workout_posts
     @workout_posts = WorkoutPost.recent_workout_posts
   end
 
   def set_all_current_or_past_wps_with_wod_dates
     @workout_posts = WorkoutPost.current_or_past_wod
+    @current_submission = WorkoutSubmission.where(user_id: current_user.id, workout_post_id: WorkoutPost.current_wod)
   end
 end

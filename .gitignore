@@ -52,7 +52,14 @@ yarn-debug.log*
 /coverage
 # Ignore application configuration
 /config/application.yml
+/config/secrets/*
 
+/public/packs
+/public/packs-test
+/node_modules
+/yarn-error.log
+yarn-debug.log*
+.yarn-integrity
 
 /public/packs
 /public/packs-test

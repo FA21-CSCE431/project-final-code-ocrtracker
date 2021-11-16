@@ -1,45 +1,65 @@
 <!DOCTYPE html>
 <html>
-
   <head>
-      <%= stylesheet_link_tag  'wod', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag  'wod', media: 'all', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body id="wod">
-    <br>
-    <h1>View WODs</h1>
-    <br>
-
-    <div class="container">
-
-      <% if flash.any? %>
-        <% flash.each do |key, value| -%>
-          <section class="flash flash__<%= key %>"><%= value.html_safe %></section>
-        <% end -%>
-      <% end %>
-
-      <% @workout_posts.each do |wp| %>
-
-        <h2>
-
-        <% if wp == @workout_posts.first %>
-          <%=="Current: <a href='#{new_submission_path(wp)}'>#{wp.title}</a>"%>
-        <% else %>
-          <%=wp.title%>
+    <h1>View Workout of the Day</h1>
+    <div class="container-fluid">
+      <div class = "row">
+        <div class="col-1 col-lg-2">
+          <br>
+        </div>
+        <div class="content col-10 col-lg-8">
+          <% if flash.any? %>
+            <% flash.each do |key, value| -%>
+              <section class="flash flash__<%= key %>"><%= value.html_safe %></section>
+            <% end -%>
+          <% end %>
+          <% @workout_posts.each do |wp| %>
+            <h2>
+              <% if wp == @workout_posts.first %>
+                <% if @current_submission.empty? %>
+                  <%=="Current: #{wp.title}"%>
+                <% else %>
+                  <%=="Current: #{wp.title}"%>
+                <% end %>
+                <%#"<a href='#{submissions_history_path(wp)}'>View submissions history</a>"%>
+              <% elsif current_user.is_admin? %>
+                <%=wp.title%>
+              <% else %>
+                <%=wp.title%>
+              <% end %>
+              <%=wp.humanized_wod_date%>
+              <br>
+            </h2>
+            <% wp.exercise_submissions_to_this_post_for_current_user(current_user).each do |es| %>
+              <p><%="#{es.exercise.title}: #{es.humanized_unit_value}"%></p>
+            <% end %>
+            <div class="row">
+              <div class="col">
+                <% if wp == @workout_posts.first %>
+                  <% if @current_submission.empty? %>
+                    <%= button_to "Submit Scores", new_submission_path(wp), :method => "get",:class => "universal-button", :style => "margin-left: 0%; display: inline; float: left; display: flex; flex-wrap: wrap;" %>
+                  <% else %>
+                    <%= button_to "Edit Scores", edit_submission_path(wp), :method => "get",:class => "universal-button", :style => "margin-left: 0%; display: inline; float: left; display: flex; flex-wrap: wrap;" %>
+                  <% end %>
+                <% end %>
+                </div>
+            <% if current_user.is_admin? %>
+              <div class="col">
+                <%= button_to "View History", submissions_history_path(wp), :method => "get",:class => "universal-button", :style => "margin-right: 0%; display: inline; float: right; display: flex; flex-wrap: wrap;" %>
+              </div>
+            <% end %>
+            </div>
+          <hr>
+          <br>
         <% end %>
-      
-        <%=wp.humanized_wod_date%>
+      </div>
+      <div class="col-1 col-lg-2">
         <br>
-        </h2>
-        <% wp.exercise_submissions_to_this_post_for_current_user(current_user).each do |es| %>
-          <p><%="#{es.exercise.title} (#{es.exercise.humanized_unit_name}: #{es.humanized_unit_value})"%></p>
-        <% end %>
-        <hr>
-        <br>
-      <% end %>
-
+      </div>
     </div>
-
-  </body>
-
+  </div>
+</body>
 </html>

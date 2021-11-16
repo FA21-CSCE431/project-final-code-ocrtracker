@@ -8,4 +8,8 @@ module IntegrationSpecHelper
   def login_as_admin
     sign_in users(:admin_account)
   end
+
+  def login_as_safegaurd
+    sign_in users(:permanent_admin_account)
+  end
 end

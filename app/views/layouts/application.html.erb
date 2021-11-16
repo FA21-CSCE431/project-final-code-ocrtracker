@@ -4,8 +4,11 @@
     <title>OCR Tracker</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <%= stylesheet_link_tag  'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= favicon_link_tag asset_path('favicon.png') %>
+    
     <style>
         .flash__alert   { color: red; }
         .flash__notice  { color: blue; }
@@ -49,6 +52,7 @@
               <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
                 <li><%= link_to "View Profile", profiles_path(current_user.id), class: 'nav-link' , style: "color: black"%></li>
                 <li><%= link_to "Members", '/members', class: 'nav-link', style: "color: black"%></li>
+                <li><%= link_to "Help", '/documentation', class: 'nav-link', style: "color: black"%></li>
                 <li><hr class="dropdown-divider"></li>
                 <li><%= link_to "Sign Out", destroy_user_session_path, class: 'nav-link' , style: "color: black"%></li>
               </ul>
@@ -81,6 +85,7 @@
               <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
                 <li><%= link_to "View Profile", profiles_path(current_user.id), class: 'nav-link' , style: "color: black"%></li>
                 <li><%= link_to "Members", '/members', class: 'nav-link', style: "color: black"%></li>
+                <%= link_to "Help", '/documentation', class: 'nav-link', style: "color: black" %>
                 <li><hr class="dropdown-divider"></li>
                 <li><%= link_to "Sign Out", destroy_user_session_path, class: 'nav-link' , style: "color: black"%></li>
               </ul>

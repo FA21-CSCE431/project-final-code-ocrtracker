@@ -36,29 +36,29 @@ RSpec.describe 'Viewing a workout post', type: :feature do
   end
 end
 
-RSpec.describe 'Submitting to a workout post', type: :feature do
-  fixtures :users, :exercises, :workout_posts, :exercise_posts
+RSpec.describe 'Submitting a new workout submission', type: :feature do
+  fixtures :users, :exercises, :workout_posts, :exercise_posts, :workout_submissions
 
   # Sunny
   scenario 'user fills in all available fields' do
-    login_as_user
+    login_as_admin
 
     wp = workout_posts(:wp1)
 
     visit "/submissions/new/#{wp.id}"
 
     # Fill in all entry boxes
-    fill_in 'Minutes', with: '2'
-    fill_in 'Seconds', with: '30'
-    fill_in 'Number', with: '50'
+    fill_in 'Minutes', with: '23'
+    fill_in 'Seconds', with: '24'
+    fill_in 'Number', with: '25'
 
     click_on 'Submit'
-    expect(page).to have_current_path root_path, ignore_query: true
+    expect(page).to have_content('23').and have_content('24').and have_content('25')
   end
 
   # Rainy
   scenario 'user does not fill in any fields' do
-    login_as_user
+    login_as_admin
 
     wp = workout_posts(:wp1)
 
@@ -67,5 +67,116 @@ RSpec.describe 'Submitting to a workout post', type: :feature do
     click_on 'Submit'
 
     expect(page).to have_current_path new_submission_url(wp.id), ignore_query: true
+  end
+
+  scenario 'user gets redirected to new if they do not have a submission' do
+    login_as_admin
+    wp = workout_posts(:wp1)
+    visit "/submissions/edit/#{wp.id}"
+    expect(page).to have_current_path "/submissions/new/#{wp.id}", ignore_query: true
+  end
+end
+
+RSpec.describe 'Editing a workout submission', type: :feature do
+  fixtures :users, :exercises, :workout_posts, :exercise_posts, :workout_submissions, :exercise_submissions
+
+  scenario 'user fills in all available fields' do
+    login_as_user
+
+    wp = workout_posts(:wp1)
+    visit "/submissions/edit/#{wp.id}"
+
+    # Fill in all entry boxes
+    fill_in 'Minutes', with: '23'
+    fill_in 'Seconds', with: '24'
+    fill_in 'Number', with: '25'
+
+    click_on 'Submit'
+    expect(page).to have_content('23').and have_content('24').and have_content('25')
+  end
+
+  scenario 'user clears all available fields' do
+    login_as_user
+
+    wp = workout_posts(:wp1)
+    visit "/submissions/edit/#{wp.id}"
+
+    # Fill in all entry boxes
+    fill_in 'Minutes', with: ''
+    fill_in 'Seconds', with: ''
+    fill_in 'Number', with: ''
+
+    click_on 'Submit'
+    expect(page).to have_current_path "/submissions/edit/#{wp.id}", ignore_query: true
+  end
+
+  scenario 'user goes back to edit a workout submission' do
+    login_as_user
+    wp = workout_posts(:wp1)
+
+    visit "/submissions/edit/#{wp.id}"
+    expect(page).to have_content('Edit Workout Submission')
+  end
+
+  scenario 'user gets redirected to edit if they have a submission' do
+    login_as_user
+    wp = workout_posts(:wp1)
+
+    visit "/submissions/new/#{wp.id}"
+    expect(page).to have_current_path "/submissions/edit/#{wp.id}", ignore_query: true
+  end
+end
+
+RSpec.describe 'viewing workout history', type: :feature do
+  fixtures :users, :exercises, :workout_posts, :exercise_posts, :workout_submissions
+
+  scenario 'admin wants to view workout history' do
+    login_as_admin
+
+    wp = workout_posts(:wp1)
+
+    visit "/submissions/history/#{wp.id}"
+
+    expect(page).to have_content 'Workout Post 1'
+  end
+
+  scenario 'future workout history' do
+    login_as_admin
+
+    wp = workout_posts(:wp_with_wod_in_future)
+
+    visit "/submissions/history/#{wp.id}"
+
+    expect(page).to have_content 'Workout Post 3 (WOD in future)'
+  end
+
+  scenario 'no workout history' do
+    login_as_admin
+
+    wp = workout_posts(:wp_with_no_submissions)
+
+    visit "/submissions/history/#{wp.id}"
+
+    expect(page).to have_content 'Workout Post 4 (no submissions)'
+  end
+
+  scenario 'user wants to view workout history' do
+    login_as_user
+
+    wp = workout_posts(:wp1)
+
+    visit "/submissions/history/#{wp.id}"
+
+    expect(page).to have_current_path root_path, ignore_query: true
+  end
+
+  scenario 'user no workout history' do
+    login_as_user
+
+    wp = workout_posts(:wp_with_no_submissions)
+
+    visit "/submissions/history/#{wp.id}"
+
+    expect(page).to have_current_path root_path, ignore_query: true
   end
 end

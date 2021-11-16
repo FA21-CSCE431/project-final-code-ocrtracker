@@ -8,31 +8,38 @@
     <% end %>
 
     <head>
-    <%= stylesheet_link_tag  'permissions', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag  'members', media: 'all', 'data-turbolinks-track': 'reload' %>
     </head>
 
     <body id="members-page">
-    <%= form_with url:"/members", method: :post do |perm_form| %>
-        <br>
-        <h1 style="color: white">Members</h1>
-        <br>
-        <div class="container">
+
+      <h1>Members</h1>
+        
+      <div class="container-fluid">
+        <div class = "row">
+
+          <div class="col-1 col-lg-2">
             <br>
-            <input type="text" size="30" style="margin-bottom: 3%; border-radius: 10px; border: none;" id="inputName" onkeyup="searchName()" placeholder="Search by Name" title="Type in a name">
-            <table id="userTable">
-              <tr>
-              <th style="width:20%"></th>
-              <th style="width:20%">Name</th>
-              <th style="width:20%">Email</th>
-            </tr>
-              <% @users.each do |user| %>
-                <%= perm_form.fields_for user, index: user.id, method: :post do |p_fields|%>
+          </div>
+
+          <div class="content col-10 col-lg-8">
+            <%= form_with url:"/members", method: :get do |perm_form| %>
+              <br>
+              <input type="text" size="30" style="margin-bottom: 3%; border-radius: 10px; border: none;" id="inputName" onkeyup="searchName()" placeholder="Search by Name" title="Type in a name">
+              <table id="userTable">
                 <tr>
-                  <td>
+                <th style="width:10%;"></th>
+                <th style="width:20%">Name</th>
+                <th style="width:20%">Email</th>
+              </tr>
+              <% @users.each do |user| %>
+                <%= perm_form.fields_for user, index: user.id, method: :get do |p_fields|%>
+                <tr>
+                  <td align="center">
                     <% if user.image.attached? %>
-                      <%= image_tag user.image, style: "width: 100px; display: block" %>
+                      <%= image_tag user.image, style: "width: 70px; height: 70px; object-fit: cover; object-position: 50% 50%; border-radius: 50%; display: block" %>
                     <% else %>
-                      <img src= <%= user.avatar_url%> height="100" width="100"/>
+                      <img src= <%= user.avatar_url%> class="profile-picture"/>
                     <% end %>
                   </td>
                   <td><%= link_to "#{user.full_name}",  "/profiles/#{user.id}"%></td>
@@ -40,10 +47,17 @@
                 </tr>
                 <% end %>
               <% end %>
-            </table>
+              </table>
+              <br>
+            <% end %>
+          </div>
+
+          <div class="col-1 col-lg-2">
             <br>
+          </div>
+          
         </div>
-      <% end %>
+      </div>
     </body>
 
 </html>
@@ -56,7 +70,7 @@ function searchName() {
   table = document.getElementById("userTable");
   tr = table.getElementsByTagName("tr");
   for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[0];
+    td = tr[i].getElementsByTagName("td")[1];
     if (td) {
       txtValue = td.textContent || td.innerText;
       if (txtValue.toUpperCase().indexOf(filter) > -1) {

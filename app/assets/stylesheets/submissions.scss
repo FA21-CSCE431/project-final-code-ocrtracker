@@ -1,21 +1,23 @@
-.container {
-    background: rgba(33, 37, 41, 0.98) ;
-    padding: 25px;
+.content {
+    background: rgba(33, 37, 41, 0.98);
+    padding: 20px;
     color: white;
     border-radius: 10px;
     position: relative;
-    width: 65%;
-    height: 65%;
     overflow: auto;
+    height: 65vh;
 }
 
 h1{
+    font-size: calc(100% + 1.3vw + 1.3vh);
     position: relative;
     text-align: center;
     color: black;
+    padding: 25px;
 }
 
 h2{
+    font-size: calc(100% + 1vw + 1vh);
     text-align: center;
 }
 
@@ -30,8 +32,14 @@ body#submissions-page{
 }
 
 .back-btn{
-    position: relative;
-    transform: translate(-50%, -50%);
+    padding-top: 100px; 
 }
+
+.actions{
+    padding-top: 100px; 
+}
+
+
+
 
 

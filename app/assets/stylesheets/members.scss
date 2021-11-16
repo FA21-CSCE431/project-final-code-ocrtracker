@@ -1,0 +1,50 @@
+.content {
+    background: rgba(33, 37, 41, 0.98);
+    padding: 20px;
+    color: white;
+    border-radius: 10px;
+    position: relative;
+    overflow: auto;
+    height: 70vh;
+}
+
+h1{
+    font-size: calc(100% + 1.3vw + 1.3vh);
+    position: relative;
+    text-align: center;
+    color: white;
+    padding: 25px;
+}
+
+h2{
+    font-size: calc(100% + 1vw + 1vh);
+    text-align: center;
+}
+
+p{
+    font-size: calc(100% + 0.5vw + 0.5vh);
+    color: white;
+    font-weight: 300;
+}
+
+body#members-page {
+    background-image: image-url('profile.jpg');
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+th{
+    font-size: calc(100% + 0.3vw + 0.3vh);
+}
+
+td{
+    font-size: calc(100% + 0.1vw + 0.1vh);
+}
+
+.profile-picture{
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: block;
+    object-fit: cover;
+    object-position: 50% 50%;
+}

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <%= stylesheet_link_tag  'documentation', media: 'all', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <h1>Documentation</h1>
+    <div class="container-fluid">
+      <div class = "row">
+        
+
+        <div class="col-1 col-lg-2">
+          <br>
+        </div>
+
+        <div class="content col-10 col-lg-8">
+          <% if @current_user.is_admin %>
+            <div class="accordion" id="accordionExample">
+
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  <h2>Documentation for Admin </h2>
+                  </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <p>Welcome to OCR Tracker! As an admin of the organization you have special responsibilities and privileges on the website. On this page, we will walk you through the process of using the website to post workouts, keep track of members&apos; progress and submit your own scores. Please reach out to another admin for any additional questions.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingTwo">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                    <h2>Admin Priveleges</h2>
+                  </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <p>In the navigation bar above, you will see a tab called &apos;Management&apos;. Clicking on the tab opens up a dropdown menu including the options Exercises, New Post, Set WOD, and Permissions. Each of these links is only for admin use and is used to keep the website up to date for use.</p>
+
+                    <h3>Exercises</h3>
+                    <p> On the Exercises Page, you will see a list of all the exercises other admin have created for the OCR Tracker. Each exercise consists of a name, a description, a picture (which is optional), and a unit name. </p>
+                    <p> To create a new exercise click the link at the top &apos;New Exercise&apos;. Fill in the fields with the necessary information. If you wish to include a picture, you can upload one from your device. The unit name of an exercise keeps track of how to score the values submitted for the particular exercise. For example, you might want to keep track of reps for pushups, or time how fast members can run a mile, or time how long members can keep a plank. </p>
+                    <p>Once finished, click submit. Your exercise can now be used in future workouts for the OCR Tracker. If you&apos;d like to go back and change an exercise, an edit link for each exercise sits next to the exercise.</p>
+
+                    <h3>New Post</h3>
+                    <p> To create a new post that members can complete, click on the New Post link under the Management tab. Here you will see a text field to title your workout post. Below that are fields to create exercises with specific instructions. Begin by selecting an exercise from the list of exercises you and other admin created as previously mentioned. Then, mention any specific instructions on how to complete the exercise for this workout. Finally, check whether you wish for members to be able to see their and others&apos; scores on the leaderboard by clicking on the Ranked? Checkbox. If you wish to add more exercises, click the new button at the top. If you decide you wish to delete an exercise from the workout, click the delete button corresponding to the specific exercise. </p>
+                    <p> Once the workout post is to your liking click submit. Don&qout:t worry, the workout post is not yet publicly displayed. To allow members to see and submit scores for your workout post, you must set it as a Workout of the Day (WOD). </p>
+                    
+                    <h3>Set WOD</h3>
+                    <p>This page is to set the current and future Workouts of the Day. Members will only be able to submit scores for the current WOD. The Set WOD page showcases the last 10 workout posts created by any and all admin. By clicking the calendar icon next to the workout, you can pick which date to set the post as the WOD. If you decide against the date picked, you can clear the value by clicking the clear button next to the workout. Once all the dates have been picked, click Set WOD Dates to save the changes. This allows you to schedule the WOD ahead of time and for multiple days in advance.</p>
+                    
+                    <h3>Permissions</h3>
+                    <p>To upgrade other members and give them admin access, you may search this page for their email address or find their name in the list shown. By checking the check box next to the member, you give them the same privileges that you have as ad admin. Similarly, if an admin member needs to be downgraded to member status, unchecking the checkbox next to their name will do so. As a failsafe, we have given permanent privileges to the ocr email tamuocr@&gmail.com in case all other admin access is somehow lost. </p>
+                    
+                    <h3>Submission History </h3>
+                    <p>As an admin, you can view all the scores submitted by members for a specific WOD. Simply click the History link in the WOD tab next to the specific WOD and a page will open up showing all the values submitted for each exercise of the workout. This can be used to track the progress and involvement of members.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingThree">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                  <h2>Using the Website</h2>
+                  </button>
+                </h2>
+                <div id="collapseThree" class="accordion-collapse collapse show" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                  <h3>Home Page </h3>
+                  <p>The home page displays the number of workouts completed by the entire organization as well as a trendline of the number of workouts completed in the last seven days.</p>
+                  
+                  <h3>Profiles</h3>
+                  <p> By clicking the link View Profile under your name in the navigation bar, you can view your own profile. Here you can see your profile picture, your bio, and how many fistbumps you&apos;ve recieved and given in the last month. Fistbumps can be given or recieved from the Leaderboard page.</p>
+                  <p>You can also edit your profile by clicking the Edit Profile button. Your profile picture can be uploaded from your device. </p>
+                  <p> You can also view all the members in the organization on the Members Page from the tab with your name. This gives a full list of the members, their profile picture, and their email address. You can view specific profiles by clicking on their name. </p>
+                  
+                  <h3>WOD</h3>
+                  <p>On the WOD tab, you can view your own previous WOD submissions as well as submit scores for the current WOD. Simply click the link for the current WOD and you will be taken to a page where you can input the values for specific exercises. Each exercise comes with a description, specific instructions, the unit type (this informs you of what type of value to input in the text field), and occasionally a picture. Once you have submitted your values, if the exercise will be ranked on the leaderboard, you can choose to opt_out. If the opt_out checkbox is checked, your score will remain private and not be shown in the leaderboard. It will, however, be accessible by admins when viewing the submission history of all members for a particular workout. Once your submission is complete, click submit. If you wish to go back and edit your scores, clicking the same link will load your previous scores that you can change. Submissions can only be editted or created for the current WOD. </p>
+                  
+                  <h3>Leaderboard</h3>
+                  <p>The leaderboard showcases the scores for ranked exercises in the current Workout of the Day in order from best to worst.You can give other members&apos; scores a fistbump to encourage a sense of community and camaraderie throughout the website. You can also view the fistbumps given to your public scores. To view the scores of another ranked exercise, simply click it&apos;s tab. You can also view the profiles of your fellow org members by clicking their name. </p>
+                  </div>
+                </div>
+              </div>
+            </div>  
+            
+          <% else %>
+
+            <div class="accordion" id="accordionExample">
+
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="headingOne-User">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne-User" aria-expanded="true" aria-controls="collapseOne-User">
+                      <h2>Documentation for User</h2>
+                    </button>
+                  </h2>
+                  <div id="collapseOne-User" class="accordion-collapse collapse show" aria-labelledby="headingOne-User" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                      <p>Welcome to OCR Tracker! As a member of the organization, you have the ability to submit scores for workouts, view the profiles of your peers, and stay motivated to be the best obstacle course racer you can be. We will explain how to use the website and hopefully answer any questions or concerns you have. If you have additonal questions, please reach out to an admin/officer for help. 
+                    </div>
+                  </div>
+                </div>
+
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="headingTwo-User">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo-User" aria-expanded="true" aria-controls="collapseTwo-User">
+                      <h2>Using the Website</h2>
+                    </button>
+                  </h2>
+                  <div id="collapseTwo-User" class="accordion-collapse collapse show" aria-labelledby="headingTwo-User" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                    <h3>Home Page </h3>
+                    <p>The home page displays the number of workouts completed by the entire organization as well as a trendline of the number of workouts completed in the last seven days.</p>
+                    
+                    <h3>Profiles</h3>
+                    <p> By clicking the link View Profile under your name in the navigation bar, you can view your own profile. Here you can see your profile picture, your bio, and how many fistbumps you&apos;ve recieved and given in the last month. Fistbumps can be given or recieved from the Leaderboard page.</p>
+                    <p>You can also edit your profile by clicking the Edit Profile button. Your profile picture can be uploaded from your device. </p>
+                    <p> You can also view all the members in the organization on the Members Page from the tab with your name. This gives a full list of the members, their profile picture, and their email address. You can view specific profiles by clicking on their name. </p>
+                    
+                    <h3>WOD</h3>
+                    <p>On the WOD tab, you can view your own previous WOD submissions as well as submit scores for the current WOD. Simply click the link for the current WOD and you will be taken to a page where you can input the values for specific exercises. Each exercise comes with a description, specific instructions, the unit type (this informs you of what type of value to input in the text field), and occasionally a picture. Once you have submitted your values, if the exercise will be ranked on the leaderboard, you can choose to opt_out. If the opt_out checkbox is checked, your score will remain private and not be shown in the leaderboard. It will, however, be accessible by admins when viewing the submission history of all members for a particular workout. Once your submission is complete, click submit. If you wish to go back and edit your scores, clicking the same link will load your previous scores that you can change. Submissions can only be editted or created for the current WOD. </p>
+                    
+                    <h3>Leaderboard</h3>
+                    <p>The leaderboard showcases the scores for ranked exercises in the current Workout of the Day in order from best to worst.You can give other members&apos; scores a fistbump to encourage a sense of community and camaraderie throughout the website. You can also view the fistbumps given to your public scores. To view the scores of another ranked exercise, simply click it&apos;s tab. You can also view the profiles of your fellow org members by clicking their name. </p>
+                    </div>
+                  </div>
+                </div>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="col-1 col-lg-2">
+            <br>
+        </div>
+
+      </div>
+    </div>
+  </body>
+</html>

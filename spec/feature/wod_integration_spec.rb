@@ -75,14 +75,14 @@ RSpec.describe 'User wod view', type: :feature do
   scenario 'User sees link to the current WOD' do
     login_as_user
     visit user_wod_path
-    expect(page).to have_link(nil, href: new_submission_path(workout_posts(:wp2)))
+    expect(page).to have_link_helper(edit_submission_path(workout_posts(:wp2)))
   end
 
   scenario 'No WODs, does not crash' do
     WorkoutPost.all.destroy_all
     login_as_user
     visit user_wod_path
-    expect(page).to have_content 'View WODs'
+    expect(page).to have_content 'View Workout of the Day'
   end
 
   scenario 'User cannot see future WOD' do
@@ -101,5 +101,17 @@ RSpec.describe 'User wod view', type: :feature do
     login_as_user
     visit user_wod_path
     expect(page).to have_content workout_posts(:wp_with_no_submissions).title
+  end
+
+  scenario 'Admin sees links to submissions history for previous WODs' do
+    login_as_admin
+    visit user_wod_path
+    expect(page).to have_link_helper(submissions_history_path(workout_posts(:wp1)))
+  end
+
+  scenario 'User cannot see links to submissions history for previous WODs' do
+    login_as_user
+    visit user_wod_path
+    expect(page).not_to have_link_helper(submissions_history_path(workout_posts(:wp1)))
   end
 end

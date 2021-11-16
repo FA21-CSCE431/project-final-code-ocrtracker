@@ -1,22 +1,23 @@
-.container {
-    background: rgba(33, 37, 41, 0.99) ;
-    padding: 25px;
+.content {
+    background: rgba(33, 37, 41, 0.98);
+    padding: 20px;
     color: white;
     border-radius: 10px;
     position: relative;
-    width: 80%;
-    height: 70%;
     overflow: auto;
+    height: 65vh;
 }
 
 h1{
-    font-size: calc(100% + 2.3vw + 2.3vh);
+    font-size: calc(100% + 1.2vw + 1.2vh);
     position: relative;
     text-align: center;
     color: black;
+    padding: 25px;
 }
 
 h2{
+    font-size: calc(100% + 1vw + 1vh);
     text-align: center;
 }
 

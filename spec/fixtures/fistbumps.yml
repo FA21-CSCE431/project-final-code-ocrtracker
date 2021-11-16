@@ -4,7 +4,7 @@ fb1:
 
 fb2:
   user: account3
-  exercise_submission: es3
+  exercise_submission: es4
 
 fb3:
   user: account3
@@ -13,3 +13,7 @@ fb3:
 fb4:
   user: user_account
   exercise_submission: es6
+
+fb5:
+  user: admin_account
+  exercise_submission: es4

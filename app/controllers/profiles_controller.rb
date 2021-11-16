@@ -14,7 +14,7 @@ class ProfilesController < ApplicationController
         format.html { redirect_to "/profiles/#{current_user.id}", notice: 'Profile was successfully updated' }
         format.json { render :show, status: :ok, location: @profile }
       else
-        format.html { render :edit, status: :unprocessable_entity }
+        format.html { redirect_to edit_profile_path(current_user) }
         format.json { render json: @profile.errors, status: :unprocessable_entity }
       end
     end
