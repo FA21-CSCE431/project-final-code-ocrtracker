@@ -102,10 +102,6 @@ RSpec.configure do |config|
 end
 
 OmniAuth.config.test_mode = true
-# OmniAuth.config.add_mock(:user_google_oauth2_omniauth_authorize_path, {
-#   :uid => '12345',
-#   :is_admin => true
-# })
 OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
                                                                      provider: 'google_oauth2',
                                                                      uid: '123456789',
