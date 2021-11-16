@@ -23,12 +23,12 @@ RSpec.describe 'Fistbumps', type: :feature do
   scenario 'cannot fistbump a submission twice' do
     login_as_admin
     visit '/leaderboard'
-    expect(page).not_to have_link(nil, href: "'/leaderboard/like/#{exercise_submissions(:es4).id}']")
+    expect(page).not_to have_link_helper("/leaderboard/like/#{exercise_submissions(:es4).id}")
   end
 
   scenario 'cannot un-fistbump a submission twice' do
-    login_as_admin
+    login_as_user
     visit '/leaderboard'
-    expect(page).not_to have_link(nil, href: "'/leaderboard/unlike/#{exercise_submissions(:es4).id}']")
+    expect(page).not_to have_link_helper("/leaderboard/unlike/#{exercise_submissions(:es4).id}")
   end
 end

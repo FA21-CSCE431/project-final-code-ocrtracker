@@ -17,6 +17,7 @@
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 require 'omniauth'
 require './spec/support/integration_spec_helper'
+require './spec/support/have_link_helper'
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
@@ -96,7 +97,8 @@ RSpec.configure do |config|
   #   # as the one that triggered the failure.
   #   Kernel.srand config.seed
 
-  config.include IntegrationSpecHelper # , :type => :request
+  config.include IntegrationSpecHelper
+  config.include HaveLinkHelper
 end
 
 OmniAuth.config.test_mode = true
