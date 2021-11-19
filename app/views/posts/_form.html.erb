@@ -2,7 +2,7 @@
     
     <h2 style="text-align: center;">
         <%= wp_form.label :title, "Title"%>
-        <%= wp_form.text_field :title, class: 'form-control'%>
+        <%= wp_form.text_field :title, class: 'form-control', required: true%>
     </h2>
 
     <hr>
@@ -13,12 +13,12 @@
                 <br>
                 <p>
                     <%= ep_form.label :exercise_id, "Exercise"%>
-                    <%= ep_form.select(:exercise_id, Exercise.all.collect {|e| ["#{e.title}: #{e.humanized_unit_name}", e.id]},  {prompt: "Select"}, {class: 'form-control'}) %>
+                    <%= ep_form.select(:exercise_id, Exercise.all.collect {|e| ["#{e.title}: #{e.humanized_unit_name}", e.id]},  {prompt: "Select"}, class: 'form-control', required: true) %>
                 </p>
 
                 <p>
                     <%= ep_form.label :specific_instructions, "Specific Instructions"%>
-                    <%= ep_form.text_area :specific_instructions, class: 'form-control'%>
+                    <%= ep_form.text_area :specific_instructions, class: 'form-control', required: true%>
                 </p>
 
                 <p>
