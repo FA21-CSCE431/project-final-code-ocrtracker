@@ -31,12 +31,11 @@
             <% end %>
           </div>
           <div class="text mt-3"> <p style="font-size: 14px; color: white"><%=@profile.description %></p> </div>
-          <% if current_user.is_admin? %>
-              <div class=" px-2 rounded mt-4 date "> <span style="color: white" class="join">OCRTracker Admin</span> </div>
-            <%end%>
-            <% if !current_user.is_admin? %>
-              <div class=" px-2 rounded mt-4 date "> <span style="color: white" class="join">OCRTracker Member</span> </div>
-            <%end%>
+          <% if @profile.is_admin? %>
+            <div class=" px-2 rounded mt-4 date "> <span style="color: white" class="join">OCRTracker Admin</span> </div>
+          <% else %>
+            <div class=" px-2 rounded mt-4 date "> <span style="color: white" class="join">OCRTracker Member</span> </div>
+          <%end%>
         </div>
     </div>
 </div>
