@@ -29,7 +29,7 @@ RSpec.describe 'Editing permissions', type: :feature do
     visit '/permissions'
     page.check("[user][#{users(:admin_account).id}][is_admin]")
     click_on 'Save Changes'
-    expect(page).to have_content 'Users successfully updated'
+    expect(page).to have_current_path permissions_path, ignore_query: true
   end
 
   scenario 'valid uncheck' do
@@ -52,7 +52,7 @@ RSpec.describe 'Editing permissions', type: :feature do
     page.check("[user][#{users(:admin_account).id}][is_admin]")
     page.check("[user][#{users(:user_account).id}][is_admin]")
     click_on 'Save Changes'
-    expect(page).to have_content 'Users successfully updated'
+    expect(page).to have_current_path permissions_path, ignore_query: true
   end
 
   scenario 'update multiple-remove' do
@@ -89,7 +89,7 @@ RSpec.describe 'Editing permissions', type: :feature do
     page.check("[user][#{users(:user_account).id}][is_admin]")
     page.uncheck("[user][#{users(:account3).id}][is_admin]")
     click_on 'Save Changes'
-    expect(page).to have_content 'Users successfully updated'
+    expect(page).to have_current_path permissions_path, ignore_query: true
   end
 
   scenario 'testing safegaurd-rm' do
@@ -98,7 +98,7 @@ RSpec.describe 'Editing permissions', type: :feature do
     page.uncheck("[user][#{users(:admin_account).id}][is_admin]")
     page.uncheck("[user][#{users(:user_account).id}][is_admin]")
     click_on 'Save Changes'
-    expect(page).to have_content 'Users successfully updated'
+    expect(page).to have_current_path permissions_path, ignore_query: true
   end
 
   scenario 'testing safegaurd-give' do
@@ -107,7 +107,7 @@ RSpec.describe 'Editing permissions', type: :feature do
     page.check("[user][#{users(:admin_account).id}][is_admin]")
     page.check("[user][#{users(:user_account).id}][is_admin]")
     click_on 'Save Changes'
-    expect(page).to have_content 'Users successfully updated'
+    expect(page).to have_current_path permissions_path, ignore_query: true
   end
 
   scenario 'testing safegaurd-mix' do
@@ -117,7 +117,7 @@ RSpec.describe 'Editing permissions', type: :feature do
     page.uncheck("[user][#{users(:user_account).id}][is_admin]")
     page.check("[user][#{users(:account3).id}][is_admin]")
     click_on 'Save Changes'
-    expect(page).to have_content 'Users successfully updated'
+    expect(page).to have_current_path permissions_path, ignore_query: true
   end
 
   scenario 'permanent admin (tamuocr@gmail.com) is not displayed' do
