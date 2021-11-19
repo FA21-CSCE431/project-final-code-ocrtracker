@@ -26,5 +26,4 @@ class PermissionsController < ApplicationController
       format.html { redirect_to permissions_url, notice: 'User removed' }
     end
   end
-
 end
