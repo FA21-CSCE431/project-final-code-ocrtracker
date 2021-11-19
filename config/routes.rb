@@ -29,6 +29,7 @@ Rails.application.routes.draw do
   get 'profiles/:id/', to: 'profiles#show', as: 'profiles'
   get 'profiles/:id/edit/', to: 'profiles#edit', as: 'edit_profile'
   post 'profiles/:id/', to: 'profiles#update'
+  delete 'profiles/:id/', to: 'profiles#destroy', as: 'remove_profile'
 
   get 'members/', to: 'members#index', as: 'members'
 

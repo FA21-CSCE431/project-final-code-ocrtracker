@@ -20,6 +20,14 @@ class ProfilesController < ApplicationController
     end
   end
 
+  def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+    respond_to do |format|
+      format.html { redirect_to permissions_url, notice: 'User removed' }
+    end
+  end
+
   private
 
   def set_profile

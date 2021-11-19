@@ -13,9 +13,9 @@
 
     <body id="permissions-page">
     <%= form_with url:"/permissions", method: :post do |perm_form| %>
-        
+
         <h1>Permissions</h1>
-        
+
         <div class="container-fluid justify-content-center">
 
           <div class = "row">
@@ -27,7 +27,7 @@
             <div class="content col-10 col-lg-8">
               <input type="text" size="30" style="margin-bottom: 3%; border-radius: 10px; border: none;" id="inputName" onkeyup="searchName()" placeholder=" Search by TAMU email" title="Type in a name">
               <table id="userTable">
-                <tr>
+              <tr>
                 <th>Email</th>
                 <th>Name</th>
                 <th style="text-align: center">Admin</th>
