@@ -1,0 +1,18 @@
+development:
+  cloud_name: <%= ENV['CLOUDINARY_CLOUD_NAME'].as_json %>
+  api_key: <%= ENV['CLOUDINARY_API_KEY'].as_json %>
+  api_secret: <%= ENV['CLOUDINARY_API_SECRET'].as_json %>
+  enhance_image_tag: true
+  static_file_support: false
+production:
+  cloud_name: <%= ENV['CLOUDINARY_CLOUD_NAME'].as_json %>
+  api_key: <%= ENV['CLOUDINARY_API_KEY'].as_json %>
+  api_secret: <%= ENV['CLOUDINARY_API_SECRET'].as_json %>
+  enhance_image_tag: true
+  static_file_support: true
+test:
+  cloud_name: <%= ENV['CLOUDINARY_CLOUD_NAME'].as_json %>
+  api_key: <%= ENV['CLOUDINARY_API_KEY'].as_json %>
+  api_secret: <%= ENV['CLOUDINARY_API_SECRET'].as_json %>
+  enhance_image_tag: true
+  static_file_support: false
