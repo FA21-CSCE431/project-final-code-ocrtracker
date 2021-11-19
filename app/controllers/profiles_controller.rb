@@ -3,6 +3,7 @@
 class ProfilesController < ApplicationController
   before_action :authenticate_user!, :set_profile, only: %i[show edit update]
   before_action :profile_owner, only: %i[edit update]
+  before_action :require_admin, only: %i[archive]
 
   def show; end
 
@@ -16,6 +17,28 @@ class ProfilesController < ApplicationController
       else
         format.html { redirect_to edit_profile_path(current_user) }
         format.json { render json: @profile.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def archive
+    user = User.find(params[:id])
+    respond_to do |format|
+      if user.archive
+        format.html { redirect_to permissions_url, notice: 'User archived successfully' }
+      else
+        format.html { redirect_to root_path, notice: 'Could not archive user' }
+      end
+    end
+  end
+
+  def restore
+    user = User.unscoped.find(params[:id])
+    respond_to do |format|
+      if user.un_archive
+        format.html { redirect_to permissions_url, notice: 'User restored successfully' }
+      else
+        format.html { redirect_to root_path, notice: 'Could not restore user' }
       end
     end
   end

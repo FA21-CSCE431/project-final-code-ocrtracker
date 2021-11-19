@@ -4,15 +4,17 @@ module Users
   # Omniauth Callbacks Controller
   class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     def google_oauth2
-      user = User.from_google(**from_google_params)
+      user = User.unscoped.from_google(**from_google_params)
 
-      if user.present?
+      if user.present? && user.archived?
+        flash[:alert] = t 'devise.omniauth_callbacks.failure', kind: 'Google', reason: "#{auth.info.email} has been archived by the OcrTracker admins."
+        redirect_to after_omniauth_failure_path_for(:user)
+      elsif user.present?
         sign_out_all_scopes
         flash[:success] = t 'devise.omniauth_callbacks.success', kind: 'Google'
         sign_in_and_redirect user, event: :authentication
       else
-        flash[:alert] =
-          t 'devise.omniauth_callbacks.failure', kind: 'Google', reason: "#{auth.info.email} is not authorized."
+        flash[:alert] = t 'devise.omniauth_callbacks.failure', kind: 'Google', reason: "#{auth.info.email} is not authorized."
         redirect_to after_omniauth_failure_path_for(:user)
       end
     end

@@ -57,7 +57,15 @@ class ExercisesController < ApplicationController
     # end
   end
 
-  private
+  # def archive
+
+  # end
+
+  # def archived
+
+  # end
+
+  # private
 
   def set_exercise
     @exercise = Exercise.find(params[:id])

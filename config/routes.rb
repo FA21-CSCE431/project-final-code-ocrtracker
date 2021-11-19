@@ -24,11 +24,14 @@ Rails.application.routes.draw do
   # Permissions routes
   get 'permissions/', to: 'permissions#index', as: 'permissions'
   post 'permissions/', to: 'permissions#complete'
+  get 'permissions/archived/', to: 'permissions#archived', as: 'archived_profiles'
 
   # Profiles routes
   get 'profiles/:id/', to: 'profiles#show', as: 'profiles'
   get 'profiles/:id/edit/', to: 'profiles#edit', as: 'edit_profile'
   post 'profiles/:id/', to: 'profiles#update'
+  post 'profiles/:id/archive', to: 'profiles#archive', as: 'archive_user'
+  post 'profiles/:id/restore', to: 'profiles#restore', as: 'restore_user'
 
   get 'members/', to: 'members#index', as: 'members'
 
@@ -45,6 +48,10 @@ Rails.application.routes.draw do
   post 'leaderboard/unlike/:exercise_submission_id', to: 'dashboards#unlike', as: 'leaderboard_unlike'
 
   get 'documentation', to: 'documentation#index'
+
+  # Not yet implemented
+  get 'exercises/archived', to: 'exercises#archived', as: 'archived_exercises'
+  post 'exercises/:id/archive', to: 'exercises#archive', as: 'archive_exercise'
 
   resources :exercises
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
