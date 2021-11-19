@@ -3,11 +3,11 @@
 # Exercises Controller
 class ExercisesController < ApplicationController
   before_action :require_admin # , only: %i[ edit update destroy ]
-  before_action :set_exercise, only: %i[show edit update destroy]
+  before_action :set_exercise, only: %i[show edit update destroy archive]
 
   # GET /exercises
   def index
-    @exercises = Exercise.order('updated_at DESC')
+    @exercises = Exercise.not_archived.order('updated_at DESC')
   end
 
   # GET /exercises/1
@@ -57,15 +57,33 @@ class ExercisesController < ApplicationController
     # end
   end
 
-  # def archive
+  def archive
+    exercise = Exercise.find(params[:id])
+    respond_to do |format|
+      if exercise.archive
+        format.html { redirect_to exercises_path, notice: 'Exercise archived successfully' }
+      else
+        format.html { redirect_to exercise_path(exercise.id), notice: 'Exercise could not be archived' }
+      end
+    end
+  end
 
-  # end
+  def restore
+    exercise = Exercise.find(params[:id])
+    respond_to do |format|
+      if exercise.un_archive
+        format.html { redirect_to exercises_path, notice: 'Exercise restored successfully' }
+      else
+        format.html { redirect_to exercise_path(exercise.id), notice: 'Exercise could not be restored' }
+      end
+    end
+  end
 
-  # def archived
+  def archived
+    @exercises = Exercise.archived.order('updated_at DESC')
+  end
 
-  # end
-
-  # private
+  private
 
   def set_exercise
     @exercise = Exercise.find(params[:id])

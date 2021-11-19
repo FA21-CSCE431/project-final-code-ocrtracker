@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 
@@ -6,7 +7,7 @@
   </head>
 
   <body id="exercises">
-    <h1>Exercises</h1>
+    <h1>Archived Exercises</h1>
 
     <div class="container-fluid">
       <div class = "row">
@@ -17,8 +18,8 @@
 
         <div class="content col-10 col-lg-8">
           <%= button_to "New Exercise", new_exercise_path, :method => "get",:class => "universal-button", :style => "" %>
-          <%=="<a class='float-end' href='#{archived_exercises_path}'> View archived exercises</a> "%>
-          <%# button_to "View archived exercises", archived_exercises_path, :method => "get",:class => "universal-button float-end", :style => "" %>
+          <%=="<a class='' href='#{exercises_path}'> View active exercises</a> "%>
+          <%# button_to "View active exercises", exercises_path, :method => "get",:class => "universal-button float-end", :style => "" %>
           <br>
           <div class="table-responsive">
             <table>
@@ -39,6 +40,7 @@
                     <td><%= exercise.humanized_unit_name %></td>
                     <td><%= button_to "Show", exercise_path(exercise), :method => "get",:class => "universal-button", :style => "margin-left: 40%; display: inline; float: left; display: flex; flex-wrap: wrap;" %></td>
                     <td><%= button_to "Edit", edit_exercise_path(exercise), :method => "get",:class => "universal-button", :style => "margin-left: 20%; display: inline; float: left; display: flex; flex-wrap: wrap; margin-left: 5%" %></td>
+                    <td style="text-align: center;"><%= link_to "Restore", restore_exercise_path(exercise.id), method: :post, data: {confirm: "Are you sure you want to restore #{exercise.title}?"} %></td>
                   </tr>
                 <% end %>
               </tbody>

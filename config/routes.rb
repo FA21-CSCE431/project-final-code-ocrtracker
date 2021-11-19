@@ -49,9 +49,9 @@ Rails.application.routes.draw do
 
   get 'documentation', to: 'documentation#index'
 
-  # Not yet implemented
   get 'exercises/archived', to: 'exercises#archived', as: 'archived_exercises'
   post 'exercises/:id/archive', to: 'exercises#archive', as: 'archive_exercise'
+  post 'exercises/:id/restore', to: 'exercises#restore', as: 'restore_exercise'
 
   resources :exercises
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
