@@ -15,7 +15,15 @@ class PermissionsController < ApplicationController
 
     User.update(submitted_hash.keys, submitted_hash.values.map { |x| { is_admin: x[:is_admin] } })
     respond_to do |format|
-      format.html { redirect_to permissions_url, notice: 'Users successfully updated' }
+      format.html { redirect_to permissions_url }
+    end
+  end
+
+  def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+    respond_to do |format|
+      format.html { redirect_to permissions_url, notice: 'User removed' }
     end
   end
 

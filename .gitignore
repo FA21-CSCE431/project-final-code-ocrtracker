@@ -39,7 +39,6 @@ yarn-debug.log*
 /coverage
 # Ignore application configuration
 /config/application.yml
-/config/secrets/*
 
 /public/packs
 /public/packs-test
