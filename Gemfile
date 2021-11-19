@@ -37,8 +37,9 @@ gem 'jbuilder', '~> 2.7'
 
 # Use Active Storage variant
 gem 'activestorage-validator'
-gem 'google-cloud-storage', '~> 1.8', require: false
+#gem 'google-cloud-storage', '~> 1.8', require: false
 gem 'image_processing', '~> 1.2'
+gem 'cloudinary'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
