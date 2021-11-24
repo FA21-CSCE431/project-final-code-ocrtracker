@@ -3,7 +3,7 @@
 class ProfilesController < ApplicationController
   before_action :authenticate_user!, :set_profile, only: %i[show edit update]
   before_action :profile_owner, only: %i[edit update]
-  before_action :require_admin, only: %i[archive]
+  before_action :require_admin, only: %i[archive restore]
 
   def show; end
 
