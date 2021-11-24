@@ -19,14 +19,6 @@ class PermissionsController < ApplicationController
     end
   end
 
-  def destroy
-    @user = User.find(params[:id])
-    @user.destroy
-    respond_to do |format|
-      format.html { redirect_to permissions_url, notice: 'User removed' }
-    end
-  end
-
   def archived
     @users = User.archived
   end
