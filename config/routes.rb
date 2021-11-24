@@ -43,7 +43,7 @@ Rails.application.routes.draw do
   get '/wod', to: 'wod#user_view', as: 'user_wod'
 
   # Leaderboard and Fistbump routes
-  get 'leaderboard', to: 'dashboards#leaderboard'
+  get 'leaderboard', to: 'dashboards#leaderboard', as: 'leaderboard'
   post 'leaderboard/like/:exercise_submission_id', to: 'dashboards#like', as: 'leaderboard_like'
   post 'leaderboard/unlike/:exercise_submission_id', to: 'dashboards#unlike', as: 'leaderboard_unlike'
 
