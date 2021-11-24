@@ -4,7 +4,7 @@ class PermissionsController < ApplicationController
   before_action :require_admin
 
   def index
-    @users = User.where.not(email: 'tamuocr@gmail.com')
+    @users = User.not_permanent_admin
   end
 
   def complete
@@ -19,11 +19,7 @@ class PermissionsController < ApplicationController
     end
   end
 
-  def destroy
-    @user = User.find(params[:id])
-    @user.destroy
-    respond_to do |format|
-      format.html { redirect_to permissions_url, notice: 'User removed' }
-    end
+  def archived
+    @users = User.archived
   end
 end

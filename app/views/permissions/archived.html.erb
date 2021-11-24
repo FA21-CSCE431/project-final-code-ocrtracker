@@ -12,51 +12,44 @@
     </head>
 
     <body id="permissions-page">
-    <%= form_with url:"/permissions", method: :post do |perm_form| %>
-
-        <h1>Permissions</h1>
-
+    
+        
+        <h1>Archived Users</h1>
+        
         <div class="container-fluid justify-content-center">
 
-          <div class = "row">
+            <div class = "row">
 
             <div class="col-1 col-lg-2">
-              <br>
+                <br>
             </div>
 
             <div class="content col-10 col-lg-8">
-
                 <input type="text" size="30" style="margin-bottom: 3%; border-radius: 10px; border: none;" id="inputName" onkeyup="searchName()" placeholder=" Search by TAMU email" title="Type in a name">
-                <%=="<a class='float-end' href='#{archived_profiles_path}'> View archived users</a> "%>
-              <table id="userTable">
-              <tr>
+                <%=="<a class='float-end' href='#{permissions_path}'> View active users</a> "%>
+                <table id="userTable">
+                <tr>
                 <th>Email</th>
                 <th>Name</th>
-                <th style="text-align: center">Admin</th>
-                <th style="text-align: center">Archive</th>
-              </tr>
+                <th style="text-align: center">Restore</th>
+                </tr>
                 <% @users.each do |user| %>
-                  <%= perm_form.fields_for user, index: user.id, method: :post do |p_fields|%>
-                  <tr>
+                    <tr>
                     <td><%= user.email %></td>
-                    <td><%= link_to "#{user.full_name}",  "/profiles/#{user.id}"%></td>
-                    <td style="text-align: center;"><%= p_fields.check_box :is_admin %></td>
-                    <td style="text-align: center;"><%= link_to "Archive", archive_user_path(user.id), method: :post, data: {confirm: "Are you sure you want to archive #{user.full_name}?"} %></td>
-                  </tr>
-                  <% end %>
+                    <td><%= user.full_name %></td>
+                    <td style="text-align: center;"><%= link_to "Restore", restore_user_path(user.id), method: :post, data: {confirm: "Are you sure you want to restore #{user.full_name}?"} %></td>
+                    </tr>
                 <% end %>
-              </table>
-              <br>
-              <%= perm_form.submit 'Save Changes', :class => "form1" %>
+                </table>
+                <br>
             </div>
 
             <div class="col-1 col-lg-2">
-              <br>
+                <br>
             </div>
 
-          </div>
+            </div>
         </div>
-      <% end %>
     </body>
 
 </html>

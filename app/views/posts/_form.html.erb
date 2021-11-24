@@ -13,7 +13,7 @@
                 <br>
                 <p>
                     <%= ep_form.label :exercise_id, "Exercise"%>
-                    <%= ep_form.select(:exercise_id, Exercise.all.collect {|e| ["#{e.title}: #{e.humanized_unit_name}", e.id]},  {prompt: "Select"}, class: 'form-control', required: true) %>
+                    <%= ep_form.select(:exercise_id, @exercises.collect {|e| ["#{e.title}: #{e.humanized_unit_name}", e.id]},  {prompt: "Select"}, class: 'form-control', required: true) %>
                 </p>
 
                 <p>

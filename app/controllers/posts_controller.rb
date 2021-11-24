@@ -53,6 +53,6 @@ class PostsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_exercises
-    @exercises = Exercise.all
+    @exercises = Exercise.not_archived
   end
 end

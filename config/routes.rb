@@ -24,12 +24,14 @@ Rails.application.routes.draw do
   # Permissions routes
   get 'permissions/', to: 'permissions#index', as: 'permissions'
   post 'permissions/', to: 'permissions#complete'
+  get 'permissions/archived/', to: 'permissions#archived', as: 'archived_profiles'
 
   # Profiles routes
   get 'profiles/:id/', to: 'profiles#show', as: 'profiles'
   get 'profiles/:id/edit/', to: 'profiles#edit', as: 'edit_profile'
   post 'profiles/:id/', to: 'profiles#update'
-  delete 'profiles/:id/', to: 'profiles#destroy', as: 'remove_profile'
+  post 'profiles/:id/archive', to: 'profiles#archive', as: 'archive_user'
+  post 'profiles/:id/restore', to: 'profiles#restore', as: 'restore_user'
 
   get 'members/', to: 'members#index', as: 'members'
 
@@ -41,11 +43,15 @@ Rails.application.routes.draw do
   get '/wod', to: 'wod#user_view', as: 'user_wod'
 
   # Leaderboard and Fistbump routes
-  get 'leaderboard', to: 'dashboards#leaderboard'
+  get 'leaderboard', to: 'dashboards#leaderboard', as: 'leaderboard'
   post 'leaderboard/like/:exercise_submission_id', to: 'dashboards#like', as: 'leaderboard_like'
   post 'leaderboard/unlike/:exercise_submission_id', to: 'dashboards#unlike', as: 'leaderboard_unlike'
 
   get 'documentation', to: 'documentation#index'
+
+  get 'exercises/archived', to: 'exercises#archived', as: 'archived_exercises'
+  post 'exercises/:id/archive', to: 'exercises#archive', as: 'archive_exercise'
+  post 'exercises/:id/restore', to: 'exercises#restore', as: 'restore_exercise'
 
   resources :exercises
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
