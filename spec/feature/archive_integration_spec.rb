@@ -117,3 +117,69 @@ RSpec.describe 'Restoring a user', type: :feature do
     expect(page).to have_content users(:user_account).full_name
   end
 end
+
+RSpec.describe 'Archiving an exercise', type: :feature do
+  fixtures :users, :exercises, :workout_posts, :exercise_posts, :workout_submissions, :exercise_submissions
+
+  scenario 'Exercise does not show up on exercises page any more' do
+    login_as_admin
+    pushups = exercises(:pushups)
+    visit edit_exercise_path(pushups)
+    click_on 'Archive Exercise'
+    visit exercises_path
+    expect(page).not_to have_content pushups.title
+  end
+
+  scenario 'Exercise shows up on archived exercises page' do
+    login_as_admin
+    pushups = exercises(:pushups)
+    visit edit_exercise_path(pushups)
+    click_on 'Archive Exercise'
+    visit archived_exercises_path
+    expect(page).to have_content pushups.title
+  end
+
+  scenario 'Exercise still shows up on leaderboard' do
+    login_as_admin
+    pushups = exercises(:pushups)
+    visit edit_exercise_path(pushups)
+    click_on 'Archive Exercise'
+    visit leaderboard_path
+    expect(page).to have_content pushups.title
+  end
+
+  scenario 'Exercise still shows up on submission page' do
+    login_as_admin
+    pushups = exercises(:pushups)
+    visit edit_exercise_path(pushups)
+    click_on 'Archive Exercise'
+    visit new_submission_path(workout_posts(:wp2))
+    expect(page).to have_content pushups.title
+  end
+end
+
+RSpec.describe 'Restoring an exercise', type: :feature do
+  fixtures :users, :exercises, :workout_posts, :exercise_posts, :workout_submissions, :exercise_submissions
+
+  before do
+    exercises(:pushups).archive
+  end
+
+  scenario 'Exercise shows up on exercises page' do
+    login_as_admin
+    pushups = exercises(:pushups)
+    visit archived_exercises_path
+    click_link(href: restore_exercise_path(pushups))
+    visit exercises_path
+    expect(page).to have_content pushups.title
+  end
+
+  scenario 'Exercise dooes not show up on archived exercises page' do
+    login_as_admin
+    pushups = exercises(:pushups)
+    visit archived_exercises_path
+    click_link(href: restore_exercise_path(pushups))
+    visit archived_exercises_path
+    expect(page).not_to have_content pushups.title
+  end
+end
