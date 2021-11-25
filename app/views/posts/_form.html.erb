@@ -1,35 +1,64 @@
-<%= form_with model: WorkoutPost.new, url:"/posts/create", method: :post do |wp_form| %>
+<%= form_with url:"/posts/#{editing ? 'update' : 'create'}", method: :post do |wp_form| %>
+
+    <%= wp_form.hidden_field :workout_post_id, value: @workout_post.id %>
     
     <h2 style="text-align: center;">
         <%= wp_form.label :title, "Title"%>
-        <%= wp_form.text_field :title, class: 'form-control', required: true%>
+        <%= wp_form.text_field :title, class: 'form-control', required: true, value: @workout_post.title%>
     </h2>
 
     <hr>
     <div class='new_exercise_posts'>
-        <input type="button" class ="universal-button" id = "new_exercise" value="Add">
-        <div id="1">
-            <%= wp_form.fields_for ExercisePost.new, index:1 do |ep_form|%>
-                <br>
-                <p>
-                    <%= ep_form.label :exercise_id, "Exercise"%>
-                    <%= ep_form.select(:exercise_id, @exercises.collect {|e| ["#{e.title}: #{e.humanized_unit_name}", e.id]},  {prompt: "Select"}, class: 'form-control', required: true) %>
-                </p>
+        
+        <% if editing %>
+            <input type="button" class ="universal-button" id = "new_exercise" value="Add" name= "<%=@workout_post.exercise_posts.first.id%>">
+            <% @workout_post.exercise_posts.each do |ep| %>
+                <div id= "<%=ep.id%>">
+                    <%= wp_form.fields_for ep, index:ep.id do |ep_form|%>
+                    <br>
+                    <p>
+                        <%= ep_form.label :exercise_id, "Exercise"%>
+                        <%= ep_form.select(:exercise_id, @exercises.collect {|e| ["#{e.title}: #{e.humanized_unit_name}", e.id]},  {prompt: "Select"}, class: 'form-control', required: true) %>
+                    </p>
 
-                <p>
-                    <%= ep_form.label :specific_instructions, "Specific Instructions"%>
-                    <%= ep_form.text_area :specific_instructions, class: 'form-control', required: true%>
-                </p>
-
-                <p>
-                    <%= ep_form.label :is_ranked, "Ranked"%> 
-                    <%= ep_form.check_box :is_ranked%>
-                </p>
-
+                    <p>
+                        <%= ep_form.label :specific_instructions, "Specific Instructions"%>
+                        <%= ep_form.text_area :specific_instructions, class: 'form-control', required: true%>
+                    </p>
+                    <p>
+                        <%= ep_form.label :is_ranked, "Ranked"%> 
+                        <%= ep_form.check_box :is_ranked%>
+                    </p>
+                    <% end %>
+                    <input type="button" class ="universal-button" onclick="delete_exercise(this)" value="Delete">
+                </div>
             <% end %>
-            <input type="button" class ="universal-button" onclick="delete_exercise(this)" value="Delete">
-            
-        </div>
+        <% else %>
+            <input type="button" class ="universal-button" id = "new_exercise" name = "1" value="Add">
+            <div id="1">
+                <%= wp_form.fields_for ExercisePost.new, index:1 do |ep_form|%>
+                    <br>
+                    <p>
+                        <%= ep_form.label :exercise_id, "Exercise"%>
+                        <%= ep_form.select(:exercise_id, @exercises.collect {|e| ["#{e.title}: #{e.humanized_unit_name}", e.id]},  {prompt: "Select"}, class: 'form-control', required: true) %>
+                    </p>
+
+                    <p>
+                        <%= ep_form.label :specific_instructions, "Specific Instructions"%>
+                        <%= ep_form.text_area :specific_instructions, class: 'form-control', required: true%>
+                    </p>
+
+                    <p>
+                        <%= ep_form.label :is_ranked, "Ranked"%> 
+                        <%= ep_form.check_box :is_ranked%>
+                    </p>
+
+                <% end %>
+                <input type="button" class ="universal-button" onclick="delete_exercise(this)" value="Delete">
+                
+            </div>
+        <% end %>
+        
 
     </div>
 
@@ -44,9 +73,8 @@
 
 <script>
 
-    document.getElementById("new_exercise").onclick = function() {
-
-        duplicate = document.getElementById(1).cloneNode(true);
+    document.getElementById("new_exercise").onclick = function(event) {
+        duplicate = document.getElementById(event.target.name).cloneNode(true);
 
         for(var i=1; i<4; i++) {
             var node = duplicate.children[i];
