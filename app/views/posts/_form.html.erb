@@ -65,7 +65,11 @@
 
     <div class="row">
         <div class="actions col-12 d-flex justify-content-end">
+        <% if editing %>
+            <%= wp_form.submit "Edit Workout Post", :class => "universal-button"%>
+        <% else %>
             <%= wp_form.submit "Create Workout Post", :class => "universal-button"%>
+        <% end %>
         </div>
     </div>
 
@@ -74,7 +78,9 @@
 <script>
 
     document.getElementById("new_exercise").onclick = function(event) {
-        duplicate = document.getElementById(event.target.name).cloneNode(true);
+
+        firstIndex = event.target.name;
+        duplicate = document.getElementById(firstIndex).cloneNode(true);
 
         for(var i=1; i<4; i++) {
             var node = duplicate.children[i];
@@ -86,13 +92,13 @@
                 // using time stamp so ids will be unique without having to keep track
                 var new_index = new Date().getTime();
                 if(child.attributes[0]!==undefined && child.attributes[0].localName != 'name'){
-                    child.attributes[0].value = child.attributes[0].value.replace('1', new_index.toString())
+                    child.attributes[0].value = child.attributes[0].value.replace(firstIndex, new_index.toString())
                 }
                 if(child.id!==undefined){
-                    child.id = child.id.replace('1',new_index.toString());
+                    child.id = child.id.replace(firstIndex,new_index.toString());
                 }
                 if(child.name!==undefined){
-                    child.name = child.name.replace('1',new_index.toString());
+                    child.name = child.name.replace(firstIndex,new_index.toString());
                 }
 
                 if(child.id.includes("is_ranked")){
