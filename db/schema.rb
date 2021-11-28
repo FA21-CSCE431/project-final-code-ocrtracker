@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_31_020223) do
+ActiveRecord::Schema.define(version: 2021_11_19_191905) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(version: 2021_10_31_020223) do
     t.text "unit_name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "archived", default: false
   end
 
   create_table "fistbumps", force: :cascade do |t|
@@ -94,6 +95,7 @@ ActiveRecord::Schema.define(version: 2021_10_31_020223) do
     t.string "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "archived", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
@@ -102,6 +104,7 @@ ActiveRecord::Schema.define(version: 2021_10_31_020223) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "wod_date"
+    t.boolean "archived", default: false
   end
 
   create_table "workout_submissions", force: :cascade do |t|
@@ -110,6 +113,7 @@ ActiveRecord::Schema.define(version: 2021_10_31_020223) do
     t.datetime "submitted_datetime"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "archived", default: false
     t.index ["user_id"], name: "index_workout_submissions_on_user_id"
     t.index ["workout_post_id"], name: "index_workout_submissions_on_workout_post_id"
   end

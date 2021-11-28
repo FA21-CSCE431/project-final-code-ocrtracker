@@ -13,13 +13,13 @@
   <% end %>
 
   <h2 style="text-align: center;">
-    
+
       <%= form.label :title %>
       <%= form.text_field :title, class: 'form-control'%>
-    
+
   </h2>
   <br>
-  
+
   <h2 style="text-align: center;">
     <%= form.label :description %>
     <%= form.text_area :description, class: 'form-control'%>
@@ -33,17 +33,19 @@
   </p>
   <br>
 
-  <div class="field"> 
+  <div class="field">
     <% if exercise.image.attached? %>
-      <%= image_tag exercise.image, style: "width: 100px; display: block" %>
+      <%= cl_image_tag exercise.image.key, style: "width: 100px; display: block" %>
     <% end %>
     <%= form.file_field :image, style: "display: block" %>
   </div>
   <br>
-    
-  <%= form.submit "Submit", :class => "universal-button", :style => "margin-right: 0%; display: inline; float: right; display: flex; flex-wrap: wrap;"%>
-    
- 
 
-  
+
+
+  <%= form.submit "Submit", :class => "universal-button", :style => "margin-right: 0%; display: inline; float: right; display: flex; flex-wrap: wrap;"%>
+
+
+
+
 <% end %>
