@@ -7,7 +7,7 @@ class PostsController < ApplicationController
   before_action :set_workout_posts, only: %i[index]
   before_action :set_exercise_posts, only: %i[index]
 
-  before_action :require_admin, only: %i[new create]
+  before_action :require_admin, only: %i[new create edit update archive]
 
   # GET
   def index; end
