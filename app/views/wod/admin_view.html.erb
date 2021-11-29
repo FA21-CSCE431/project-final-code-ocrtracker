@@ -26,30 +26,40 @@
                             <th>Details</th>
                         </tr>
                         <% @workout_posts.each do |wp| %>
+                            <% if wp.archived == false %>
+                                <%= wp_h_form.fields_for wp, url: set_wod_path, index: wp.id, method: :post do |wp_fields|%>
+                                    <tr>
+                                        <td><%= wp_fields.label :wod_date, wp.title%></td>
+                                        <td>
+                                        
+                                        <% wp.exercise_posts.each do |ep|%>
 
-                            <%= wp_h_form.fields_for wp, url: set_wod_path, index: wp.id, method: :post do |wp_fields|%>
-                                <tr>
-                                    <td><%= wp_fields.label :wod_date, wp.title%></td>
-                                    <td>
-                                    
-                                    <% wp.exercise_posts.each do |ep|%>
+                                        
+                                        <%= '*' if ep.is_ranked?%>
+                                        <%=ep.exercise.title%>
+                                        <%= ": #{truncate(ep.specific_instructions, length: 25)}" %>
+                                        <br>
+                                        <% end %>
+                                        
+                                        </td>
 
+                                        <td style="text-align: center; vertical-align: middle;"><input class ="universal-button" type="button" value="Clear" id='<%= "clear_button_#{wp.id}" %>'  onclick="this.parentElement.parentElement.nextElementSibling.firstElementChild.firstChild.value =''"></td>
+                                    </tr>
+                                    <tr style='border-bottom: 1px solid #ffffff;'>
+                                        <td><%= wp_fields.datetime_local_field :wod_date %></td>
+                                        <td>
+                                            <%= link_to "Archive Post", archive_post_path(wp), method: :post, data: {confirm: "Are you sure you want to archive #{wp.title}?"} %>
+                                        </td>
+                                        <% if wp.workout_submissions.empty? %>
+                                            <td>
+                                            <a href="<%= edit_post_path(wp) %>">Edit Post</a>
+                                            </td>
+                                        <% end %>
+                                    </tr>
                                     
-                                    <%= '*' if ep.is_ranked?%>
-                                    <%=ep.exercise.title%>
-                                    <%= ": #{truncate(ep.specific_instructions, length: 25)}" %>
-                                    <% end %>
                                     
-                                    </td>
-
-                                    <td style="text-align: center; vertical-align: middle;"><input class ="universal-button" type="button" value="Clear" id='<%= "clear_button_#{wp.id}" %>'  onclick="this.parentElement.parentElement.nextElementSibling.firstElementChild.firstChild.value =''"></td>
-                                </tr>
-                                <tr style='border-bottom: 1px solid #ffffff;'>
-                                    <td><%= wp_fields.datetime_local_field :wod_date, size: 10 %></td>
-                                    
-                                </tr>
-                                
-                            <% end %> 
+                                <% end %> 
+                            <% end %>
 
                         <%end%>
 

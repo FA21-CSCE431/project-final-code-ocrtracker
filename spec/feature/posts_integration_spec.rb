@@ -12,11 +12,11 @@ RSpec.describe 'Creating a workout post', type: :feature do
 
     fill_in 'Title', with: 'new_post_title'
 
-    select exercises(:pushups).title, from: 'workout_post_exercise_post_1_exercise_id'
+    select exercises(:pushups).title, from: '_exercise_post_1_exercise_id'
 
     page.all(:fillable_field, 'Specific Instructions')[0].set('si1')
 
-    page.find('#workout_post_exercise_post_1_is_ranked').set(true)
+    page.find('#_exercise_post_1_is_ranked').set(true)
 
     click_on 'Create Workout Post'
 
