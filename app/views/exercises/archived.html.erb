@@ -18,28 +18,28 @@
 
         <div class="content col-10 col-lg-8">
           <%= button_to "New Exercise", new_exercise_path, :method => "get",:class => "universal-button", :style => "" %>
-          <%=="<a class='' href='#{exercises_path}'> View active exercises</a> "%>
+          <%=="<a class='float-end' href='#{exercises_path}'> View active exercises</a> "%>
           <%# button_to "View active exercises", exercises_path, :method => "get",:class => "universal-button float-end", :style => "" %>
           <br>
           <div class="table-responsive">
             <table>
               <thead>
                 <tr>
-                  <th>Title</th>
-                  <th>Description</th>
-                  <th>Unit Name</th>
-                  <th colspan="3"></th>
+                <th style="text-align:center">Title</th>
+                <th style="text-align:center">Unit Name</th>
+                <th></th>
                 </tr>
               </thead>
 
               <tbody>
                 <% @exercises.each do |exercise| %>
                   <tr style='border-bottom: 1px solid #ffffff;'>
-                    <td><%= exercise.title %></td>
-                    <td><%= exercise.description %></td>
-                    <td><%= exercise.humanized_unit_name %></td>
-                    <td><%= button_to "Show", exercise_path(exercise), :method => "get",:class => "universal-button", :style => "margin-left: 40%; display: inline; float: left; display: flex; flex-wrap: wrap;" %></td>
-                    <td><%= button_to "Edit", edit_exercise_path(exercise), :method => "get",:class => "universal-button", :style => "margin-left: 20%; display: inline; float: left; display: flex; flex-wrap: wrap; margin-left: 5%" %></td>
+                    <td style="text-align:center"><%= exercise.title %></td>
+                    <td style="text-align:center"><%= exercise.humanized_unit_name %></td>
+                     <td class="text-center">
+                    <%= button_to "Show", exercise_path(exercise), :method => "get",:class => "universal-button"%>
+                    <%= button_to "Edit", edit_exercise_path(exercise), :method => "get",:class => "universal-button"%>
+                    </td>
                     <td style="text-align: center;"><%= link_to "Restore", restore_exercise_path(exercise.id), method: :post, data: {confirm: "Are you sure you want to restore #{exercise.title}?"} %></td>
                   </tr>
                 <% end %>
