@@ -19,7 +19,10 @@ Rails.application.routes.draw do
 
   # Posts routes
   get 'posts/new/', to: 'posts#new', as: 'posts_new'
+  get 'posts/edit/:workout_post_id', to: 'posts#edit', as: 'edit_post'
   post 'posts/create/', to: 'posts#create'
+  post 'posts/update', to: 'posts#update'
+  post 'posts/archive/:workout_post_id', to: 'posts#archive', as: 'archive_post'
 
   # Permissions routes
   get 'permissions/', to: 'permissions#index', as: 'permissions'
