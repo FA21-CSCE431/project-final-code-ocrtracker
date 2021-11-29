@@ -104,10 +104,7 @@ ActiveRecord::Schema.define(version: 2021_11_26_211952) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "wod_date"
-<<<<<<< HEAD
-=======
     t.boolean "archived", default: false
->>>>>>> dee6a2a9155caa8715826df980b191db6b348664
   end
 
   create_table "workout_submissions", force: :cascade do |t|
