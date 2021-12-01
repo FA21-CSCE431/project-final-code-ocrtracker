@@ -19,8 +19,23 @@ class Exercise < ApplicationRecord
     quantity: 'Quantity'
   }
 
+  scope :not_archived, lambda {
+    where(archived: [false, nil])
+  }
+
+  scope :archived, lambda {
+    where(archived: true)
+  }
   # Return the human-readable string representing unit_value. Returns 'None' if not found
   def humanized_unit_name
     self.class.unit_names.fetch(unit_name, 'None')
+  end
+
+  def archive
+    update(archived: true)
+  end
+
+  def un_archive
+    update(archived: false)
   end
 end

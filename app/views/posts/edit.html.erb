@@ -2,30 +2,33 @@
 <html>
 
     <head>
-        <%= stylesheet_link_tag  'exercises', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag  'posts', media: 'all', 'data-turbolinks-track': 'reload' %>
     </head>
 
-    <body id="exercises">
-
-        <h1>New Exercise</h1>
-
+    <body id="posts">
+        <h1>Edit Workout Post</h1>
+      
         <div class="container-fluid">
             <div class = "row">
+
                 <div class="col-1 col-lg-2">
                     <br>
                 </div>
-
+  
                 <div class="content col-10 col-lg-8">
-                    <%= render 'form', exercise: @exercise %>
-                    <%= button_to 'Back', exercises_path, :method => "get", :class => "universal-button", :style => "margin-left: 0%; display: inline; float: left; display: flex; flex-wrap: wrap;"%>
+                    <br>
+                    <%= render 'form', exercises: @exercises, editing: true%>
                 </div>
 
                 <div class="col-1 col-lg-2">
                     <br>
                 </div>
+  
             </div>
         </div>
 
+       
+        
     </body>
-
+    
 </html>

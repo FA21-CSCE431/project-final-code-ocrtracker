@@ -4,7 +4,7 @@
   </head>
 
   <body>
-    <div class="jumbotron">
+    <div class="content">
       <div class="container-fluid text-center">    
         <div class="row">
           <div class="col-2 col-lg-3">
@@ -14,7 +14,7 @@
           <div class="col-8 col-lg-6 text-left" style="background: rgba(25, 25, 30, 0.9); padding: 2%;">
             <h1>Welcome, <%= current_user.full_name %></h1>
 
-            <h2><%= WorkoutSubmission.count %> total workouts completed</h2>
+            <h2><%= WorkoutSubmission.unscoped.count %> total workouts completed</h2>
           </div>
 
           <div class="col-2 col-lg-3">

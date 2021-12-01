@@ -10,6 +10,8 @@ class ExerciseSubmission < ApplicationRecord
 
   validates :unit_value, presence: true
 
+  default_scope { joins(:workout_submission).merge(WorkoutSubmission.all) }
+
   def humanized_unit_value
     if exercise.unit_name.starts_with?('time')
       uv = unit_value.to_f

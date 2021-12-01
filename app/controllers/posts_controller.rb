@@ -2,12 +2,12 @@
 
 # Posts Controller
 class PostsController < ApplicationController
-  before_action :set_exercises, only: %i[new]
+  before_action :set_exercises, only: %i[new create edit update archive]
 
   before_action :set_workout_posts, only: %i[index]
   before_action :set_exercise_posts, only: %i[index]
 
-  before_action :require_admin, only: %i[new create]
+  before_action :require_admin, only: %i[new create edit update archive]
 
   # GET
   def index; end
@@ -22,13 +22,15 @@ class PostsController < ApplicationController
   end
 
   # GET
-  def edit; end
+  def edit
+    @workout_post = WorkoutPost.find(params[:workout_post_id])
+  end
 
   # POST
   def create
-    workout_post = WorkoutPost.new(title: params[:workout_post][:title])
+    workout_post = WorkoutPost.new(title: params[:title])
 
-    submitted_exercise_posts = params[:workout_post][:exercise_post]
+    submitted_exercise_posts = params[:exercise_post]
 
     workout_post.exercise_posts.build(submitted_exercise_posts.values)
 
@@ -44,7 +46,34 @@ class PostsController < ApplicationController
   end
 
   # PATCH/PUT
-  def update; end
+  def update
+    workout_post = WorkoutPost.find(params[:workout_post_id])
+    submitted_exercise_posts = params[:exercise_post]
+    respond_to do |format|
+      # If the workout submission and all exercise submissions are valid
+      if submitted_exercise_posts.values.all? { |v| v[:exercise_id] }
+        # If any of the previous exercise posts were deleted
+        delete_exercises(workout_post, submitted_exercise_posts)
+        submitted_exercise_posts.each { |key, v| edit_or_add_exercise(workout_post, key, v) }
+        workout_post.update(title: params[:title])
+        format.html { redirect_to '/wod/set', notice: 'Workout was successfully edited' }
+      else
+        format.html { redirect_to edit_post_url(params[:workout_post_id]), notice: 'Workout was not valid' }
+      end
+    end
+  end
+
+  def archive
+    post = WorkoutPost.find(params[:workout_post_id])
+    post.archived = true
+    respond_to do |format|
+      if post.save
+        format.html { redirect_to '/wod/set', notice: 'Post archived successfully' }
+      else
+        format.html { redirect_to '/wod/set', notice: 'Post could not be archived' }
+      end
+    end
+  end
 
   # DELETE
   def destroy; end
@@ -53,6 +82,22 @@ class PostsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_exercises
-    @exercises = Exercise.all
+    @exercises = Exercise.not_archived
+  end
+end
+
+def delete_exercises(workout_post, submitted_posts)
+  workout_post.exercise_posts.each do |post|
+    post.destroy if submitted_posts.key?(post.id) == false
+  end
+end
+
+def edit_or_add_exercise(workout_post, key, val)
+  # If the exercise post already existed
+  if ExercisePost.exists?(id: key)
+    ExercisePost.update(key, exercise_id: val[:exercise_id], specific_instructions: val[:specific_instructions], is_ranked: val[:is_ranked])
+  # If the exercise post was added
+  else
+    workout_post.exercise_posts.create(exercise_id: val[:exercise_id], specific_instructions: val[:specific_instructions], is_ranked: val[:is_ranked])
   end
 end
