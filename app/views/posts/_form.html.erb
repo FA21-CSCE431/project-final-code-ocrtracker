@@ -1,5 +1,5 @@
 <%= form_with model: WorkoutPost.new, url:"/posts/create", method: :post do |wp_form| %>
-    
+
     <h2 style="text-align: center;">
         <%= wp_form.label :title, "Title"%>
         <%= wp_form.text_field :title, class: 'form-control'%>
@@ -22,13 +22,13 @@
                 </p>
 
                 <p>
-                    <%= ep_form.label :is_ranked, "Ranked"%> 
+                    <%= ep_form.label :is_ranked, "Ranked"%>
                     <%= ep_form.check_box :is_ranked%>
                 </p>
 
             <% end %>
             <input type="button" class ="universal-button" onclick="delete_exercise(this)" value="Delete">
-            
+
         </div>
 
     </div>
@@ -86,12 +86,9 @@
     delete_exercise = function(e) {
         original = document.getElementsByClassName("new_exercise_posts")[0]
         last_index = original.childNodes.length
-        if(last_index>5){    
+        if(last_index>5){
             document.getElementById(e.parentNode.id).remove()
         }
     };
 
 </script>
-
-
-
